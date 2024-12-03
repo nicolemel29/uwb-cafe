@@ -9,7 +9,7 @@ function CustomerMenu() {
     const [selectedCategory, setSelectedCategory] = useState(-1)
     const [selectedSubcategory, setSelectedSubcategory] = useState(undefined) // category, subcategory index
 
-    
+    const [cart, setCart] = useState([])
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -26,6 +26,10 @@ function CustomerMenu() {
 
     function showGroups(subcategory) {
         setSelectedSubcategory(subcategory)
+    }
+
+    function addToCart(item) {
+        setCart([...cart, item])
     }
 
     function renderResults() {
@@ -47,7 +51,7 @@ function CustomerMenu() {
                                 <h3>{group.groupName}</h3>
                                 {
                                     group.items.map(item => (
-                                        <p>{item.itemName}</p>
+                                        <p onClick={() => addToCart(item)}>{item.itemName}</p>
                                     ))
                                 }
                                 </>
@@ -57,6 +61,33 @@ function CustomerMenu() {
                 </>
             )
         }
+    }
+
+    function renderCart() {
+        if (cart.length === 0) {
+            return (
+                <>
+                    <h2>Cart</h2>
+                    <div id="cart-content">
+                        No Items Yet
+                    </div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <h2>Cart</h2>
+                    <div id="cart-content">
+                        {
+                            cart.map(cartItem => (
+                                <p>{cartItem.itemName}</p>
+                            ))
+                        }
+                    </div>
+                </>
+            )
+        }
+        
     }
 
     return (
@@ -107,8 +138,9 @@ function CustomerMenu() {
                         
                     </section>
                     <section id="cart" class="card">
-                        <h2>Cart</h2>
-                        <div id="cart-content"></div>
+                        {
+                            renderCart()
+                        }
                     </section>
                 </main>
                 <footer>
