@@ -7,7 +7,7 @@ import categories from './menuData.json'
 function CustomerMenu() {
 
     const [selectedCategory, setSelectedCategory] = useState(-1)
-    const [selectedSubcategory, setSelectedSubcategory] = useState({}) // category, subcategory index
+    const [selectedSubcategory, setSelectedSubcategory] = useState(undefined) // category, subcategory index
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -27,7 +27,7 @@ function CustomerMenu() {
     }
 
     function renderResults() {
-        if (selectedSubcategory == null) {
+        if (selectedSubcategory == undefined) {
             return (
                 <>
                     <h2 id="results-header">Select a Category</h2>
