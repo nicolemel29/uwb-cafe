@@ -1,7 +1,7 @@
 import React from 'react';
 import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import categories from './menuData.json'
 
 function CustomerMenu() {
@@ -10,6 +10,7 @@ function CustomerMenu() {
     const [selectedSubcategory, setSelectedSubcategory] = useState(undefined) // category, subcategory index
 
     const [cart, setCart] = useState([])
+    const [cartLoaded, setCartLoaded] = useState(false)
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -30,6 +31,11 @@ function CustomerMenu() {
 
     function addToCart(item) {
         setCart([...cart, item])
+        
+    }
+
+    function saveCart(item) {
+        localStorage.setItem("cart", JSON.stringify(cart))
     }
 
     function renderResults() {
@@ -51,7 +57,10 @@ function CustomerMenu() {
                                 <h3>{group.groupName}</h3>
                                 {
                                     group.items.map(item => (
-                                        <p onClick={() => addToCart(item)}>{item.itemName}</p>
+                                        <p onClick={() => {
+                                            addToCart(item)
+                                            saveCart()
+                                        }}>{item.itemName}</p>
                                     ))
                                 }
                                 </>
@@ -62,6 +71,21 @@ function CustomerMenu() {
             )
         }
     }
+
+    // cart retrieval
+    useEffect(() => {
+        if (localStorage.getItem("cart")) {
+            setCart(JSON.parse(localStorage.getItem("cart")));
+        }
+        setCartLoaded(true)
+    }, []);
+
+    // cart saving
+    useEffect(() => {
+        if (cartLoaded) {
+            localStorage.setItem("cart", JSON.stringify(cart))
+        }
+    }, [cart]);
 
     function renderCart() {
         if (cart.length === 0) {
