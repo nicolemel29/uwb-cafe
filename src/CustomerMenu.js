@@ -2,41 +2,12 @@ import React from 'react';
 import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
 import { useState } from 'react'
+import categories from './menuData.json'
 
 function CustomerMenu() {
-    const [categories, setCategories] = useState([
-        {
-            categoryName: "Drinks",
-            subcategories: [
-                "One",
-                "Two"
-            ]
-        },
-        {
-            categoryName: "Food",
-            subcategories: [
-                "One",
-                "Two"
-            ]
-        },
-        {
-            categoryName: "At Home Coffee",
-            subcategories: [
-                "One",
-                "Two"
-            ]
-        },
-        {
-            categoryName: "Merchandise",
-            subcategories: [
-                "One",
-                "Two"
-            ]
-        },
-    ])
 
     const [selectedCategory, setSelectedCategory] = useState(-1)
-    const [selectedSubcategory, setSelectedSubcategory] = useState([-1, -1]) // category, subcategory index
+    const [selectedSubcategory, setSelectedSubcategory] = useState({}) // category, subcategory index
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -46,22 +17,37 @@ function CustomerMenu() {
     function showSubcategories(index1, category) {
         return (
             category.subcategories.map((subcategory, index2) => (
-                <li key={`${index1}.${index2}`} onClick={() => showGroups(index1, index2)} class="subcategory-item">{subcategory}</li>
+                <li key={`${index1}.${index2}`} onClick={() => showGroups(subcategory)} class="subcategory-item">{subcategory.subcategoryName}</li>
             ))
         )   
     }
 
-    function showGroups(index1, index2) {
-        setSelectedSubcategory([index1, index2])
+    function showGroups(subcategory) {
+        setSelectedSubcategory(subcategory)
     }
 
     function renderResults() {
-        return (
-            <>
-                <h2 id="results-header">Select a Category</h2>
-                <div id="results-content"></div>
-            </>
-        )
+        if (selectedSubcategory == null) {
+            return (
+                <>
+                    <h2 id="results-header">Select a Category</h2>
+                    <div id="results-content"></div>
+                </>
+            )
+        } else {
+            return (
+                <>
+                    <h2 id="results-header">{selectedSubcategory.subcategoryName}</h2>
+                    <div id="results-content">
+                        {
+                            selectedSubcategory.groups.map((group) => (
+                                <p>{group}</p>
+                            ))
+                        }
+                    </div>
+                </>
+            )
+        }
     }
 
     return (

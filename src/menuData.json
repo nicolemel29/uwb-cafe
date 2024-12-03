@@ -1,0 +1,114 @@
+[
+    {
+        "categoryName": "Drinks",
+        "subcategories": [
+            {
+                "subcategoryName": "Hot Coffee",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Cold Coffee",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Tea",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Smoothies",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            }
+
+        ]
+    },
+    {
+        "categoryName": "Food",
+        "subcategories": [
+            {
+                "subcategoryName": "Sandwiches",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Salads",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Pastries",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            }
+        ]
+    },
+    {
+        "categoryName": "At Home Coffee",
+        "subcategories": [
+            {
+                "subcategoryName": "Coffee Beans",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Ground Coffee",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Pods",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            }
+        ]
+    },
+    {
+        "categoryName": "Merchandise",
+        "subcategories": [
+            {
+                "subcategoryName": "Mugs",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Tumblers",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            },
+            {
+                "subcategoryName": "Apparel",
+                "groups": [
+                    "One",
+                    "Two"
+                ]
+            }
+        ]
+    }
+]
