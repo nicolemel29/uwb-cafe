@@ -7,40 +7,27 @@ import {Link} from 'react-router-dom'
 
 function CustomerMenu() {
 
-    const [selectedCategory, setSelectedCategory] = useState(-1)
-    const [selectedSubcategory, setSelectedSubcategory] = useState(undefined) // category, subcategory index
+    const [selectedCategory, setSelectedCategory] = useState(undefined)
 
     const [cart, setCart] = useState([])
     const [cartLoaded, setCartLoaded] = useState(false)
 
     function changeCategory(index) {
         setSelectedCategory(index)
-        console.log(selectedCategory)
     }
 
-    function showSubcategories(index1, category) {
-        return (
-            category.subcategories.map((subcategory, index2) => (
-                <li key={`${index1}.${index2}`} onClick={() => showGroups(subcategory)} class="subcategory-item">{subcategory.subcategoryName}</li>
-            ))
-        )   
-    }
-
-    function showGroups(subcategory) {
-        setSelectedSubcategory(subcategory)
-    }
 
     function addToCart(item) {
         setCart([...cart, item])
         
     }
 
-    function saveCart(item) {
+    function saveCart() {
         localStorage.setItem("cart", JSON.stringify(cart))
     }
 
     function renderResults() {
-        if (selectedSubcategory == undefined) {
+        if (selectedCategory === undefined) {
             return (
                 <>
                     <h2 id="results-header">Select a Category</h2>
@@ -50,20 +37,16 @@ function CustomerMenu() {
         } else {
             return (
                 <>
-                    <h2 id="results-header">{selectedSubcategory.subcategoryName}</h2>
+                    <h2 id="results-header">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
                         {
-                            selectedSubcategory.groups.map(group => (
+                            categories[selectedCategory].items.map(item => (
                                 <>
-                                <h3>{group.groupName}</h3>
-                                {
-                                    group.items.map(item => (
-                                        <p onClick={() => {
-                                            addToCart(item)
-                                            saveCart()
-                                        }}>{item.itemName}</p>
-                                    ))
-                                }
+                                <h3 onClick={() => {
+                                        addToCart(item)
+                                        saveCart()
+                                    }
+                                }>{item.itemName}</h3>
                                 </>
                             ))
                         }
@@ -151,16 +134,10 @@ function CustomerMenu() {
                                 categories.map((category, index1) => (
                                     <>
                                         <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
-                                        <ul class="subcategory-list">
-                                            {
-                                                selectedCategory === index1 ? showSubcategories(index1, category) : null
-                                            }
-                                        </ul>
                                     </>
                                 ))
                             }
                         </ul>
-                        <div id="subcategories"></div>
                     </section>
                     <section id="results" class="card">
                         {

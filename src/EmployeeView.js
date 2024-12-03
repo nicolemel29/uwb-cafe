@@ -7,28 +7,15 @@ import {Link} from 'react-router-dom'
 
 function EmployeeView() {
 
-    const [selectedCategory, setSelectedCategory] = useState(-1)
-    const [selectedSubcategory, setSelectedSubcategory] = useState(undefined) // category, subcategory index
+    const [selectedCategory, setSelectedCategory] = useState(undefined)
 
     function changeCategory(index) {
         setSelectedCategory(index)
-        console.log(selectedCategory)
     }
 
-    function showSubcategories(index1, category) {
-        return (
-            category.subcategories.map((subcategory, index2) => (
-                <li key={`${index1}.${index2}`} onClick={() => showGroups(subcategory)} class="subcategory-item">{subcategory.subcategoryName}</li>
-            ))
-        )   
-    }
 
-    function showGroups(subcategory) {
-        setSelectedSubcategory(subcategory)
-    }
-
-    function renderResults() {
-        if (selectedSubcategory == undefined) {
+        function renderResults() {
+        if (selectedCategory === undefined) {
             return (
                 <>
                     <h2 id="results-header">Select a Category</h2>
@@ -38,17 +25,12 @@ function EmployeeView() {
         } else {
             return (
                 <>
-                    <h2 id="results-header">{selectedSubcategory.subcategoryName}</h2>
+                    <h2 id="results-header">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
                         {
-                            selectedSubcategory.groups.map(group => (
+                            categories[selectedCategory].items.map(item => (
                                 <>
-                                <h3>{group.groupName}</h3>
-                                {
-                                    group.items.map(item => (
-                                        <p>{item.itemName}</p>
-                                    ))
-                                }
+                                <h3>{item.itemName}</h3>
                                 </>
                             ))
                         }
@@ -57,6 +39,7 @@ function EmployeeView() {
             )
         }
     }
+
 
     return (
     <>
@@ -72,11 +55,12 @@ function EmployeeView() {
                         <img src={logo} alt="UW Bothell Cafe Logo" />
                     </div>
                     <nav>
-                        <ul>
+                    <ul>
                             <li><Link to={`/`}>Menu</Link></li>
                             <li hidden><a href="#featured">Featured</a></li>
                             <li><Link to={`/transaction-history`}>Transaction History</Link></li>
                             <li hidden><a href="#favorites">Favorites</a></li>
+                            <li><Link to={`/employee`} >Employees Only!</Link></li>
                         </ul>
                     </nav>
                 </header>
@@ -88,16 +72,10 @@ function EmployeeView() {
                                 categories.map((category, index1) => (
                                     <>
                                         <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
-                                        <ul class="subcategory-list">
-                                            {
-                                                selectedCategory === index1 ? showSubcategories(index1, category) : null
-                                            }
-                                        </ul>
                                     </>
                                 ))
                             }
                         </ul>
-                        <div id="subcategories"></div>
                     </section>
                     <section id="results" class="card">
                         {
