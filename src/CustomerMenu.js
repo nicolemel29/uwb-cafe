@@ -3,6 +3,7 @@ import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState } from 'react'
 import categories from './menuData.json'
+import {Link} from 'react-router-dom'
 
 function CustomerMenu() {
 
@@ -108,9 +109,11 @@ function CustomerMenu() {
                             ))
                         }
                     </div>
-                    <button>
-                        Go To Payment Page
-                    </button>
+                    <Link to={"/pay"} >
+                        <button>
+                            Go To Payment Page
+                        </button>
+                    </Link>
                 </>
             )
         }
