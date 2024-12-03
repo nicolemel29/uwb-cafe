@@ -1,0 +1,690 @@
+[
+    {
+        "categoryName": "Seasonal Beverages",
+        "items": [
+            {
+                "itemName": "Iced Lavender Cream Oatmilk Matcha",
+                "price": "5.65",
+                "calories": "300-480",
+                "desc": "Smooth and creamy matcha served with oatmilk over ice, topped with sweet and subtle floral notes of lavender cream cold foam--an unexpected combination that's springtime in a cup. Beverage includes dairy."
+            },
+            {
+                "itemName": "Iced Lavender Oatmilk Latte",
+                "price": "5.65",
+                "calories": "160-290",
+                "desc": "Smooth Starbucks Blonde Espresso Roast, creamy oatmilk, ice, and the sweet and subtly floral notes of lavender come together for a latte with a springtime twist."
+            },
+            {
+                "itemName": "Lavender Creme Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "260-450",
+                "desc": "Sweet and subtle notes of lavender blended with vanilla syrup, milk and ice, topped with whipped cream. A delicious blend of floral lavender and sweet vanilla in every sip."
+            },
+            {
+                "itemName": "Pumpkin Spice Creme",
+                "price": "4.55",
+                "calories": "210-480",
+                "desc": "Streamed milk and flavors of pumpkin, cinnamon, nutmeg and clove are topped with whipped cream to create this amazing, coffee-free fall favorite."
+            },
+            {
+                "itemName": "Pistachio Latte",
+                "price": "5.65",
+                "calories": "230-400",
+                "desc": "Cozy flavors of sweet pistachio and rich brown butter paired with espresso and steamed milk, specially crafted to keep you comforted and energized in the new year."
+            },
+            {
+                "itemName": "Pistachio Cream Cold Brew",
+                "price": "4.75",
+                "calories": "150-370",
+                "desc": "Starbucks signature cold brew sweetened with vanilla syrup, topped with a silky, pistachio cream cold foam and finished with salted brown-buttery sprinkles for a sweet treat to start up any winter day."
+            },
+            {
+                "itemName": "Pistachio Creme",
+                "price": "4.75",
+                "calories": "230-410",
+                "desc": "Cozy flavors of sweet pistachio and rich brown butter paired with steamed milk, specially reimagined and crafted to keep you comforted in the new year."
+            },
+            {
+                "itemName": "Iced Pistachio Latte",
+                "price": "5.75",
+                "calories": "190-370",
+                "desc": "Sweet pistachio flavor paired with espresso and milk, served over ice, and finished with a rich, salted brown-buttery topping: a creamy, smooth iced latte made to keep you renewed and energized in the new year."
+            },
+            {
+                "itemName": "Iced White Chocolate Mocha",
+                "price": "5.65",
+                "calories": "310-560",
+                "desc": "Our signature espresso meets white chocolate sauce, milk and ice, and then is finished off with sweetened whipped cream to create this supreme white chocolate delight."
+            },
+            {
+                "itemName": "Pumpkin Spice Latte",
+                "price": "5.65",
+                "calories": "210-470",
+                "desc": "Our signature espresso and milk are highlighted by flavor notes of pumpkin, cinnamon, nutmeg and clove to create this incredible beverage that's a fall favorite. Enjoy it topped with whipped cream and real pumpkin pie spices."
+            },
+            {
+                "itemName": "Peppermint White Chocolate Mocha",
+                "price": "5.65",
+                "calories": "400-620",
+                "desc": "Rich espresso meets a trio of white chocolate sauce, peppermind-flavored syrup and steamed milk, topped with sweet whipped cream and dark chocolate curls - an oh-so-delightfully merry treat."
+            },
+            {
+                "itemName": "Peppermind Hot Chocolate",
+                "price": "4.75",
+                "calories": "360-550",
+                "desc": "A big welcome back to our classic holiday hot chocolate - lovingly made with chocolaty mocha sauce, peppermind-flavored syrup and steamed milk and sweetly topped with whipped cream and dark chocolate curls."
+            },
+            {
+                "itemName": "Peppermind White Hot Chocolate",
+                "price": "4.75",
+                "calories": "400-630",
+                "desc": "A sweet twist on holiday hot chocolate - white chocolate mocha sauce, peppermind-flavored syrup and steamed milk, topped with whipped cream and dark chocolate curls."
+            },
+            {
+                "itemName": "Pumpkin Spice Frappuccino Blended Beverage",
+                "price": "5.45",
+                "calories": "290-510",
+                "desc": "We take pumpkin and traditional fall spice flavors and blend them with coffee, milk and ice, then top it all off with whipped cream and pumpkin pie spice. It's your favorite fall latte in a cool, Frappuccino form."
+            },
+            {
+                "itemName": "Pumpkin Spice Creme Frappuccino Blended Beverage",
+                "price": "5.45",
+                "calories": "250-450",
+                "desc": "A blend a pumpkin and traditional fall spice flavors combined milk and ice, blended and topped with sweetened whipped cream and pumpkin pie spice."
+            },
+            {
+                "itemName": "Iced Pumpkin Spice Latte",
+                "price": "5.75",
+                "calories": "180-350",
+                "desc": "Our signature espresso and milk are highlighted by flavor notes of pumpkin, cinnamon, nutmeg, and clove and served over ice to create this cool seasonal sensation. Enjoy it topped with whipped cream and real pumpkin pie spices."
+            },
+            {
+                "itemName": "Chestnut Praline Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "260-460",
+                "desc": "A blissful world of deliciousness: festive flavors of caramelized chestnuts and spices blended with Frappuccino Roast coffee, milk and ice, and topped with whipped cream and spiced praline crumbs."
+            },
+            {
+                "itemName": "Chestnut Praline Creme Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "240-400",
+                "desc": "A joyful world of deliciousness: holiday flavors of caramelized chestnuts and spices blended with milk and ice, and topped with whipped cream and spiced praline crumbs."
+            },
+            {
+                "itemName": "Peppermind Mocha Creme Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "270-480",
+                "desc": "This all-about-the-flavors sip delivers a delectable blend of chocolaty-pepperminty perfection - milk,ice,mocha sauce and peppermind-flavored syrup swirled together, topped with whipped cream and dark chocolate curls."
+            },
+            {
+                "itemName": "Sugar Cookie Almondmilk Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "250-440",
+                "desc": "Sugar cookie-flavored syrup combined with Frappuccino Roast coffee and almondmilk and blended with ice, topped with whipped cream and red and green sprinkles."
+            },
+            {
+                "itemName": "Sugar Cookie Almondmilk Creme Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "210-370",
+                "desc": "Sugar cookie-flavored syrup combined with almondmilk and blended with ice, topped with whipped cream and red and green sprinkles."
+            },
+            {
+                "itemName": "Iced Peppermint White Chocolate Mocha",
+                "price": "5.75",
+                "calories": "360-660",
+                "desc": "Our signature espresso meets a trio of white chocolate sauce, peppermind-flavored syrup and milk, served over ice and topped with whipped cream and dark chocolate curls - a sweet, oh-so-delightfully merry treat."
+            },
+            {
+                "itemName": "Peppermint White Chocolate Mocha Frappuccino Blended Beverage",
+                "price": "5.75",
+                "calories": "310-550",
+                "desc": "A delectable blend of white chocolaty-pepperminty perfection in every cool sip - Frappuccino Roast coffee, white chocolate mocha sauce, peppermint-flavored syrup, milk and ice, topped with whipped cream and dark chocolate curls."
+            },
+            {
+                "itemName": "Peppermint White Chocolate Creme Frappuccino Blended Beverage",
+                "price": "5.45",
+                "calories": "270-510",
+                "desc": "This all-about-the-flavors sip delivers a delectable blend of white chocolaty-pepperminty perfection - milk, ice, white chocolate mocha sauce and peppermint-flavored syrup swirled together, topped with whipped cream and dark-chocolate curls."
+            },
+            {
+                "itemName": "Gingerbread Latte",
+                "price": "5.65",
+                "calories": "230-380",
+                "desc": "Sweet and delicately spicy gingerbread flavors mingle - with our Starbucks Blonde Espresso and steamed milk, topped with whipped cream and a pumpkin spice blend - for the perfect holiday touch."
+            },
+            {
+                "itemName": "Iced Gingerbread Latte",
+                "price": "5.75",
+                "calories": "220-380",
+                "desc": "Sweet and deliciously spicy gingerbread flavors mingle - with our Starbucks Blonde Espresso and milk, topped with whipped cream, nutmeg and spice blend - for the perfect holiday touch, served over ice."
+            }
+        ]
+    },
+    {
+        "categoryName": "Frappuccino Blended Beverages",
+        "items": [
+            {
+                "itemName": "Espresso Frappuccino",
+                "price": "5.85",
+                "calories": "140-290",
+                "desc": "Coffee is combined with a shot of espresso and milk, then blended with ice to give you a nice little jolt and lots of sipping joy."
+            },
+            {
+                "itemName": "Caffe Vanilla Frappuccino",
+                "price": "4.95",
+                "calories": "280-510",
+                "desc": "We take Frappuccino Roast Coffee and vanilla bean powder, combine them with milk and ice, and top it with whipped cream. Tastes like happiness."
+            },
+            {
+                "itemName": "Caramel Frappuccino",
+                "price": "4.95",
+                "calories": "250-470",
+                "desc": "Caramel syrup meets coffee, milk and ice for a rendezvous in the blender, while whipped cream and buttery caramel sauce layer the love on top. To change things up, try it affogato-style with a hot espresso shot poured right over the top."
+            },
+            {
+                "itemName": "Mocha Frappuccino",
+                "price": "4.95",
+                "calories": "240-460",
+                "desc": "Mocha sauce, Frappuccino Roast Coffee, milk and ice all come together for a mocha flavor that'll leave you wanting more. To change things up, try it affogato-style with a hot espresso shot poured right over the top."
+            },
+            {
+                "itemName": "Java Chip Frappuccino",
+                "price": "4.95",
+                "calories": "320-560",
+                "desc": "We blend mocha sauce and Frappuccino chips with coffee, milk and ice, then top it off with whipped cream and a mocha drizzle to bring you endless java joy."
+            },
+            {
+                "itemName": "Strawberry Creme Frappuccino",
+                "price": "4.95",
+                "calories": "240-460",
+                "desc": "Summer's favorite berry is the star of this delicious Frappuccino Blended Beverage - a blend of ice, milk and strawberry puree layered on top of a splash of strawberry puree and finished with vanilla whipped cream."
+            },
+            {
+                "itemName": "Chai Creme Frapuccino",
+                "price": "4.95",
+                "calories": "230-410",
+                "desc": "Rich mocha-flavored sauce meets up with chocolaty chips, milk and ice for a blender bash. Top it off with sweetened whipped cream and mocha drizzle for a real party in your mouth."
+            },
+            {
+                "itemName": "Double Chocolaty Chip Creme Frappuccino",
+                "price": "4.95",
+                "calories": "290-510",
+                "desc": "Rich mocha-flavored sauce meets up with chocolaty chips, milk and ice for a belnder bash. Top it off with sweetened whipped cream and mocha drizzle for a real party in your mouth."
+            },
+            {
+                "itemName": "Matcha Green Tea Creme Frappuccino",
+                "price": "4.95",
+                "calories": "300-520",
+                "desc": "This blend of sweetened premium matcha green tea, milk and ice - topped off with sweetened whipped cream - inspires a delicious boost and good green vibes."
+            },
+            {
+                "itemName": "Vanilla Bean Creme Frappuccino",
+                "price": "4.85",
+                "calories": "260-460",
+                "desc": "This rich and creamy blend of vanilla bean, milk and ice topped with whipped cream takes va-va-vanilla flavor to another level. To change things up, try it affogato-style with a hot espresso shot poured right over the top."
+            },
+            {
+                "itemName": "White Chocolate Creme Frappuccino",
+                "price": "4.95",
+                "calories": "250-450",
+                "desc": "A smooth blend of white chocolate sauce, milk and ice topped with whipped cream for a remarkable flavor that surprisingly wows."
+            }
+        ]
+    },
+    {
+        "categoryName": "Hot Coffees",
+        "items": [
+            {
+                "itemName": "Pike Place Roast Coffee",
+                "price": "2.65",
+                "calories": "5",
+                "desc": "From our first store in Seattle's Pike Place Market to our coffeehouses around the world, customers requested a freshly brewed coffee they could enjoy throughout the day. In 2008 our master blenders and roasters created this for you - a smooth, well-rounded blend of Latin American coffees with subtly rich flavors of chocolate and toasted nuts, it's served fresh every day at a Starbucks store near you."
+            },
+            {
+                "itemName": "Espresso",
+                "price": "2.75",
+                "calories": "5-20",
+                "desc": "Our smooth signature Espresso Roast with rich flavor and caramelly sweetness is at the very heart of everything we do."
+            },
+            {
+                "itemName": "Espresso con Panna",
+                "price": "2.85",
+                "calories": "30-50",
+                "desc": "Espresso meets a dollop of whipped cream to enhance the rich and caramelly flavors of a straight-up-shot"
+            },
+            {
+                "itemName": "Espresso Macchiato",
+                "price": "2.85",
+                "calories": "10-25",
+                "desc": "Our rich espresso marked with dollop of steamed milk and foam. A European-style classic."
+            },
+            {
+                "itemName": "Caffe Americano",
+                "price": "3.65",
+                "calories": "15",
+                "desc": "Espresso shots topped with hot water create a light layer of crema culminating in this wonderfully rich cup with depth and nuance. Pro tip: For an additional boost, ask to try this with an extra shot."
+            },
+            {
+                "itemName": "Caffe Misto",
+                "price": "3.35",
+                "calories": "50-130",
+                "desc": "A 1-to-1 combination of fresh-brewed coffee and steamed milk add up to one distinctly delicious coffee drink that's remarkably mixed."
+            },
+            {
+                "itemName": "Cappuccino",
+                "price": "4.35",
+                "calories": "80-150",
+                "desc": "Dark, rich espresso lies in wait under a smoothed and stretched layer of thick milk foam. An alchemy of barista artistry and craft."
+            },
+            {
+                "itemName": "Caffe Latte",
+                "price": "4.45",
+                "calories": "100-250",
+                "desc": "Our dark, rich espresso balanced with steamed milk and a light layer of foam. A perfect milk-forward warm-up."
+            },
+            {
+                "itemName": "Caffe Mocha",
+                "price": "4.95",
+                "calories": "200-450",
+                "desc": "Our rich, full-bodied espresso combined with bittersweet mocha sauce and steamed milk, then topped with sweetened whipped cream. The classic coffee drink that always sweetly satisfies."
+            },
+            {
+                "itemName": "Caramel Macchiato",
+                "price": "5.25",
+                "calories": "120-310",
+                "desc": "Freshly steamed milk with vanilla-flavored syrup marked with espresso and topped with a caramel drizzle for an oh-so-sweet finish."
+            },
+            {
+                "itemName": "Honey Oatmilk Latte",
+                "price": "5.45",
+                "calories": "140-360",
+                "desc": "Oat milk and signature espresso are intentionally combined with a hint of honey and a toasted honey topping - a savory tribute to all things sweet and salty."
+            },
+            {
+                "itemName": "Cinnamon Dolce Latte",
+                "price": "5.45",
+                "calories": "190-420",
+                "desc": "We add freshly steamed milk and cinnamon dolce-flavored syrup to our classic espresso, topped with sweetened whipped cream and a cinnamon dolce topping to bring you specialness in a treat."
+            }
+        ]
+    },
+    {
+        "categoryName": "Cold Coffees",
+        "items": [
+            {
+                "itemName": "Vanilla Sweet Cream Cold Brew",
+                "price": "4.25",
+                "calories": "90-220",
+                "desc": "Our slow-steeped custom blend of Starbucks Cold Brew coffee accented with vanilla and topped with a delicate float of house-made vanilla sweet cream that cascades throughout the cup. It's over-the-top and super-smooth."
+            },
+            {
+                "itemName": "Iced Caffe Latte",
+                "price": "4.75",
+                "calories": "100-180",
+                "desc": "Our dark, rich espresso combined with milk and served over ice. A perfect milk-forward cool-down."
+            },
+            {
+                "itemName": "Iced Caffe Mocha",
+                "price": "5.25",
+                "calories": "260-450",
+                "desc": "Our rich, full-bodied espresso combined with bittersweet mocha sauce, milk and ice, then topped with sweetened whipped cream. The classic iced coffee drink that always sweetly satisfies."
+            },
+            {
+                "itemName": "Iced Cappuccino",
+                "price": "4.75",
+                "calories": "106",
+                "desc": "With less milk than a latte, Iced Cappuccino offers a stronger espresso flavor, a luxurious texture and a velvety, frothy foam with a crisp, cool undercurrent."
+            },
+            {
+                "itemName": "Honey Almondmilk Cold Brew",
+                "price": "4.25",
+                "calories": "30-80",
+                "desc": "Starbucks Cold Brew lightly sweetened with honey and topped off with almondmilk for a balanced taste in every delicious sip."
+            },
+            {
+                "itemName": "Iced Chocolate Almondmilk Shaken Espresso",
+                "price": "5.25",
+                "calories": "80-150",
+                "desc": "Starbucks Blonde espresso meets cocoa and notes of malt, shaken together and topped with almondmilk and ice for an invigorating treat to power you through your day."
+            },
+            {
+                "itemName": "Iced Brown Sugar Oatmilk Shaken Espresso",
+                "price": "5.25",
+                "calories": "90-170",
+                "desc": "First we shake Starbucks Blonde espresso, brown sugar and cinnamon together, and then top it off with oatmilk and ice for a cool lift to power you through your day."
+            },
+            {
+                "itemName": "Iced Shaken Espresso",
+                "price": "3.75",
+                "calories": "100-190",
+                "desc": "Made with the rich, full-bodied espresso you love - then shaken, chilled and mellowed with the sweetness and a touch of milk to create a delightfully and deliciously convenient on-the-go drink."
+            },
+            {
+                "itemName": "Salted Caramel Cream Cold Brew",
+                "price": "4.75",
+                "calories": "160-340",
+                "desc": "Here's a savory-meets-sweet refreshing beverage certain to delight: our signature, super-smooth cold brew, sweetened with a touch a caramel and topped with a salted, rich cold foam."
+            },
+            {
+                "itemName": "Starbucks Cold Brew Coffee",
+                "price": "3.95",
+                "calories": "5",
+                "desc": "Handcrafted in small batches daily, slow-steeped in cool water for 20 hours without touching heat - Starbucks Cold Brew is made from our custom blend of beans grown to steep long and cold for a super-smooth flavor."
+            },
+            {
+                "itemName": "Starbucks Cold Brew Coffee with Milk",
+                "price": "3.95",
+                "calories": "25-70",
+                "desc": "Handcrafted in small batches daily, slow-steeped in cool water for 20 hours, without touching heat and finished with a splash of milk - Starbucks Cold Brew is made from our custom blend of beans grown to steep long and cold for a super-smooth flavor."
+            },
+            {
+                "itemName": "Iced Coffe Americano",
+                "price": "4.25",
+                "calories": "10-15",
+                "desc": "Espresso shots topped with cold water produce a light layer of crema that is then served over ice. The result: A wonderfully rich cup with depth and nuance. Pro tip: For an additional boost, try this with an extra shot."
+            },
+            {
+                "itemName": "Iced Espresso",
+                "price": "2.75",
+                "calories": "5-25",
+                "desc": "Our smooth signature Espresso Roast over ice boast rich, robust flavor and caramelly sweetness. A recipe of perfection at the heart of every handcrafted espresso we serve."
+            },
+            {
+                "itemName": "Iced Honey Oatmilk Latte",
+                "price": "5.65",
+                "calories": "160-300",
+                "desc": "Oat milk and signature espresso are intentionally combined over ice with a hint of honey and a toasted honey topping - a savory tribute to all things sweet and salty."
+            },
+            {
+                "itemName": "Iced Caramel Macchiato",
+                "price": "5.45",
+                "calories": "180-350",
+                "desc": "We combine our rich, full-bodied espresso with vanilla-flavored syrup, milk and ice, then top it off with a caramel drizzle for an oh-so-sweet finish."
+            },
+            {
+                "itemName": "Iced Cinnamon Dolce Latte",
+                "price": "5.65",
+                "calories": "240-420",
+                "desc": "We add freshly steamed milk and cinnamon dolce-flavored syrup to our classic espresso and ice, topped with sweetened whipped cream and a cinnamon dolce topping to bring you specialness in a treat."
+            }
+        ]
+    },
+    {
+        "categoryName": "Hot Teas",
+        "items": [
+            {
+                "itemName": "Chai Tea",
+                "price": "2.95",
+                "calories": "0",
+                "desc": "Black tea infused with warm clove, cardamom, cinnamon and ginger notes. A bold, distinctive chai tea."
+            },
+            {
+                "itemName": "Chamomile Blush Tea",
+                "price": "2.95",
+                "calories": "0",
+                "desc": "Chamomile, Spearmint, Rose & Lemongrass"
+            },
+            {
+                "itemName": "Earl Grey Tea",
+                "price": "2.95",
+                "calories": "0",
+                "desc": "We take a strong black tea base and add the essence of bergamot, a citrus fruit with subtle lemon and floral lavendar notes, to create this aromantically awesome tea flavor."
+            },
+            {
+                "itemName": "Royal English Breakfast Tea",
+                "price": "2.95",
+                "calories": "0",
+                "desc": "Each sip of this beloved morning black tea unfolds to reveal the complexity of the high-grown full leaves. An elegant, time-honored classic that brings a royal nod to every cup."
+            },
+            {
+                "itemName": "Jasmine Citrus Tea",
+                "price": "2.95",
+                "calories": "60-150",
+                "desc": "N/A"
+            },
+            {
+                "itemName": "Harmonic Mint",
+                "price": "2.95",
+                "calories": "0",
+                "desc": "A blend of mint and a pinch of lemon verbena creates a refreshing flavor that's supercool for a caffeine-free herbal tea."
+            },
+            {
+                "itemName": "Peach Tranquility",
+                "price": "2.95",
+                "calories": "0",
+                "desc": "A sweet fusion of peach, candied pineapple, chamomile blossoms, lemon verbena and rose hips come together in this caffeine-free herbal tea. Sip back and relax."
+            },
+            {
+                "itemName": "Chai Tea Latte",
+                "price": "4.65",
+                "calories": "120-310",
+                "desc": "Black tea infused with cinnamon, clove and other warming spices is combined with steamed milk and topped with foam for the perfect balance of sweet and spicy. An iconic chai cup."
+            },
+            {
+                "itemName": "London Fog Tea Latte",
+                "price": "4.55",
+                "calories": "90-230",
+                "desc": "Bright, citrusy spark of Italian bergamot blends with subtle hints of lavender, vanilla syrup and steamed milk for this frothy reinvention of classic Earl Grey tea."
+            },
+            {
+                "itemName": "Royal English Breakfast Tea Latte",
+                "price": "4.55",
+                "calories": "80-190",
+                "desc": "A select blend of rich, full-leaf black teas from India and Sri Lanka sweetened with liquid cane sugar and topped with steamed milk and a velvety foam. Each and every sip - smooth and silky."
+            },
+            {
+                "itemName": "Matcha Tea Latte",
+                "price": "4.65",
+                "calories": "110-320",
+                "desc": "Smooth and creamy matcha sweetened just right and served with steamed milk. This favorite will transport your senses to pure green delight."
+            }
+        ]
+    },
+    {
+        "categoryName": "Iced Teas",
+        "items": [
+            {
+                "itemName": "Iced Black Tea",
+                "price": "2.95",
+                "calories": "30-70",
+                "desc": "Premium black tea is sweetened just right and shaken with ice. It's the ideal iced tea - a rich and flavorful black tea journey awaits you."
+            },
+            {
+                "itemName": "Iced Black Tea Lemonade",
+                "price": "3.45",
+                "calories": "70-170",
+                "desc": "Premium black tea is sweetened just right, then shaken with refreshing lemonade and ice for this Arnold Palmer-inspired beverage. A distringuished, satisfying treat."
+            },
+            {
+                "itemName": "Iced Royal English Breakfast Tea Latte",
+                "price": "4.45",
+                "calories": "100-210",
+                "desc": "A select blend of rich, full-leaf black teas from India and Sri Lanka sweetened with liquid cane sugar combined with milk and ice."
+            },
+            {
+                "itemName": "Iced London Fog Tea Latte",
+                "price": "4.75",
+                "calories": "100-210",
+                "desc": "Bright, citrusy spark of bergamot blends with subtle hints of lavender and mixes with vanilla syrup, milk and ice to create this delicious reinvention of a classic Earl Grey tea."
+            },
+            {
+                "itemName": "Iced Chai Tea Latte",
+                "price": "4.75",
+                "calories": "180-350",
+                "desc": "Black tea infused with cinnamon, clove and other warming spices are combined with milk and ice for the perfect balance of sweet and spicy."
+            },
+            {
+                "itemName": "Iced Matcha Green Tea Latte",
+                "price": "4.75",
+                "calories": "140-280",
+                "desc": "Smooth and creamy matcha sweetened just right and served with milk over ice. Green has never tasted so god."
+            },
+            {
+                "itemName": "Iced Green Tea",
+                "price": "2.95",
+                "calories": "30-70",
+                "desc": "Green tea blended with mint, lemongrass and lemon verbena, then sweetened just right and given a good shake with ice. Lightly flavored and oh-so-refreshing!"
+            },
+            {
+                "itemName": "Iced Green Tea Lemonade",
+                "price": "3.45",
+                "calories": "70-170",
+                "desc": "Green tea blended with mint, lemongrass, lemon verbena and lemonade, then sweetened just right and given a good shake with ice. Lightly flavored and oh-so-refreshing!"
+            },
+            {
+                "itemName": "Matcha Lemonade",
+                "price": "3.45",
+                "calories": "90-170",
+                "desc": "Our finely ground Teavana matcha grean tea combined with crisp lemonade, then shaken with ice, creates a refreshingly sweet, delicious drink that's a delightfully vibrant, green-hue."
+            },
+            {
+                "itemName": "Iced Passion Tango Tea",
+                "price": "2.95",
+                "calories": "30-70",
+                "desc": "A blend of hibiscus, lemongrass and apple sweetened just right and hand-shaken with ice. A refreshingly vibrant tea infused with the color of passion."
+            },
+            {
+                "itemName": "Iced Passion Tango Tea Lemonade",
+                "price": "3.45",
+                "calories": "70-170",
+                "desc": "Our blend of hibiscus, lemongrass and apple sweetened just right and hand-shaken with ice, lemonade and, of course, passion."
+            }
+        ]
+    },
+    {
+        "categoryName": "Hot Drinks",
+        "items": [
+            {
+                "itemName": "Hot Chocolate",
+                "price": "4.55",
+                "calories": "230-500",
+                "desc": "Steamed milk with vanilla and chocolate-flavored syrups. Topped with sweetened whipped cream and chocolate-flavored drizzle. A timeless classic made to sweetend your spirits."
+            },
+            {
+                "itemName": "White Hot Chocolate",
+                "price": "4.55",
+                "calories": "190-540",
+                "desc": "A traditional hot chocolate beverage made with white chocolate sauce and steamed milk. Topped with whipped cream."
+            },
+            {
+                "itemName": "Cinnamon Dolce Creme",
+                "price": "5.45",
+                "calories": "280-430",
+                "desc": "We combine freshly steamed milk and cinnamon dolce-flavored syrup. Topped with sweetened whipped cream and a cinnamon dolce topping to give you a creamy, special treat."
+            },
+            {
+                "itemName": "Steamed Milk",
+                "price": "2.95",
+                "calories": "100-260",
+                "desc": "Enjoy a warm cup of skim, 2%, soy, almond, or coconut milk steamed for your sipping pleasure."
+            },
+            {
+                "itemName": "Vanilla Creme",
+                "price": "3.75",
+                "calories": "180-400",
+                "desc": "A smooth, frothy vanilla-flavored luxury. For those times, when you'd rather not indulge in the rich flavor of our world-famous espresso, but desire a hot, creamy vanilla beverage."
+            }
+        ]
+    },
+    {
+        "categoryName": "Cold Drinks",
+        "items": [
+            {
+                "itemName": "Pineapple Passionfruit Lemonade Starbucks Refreshers Beverage",
+                "price": "4.25",
+                "calories": "110-290",
+                "desc": "Tropical flavors of pineapple and passionfruit combine with diced pineapple and refreshing lemonade to create a taste of sunshine in a cup."
+            },
+            {
+                "itemName": "Strawberry Acai Lemonade Starbucks Refresher",
+                "price": "4.25",
+                "calories": "110-280",
+                "desc": "Sweet strawberry flavors, passion fruit, and acai notes balanced with the delightful zing of lemonade and caffeine from green coffee extract. Served over ice. This is the ultimate pick-me-up your afternoon is calling for."
+            },
+            {
+                "itemName": "Mango Dragonfruit Lemonade Starbucks Refresher",
+                "price": "4.25",
+                "calories": "110-280",
+                "desc": "This tropical-inspired pick-me-up - crafted with a clever combination of vibrant lemonade, sweet mango and refreshing dragonfruit flavors - is hand-shaken with ice and a scoop of real diced dragonfruit. Contains caffeine."
+            },
+            {
+                "itemName": "Dragon Drink",
+                "price": "4.75",
+                "calories": "100-270",
+                "desc": "This tropical-inspired pick-me-up - crafted with a refreshing combination of sweet mango and dragonfruit flavors - is hand-shaken with creamy coconut milk, ice and a scoop of real diced dragonfruit. Contains caffeine."
+            },
+            {
+                "itemName": "Mango Dragonfruit Starbucks Refresher",
+                "price": "3.95",
+                "calories": "70-180",
+                "desc": "This tropical-inspired pick-me-up - crafted with a refreshing combination of sweet mango and dragonfruit flavors - is hand-shaken with ice and a scoop of real diced dragonfruit. Contains caffeine."
+            },
+            {
+                "itemName": "Strawberry Acai Starbucks Refresher",
+                "price": "3.95",
+                "calories": "80-190",
+                "desc": "Sweet strawberry flavors accented by passion fruit and acai notes, and caffeinated with green coffee extract - a welcoming sweet spot of refreshment."
+            },
+            {
+                "itemName": "Pink Drink",
+                "price": "4.75",
+                "calories": "110-270",
+                "desc": "Our crisp Strawberry Acai Refresher with its accents of passion fruit, is combined with creamy coconut milk. A fruity and refreshing sip of spring, no matter what time of year."
+            },
+            {
+                "itemName": "Lemonade",
+                "price": "4.75",
+                "calories": "80-200",
+                "desc": "Awaken your taste buds with the zing of refreshing lemonade - this tangy, fresh sip puts a little zip in your step."
+            },
+            {
+                "itemName": "Blended Strawberry Lemonade",
+                "price": "3.95",
+                "calories": "130-260",
+                "desc": "Awaken your taste buds with the zing of refreshing lemonade infused with a hint of delicious strawberry flavor and blended with ice. A light, fresh beverage that puts a little zip in your step."
+            },
+            {
+                "itemName": "Milk",
+                "price": "2.95",
+                "calories": "200-370",
+                "desc": "Skim, 2%, soy, almond, or coconut milk served chilled or over ice. Simply refreshing."
+            },
+            {
+                "itemName": "Paradise Drink Starbucks Refreshers Beverage",
+                "price": "4.75",
+                "calories": "110-270",
+                "desc": "Tropical flavors of pineapple and passionfruit combine with diced pineapple and creamy coconut beverage to create a delicious island escape"
+            },
+            {
+                "itemName": "Pineapple Passionfruit Starbucks Refreshers Beverage",
+                "price": "4.25",
+                "calories": "80-190",
+                "desc": "Tropical flavors of pineapple and passionfruit mix with diced pineapple to create an island escape -- oh so refreshing."
+            }
+        ]
+    },
+    {
+        "categoryName": "Bakery",
+        "items": [
+            {
+                "itemName": "Iced Lemon Loaf",
+                "price": "3.49",
+                "calories": "440",
+                "desc": "N/A"
+            },
+            {
+                "itemName": "Iced Marble Loaf",
+                "price": "3.49",
+                "calories": "390",
+                "desc": "N/A"
+            },
+            {
+                "itemName": "Banana Nut Loaf",
+                "price": "3.49",
+                "calories": "370",
+                "desc": "N/A"
+            }
+        ]
+    }
+    
+]

@@ -42,7 +42,7 @@ function CustomerMenu() {
                         {
                             categories[selectedCategory].items.map(item => (
                                 <>
-                                <h3 onClick={() => {
+                                <h3 class="clickable" onClick={() => {
                                         addToCart(item)
                                         saveCart()
                                     }
