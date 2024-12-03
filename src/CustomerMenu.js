@@ -125,7 +125,7 @@ function CustomerMenu() {
             <head>
                 <meta charset="UTF-8" />
                 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>UW Bothell Cafe</title>
+                <title>Menu - UW Bothell Cafe</title>
                 <link rel="stylesheet" href="../Stylesheets/homestyle.css" />
             </head>
             <body>
