@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color:#c8befa;
+    background: linear-gradient(180deg, #c0b5fa,#dedbf4);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -11,6 +11,11 @@ body {
 
 header {
     background-color: #4b2e83; 
+    background: url('coffee.jpg');
+    background-size: cover;
+    background-position: center center;
+    position: relative;
+
     color: white;
     padding: 1rem 2rem;
     display: flex;
@@ -18,9 +23,40 @@ header {
     align-items: center;
     height: 100px;
     overflow: hidden;
+
 }
 
+header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: #5b4585;
+    opacity: 0.8;
+    z-index: 1;
+}
 
+header .logo, header nav {
+    position: relative;
+    z-index: 2;
+}
+
+nav {
+    background-color: #4b2e83;
+    padding: .2rem 1rem;
+    border-radius: 20px;
+    border: 1px solid white;
+    border-color: white;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+nav:hover {
+    scale: 1.1;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
 
 header .logo img {
     height: 200px;
@@ -59,6 +95,13 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     flex: 1;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.card:hover {
+    transform: translateY(-0.5rem);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 footer {
