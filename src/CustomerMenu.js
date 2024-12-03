@@ -139,6 +139,7 @@ function CustomerMenu() {
                             <li hidden><a href="#featured">Featured</a></li>
                             <li><Link to={`/transaction-history`}>Transaction History</Link></li>
                             <li hidden><a href="#favorites">Favorites</a></li>
+                            <li><Link to={`/employee`} >Employees Only!</Link></li>
                         </ul>
                     </nav>
                 </header>

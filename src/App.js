@@ -1,5 +1,6 @@
 import './App.css';
 import CustomerMenu from './CustomerMenu.js'
+import EmployeeView from './EmployeeView.js';
 import PaymentView from './PaymentView.js'
 import Redirect from './Redirect.js'
 import TransactionView from './TransactionView.js';
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={ <CustomerMenu/> } />
         <Route path="/pay" element={ <PaymentView/> } />
         <Route path="/transaction-history" element={ <TransactionView/> } />
+        <Route path="/employee" element={ <EmployeeView /> } />
         <Route path="*" element={ <Redirect/> } />
       </Routes>
     </BrowserRouter>
