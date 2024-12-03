@@ -1,8 +1,69 @@
 import React from 'react';
 import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
+import { useState } from 'react'
 
 function CustomerMenu() {
+    const [categories, setCategories] = useState([
+        {
+            categoryName: "Drinks",
+            subcategories: [
+                "One",
+                "Two"
+            ]
+        },
+        {
+            categoryName: "Food",
+            subcategories: [
+                "One",
+                "Two"
+            ]
+        },
+        {
+            categoryName: "At Home Coffee",
+            subcategories: [
+                "One",
+                "Two"
+            ]
+        },
+        {
+            categoryName: "Merchandise",
+            subcategories: [
+                "One",
+                "Two"
+            ]
+        },
+    ])
+
+    const [selectedCategory, setSelectedCategory] = useState(-1)
+    const [selectedSubcategory, setSelectedSubcategory] = useState([-1, -1]) // category, subcategory index
+
+    function changeCategory(index) {
+        setSelectedCategory(index)
+        console.log(selectedCategory)
+    }
+
+    function showSubcategories(index1, category) {
+        return (
+            category.subcategories.map((subcategory, index2) => (
+                <li key={`${index1}.${index2}`} onClick={() => showGroups(index1, index2)} class="subcategory-item">{subcategory}</li>
+            ))
+        )   
+    }
+
+    function showGroups(index1, index2) {
+        setSelectedSubcategory([index1, index2])
+    }
+
+    function renderResults() {
+        return (
+            <>
+                <h2 id="results-header">Select a Category</h2>
+                <div id="results-content"></div>
+            </>
+        )
+    }
+
     return (
         <>
             <head>
@@ -29,16 +90,26 @@ function CustomerMenu() {
                     <section id="categories" class="card">
                         <h2>Categories</h2>
                         <ul>
-                            <li><a href="#" onclick="showSubcategories('drinks')">Drinks</a></li>
-                            <li><a href="#" onclick="showSubcategories('food')">Food</a></li>
-                            <li><a href="#" onclick="showSubcategories('homeCoffee')">At Home Coffee</a></li>
-                            <li><a href="#" onclick="showSubcategories('merchandise')">Merchandise</a></li>
+                            {
+                                categories.map((category, index1) => (
+                                    <>
+                                        <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
+                                        <ul class="subcategory-list">
+                                            {
+                                                selectedCategory === index1 ? showSubcategories(index1, category) : null
+                                            }
+                                        </ul>
+                                    </>
+                                ))
+                            }
                         </ul>
                         <div id="subcategories"></div>
                     </section>
                     <section id="results" class="card">
-                        <h2 id="results-header">Select a Category</h2>
-                        <div id="results-content"></div>
+                        {
+                            renderResults()
+                        }
+                        
                     </section>
                     <section id="cart" class="card">
                         <h2>Cart</h2>
