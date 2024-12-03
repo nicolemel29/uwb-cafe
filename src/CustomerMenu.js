@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react'
 import categories from './menuData.json'
 import {Link} from 'react-router-dom'
 
-function CustomerMenu() {
+function CustomerMenu(props) {
+    const isOpen = props.isOpen
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
@@ -140,6 +141,7 @@ function CustomerMenu() {
                         </ul>
                     </nav>
                 </header>
+                {!isOpen ? <p>We're closed!</p> : <></>} {/* This does NOT happen in real time */}
                 <main>
                     <section id="categories" class="card">
                         <h2>Categories</h2>

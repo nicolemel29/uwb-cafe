@@ -1,11 +1,14 @@
 import React from 'react'
-import './CustomerMenu.css'
+import './EmployeeView.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState } from 'react'
 import categories from './menuData.json'
 import {Link} from 'react-router-dom'
+import axios from 'axios'
 
-function EmployeeView() {
+function EmployeeView(props) {
+    const isOpen = props.isOpen
+    const toggleOpen = props.toggleOpen
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
@@ -40,6 +43,40 @@ function EmployeeView() {
         }
     }
 
+    function addCategory() {
+
+    }
+
+    function editCategory() {
+        // includes name
+    }
+
+    function deleteCategory() {
+
+    }
+
+    function reorganizeCategory() {
+
+    }
+
+    function addItem() {
+
+    }
+
+    function editItem() {
+
+    }
+
+    function deleteItem() {
+
+    }
+
+    function reorganizeItem() {
+
+    }
+
+
+
 
     return (
     <>
@@ -66,6 +103,16 @@ function EmployeeView() {
                 </header>
                 <main>
                     <section id="categories" class="card">
+                        <div id="store-open-employee">
+                            <label>
+                                <input
+                                    type="checkbox"
+                                    checked={isOpen}
+                                    onChange={toggleOpen}
+                                />
+                                Is the Store Open?
+                            </label>
+                        </div>
                         <h2>Categories</h2>
                         <ul>
                             {
@@ -75,6 +122,7 @@ function EmployeeView() {
                                     </>
                                 ))
                             }
+                            <button onClick={addCategory}>Add Category</button>
                         </ul>
                     </section>
                     <section id="results" class="card">
@@ -82,11 +130,6 @@ function EmployeeView() {
                             renderResults()
                         }
                         
-                    </section>
-                    <section id="cart" class="card">
-                        {
-                            
-                        }
                     </section>
                 </main>
                 <footer>
