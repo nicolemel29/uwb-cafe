@@ -135,9 +135,9 @@ function CustomerMenu() {
                     </div>
                     <nav>
                         <ul>
-                            <li><a href="#menu">Menu</a></li>
+                            <li><Link to={`/`}>Menu</Link></li>
                             <li hidden><a href="#featured">Featured</a></li>
-                            <li><a href="#previous">Transaction History</a></li>
+                            <li><Link to={`/transaction-history`}>Transaction History</Link></li>
                             <li hidden><a href="#favorites">Favorites</a></li>
                         </ul>
                     </nav>

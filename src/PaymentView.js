@@ -15,6 +15,21 @@ function PaymentView() {
         }
     }, [])
 
+    function handlePay() {
+        if (localStorage.getItem("transaction")) {
+            const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
+            const newTransactionHistory = JSON.stringify([...oldTransactionHistory, cart])
+            localStorage.setItem("transaction", newTransactionHistory)
+            localStorage.setItem("cart", [])
+            navigate("/")
+        } else {
+            const newTransactionHistory = JSON.stringify([cart])
+            localStorage.setItem("transaction", newTransactionHistory)
+            localStorage.setItem("cart", [])
+            navigate("/")
+        }
+    }
+
     return (
         <>
             <head>
@@ -28,6 +43,9 @@ function PaymentView() {
                         <p>{cartItem.itemName}</p>
                     ))
                 }
+                <button onClick={handlePay}>
+                    Pay!
+                </button>
             </body>
         </>
     )
