@@ -22,6 +22,17 @@ function CustomerMenu() {
         
     }
 
+    function removeFromCart(index) {
+        const iterations = cart.length
+        let cartCopy = []
+        for (let i = 0; i < iterations; i++) {
+            if (i != index) {
+                cartCopy.push(cart[i])
+            }
+        }
+        setCart(cartCopy)
+    }
+
     function saveCart() {
         localStorage.setItem("cart", JSON.stringify(cart))
     }
@@ -87,8 +98,11 @@ function CustomerMenu() {
                     <h2>Cart</h2>
                     <div id="cart-content">
                         {
-                            cart.map(cartItem => (
-                                <p>{cartItem.itemName}</p>
+                            cart.map((cartItem, index) => (
+                                <p onClick={() => {
+                                    removeFromCart(index)
+                                    saveCart()
+                                }} key={`cart${index}`}>{cartItem.itemName}</p>
                             ))
                         }
                     </div>
