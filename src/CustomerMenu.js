@@ -108,6 +108,9 @@ function CustomerMenu() {
                             ))
                         }
                     </div>
+                    <button>
+                        Go To Payment Page
+                    </button>
                 </>
             )
         }

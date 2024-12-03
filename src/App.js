@@ -1,10 +1,15 @@
 import './App.css';
 import CustomerMenu from './CustomerMenu.js'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 // Controller
 function App() {
   return (
-    <CustomerMenu/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={ <CustomerMenu/> } />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
