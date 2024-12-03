@@ -5,29 +5,157 @@
             {
                 "subcategoryName": "Hot Coffee",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Cold Coffee",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Tea",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Smoothies",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             }
 
@@ -39,22 +167,118 @@
             {
                 "subcategoryName": "Sandwiches",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Salads",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Pastries",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             }
         ]
@@ -65,22 +289,118 @@
             {
                 "subcategoryName": "Coffee Beans",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Ground Coffee",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Pods",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             }
         ]
@@ -91,22 +411,118 @@
             {
                 "subcategoryName": "Mugs",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Tumblers",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             },
             {
                 "subcategoryName": "Apparel",
                 "groups": [
-                    "One",
-                    "Two"
+                    {
+                        "groupName": "Group 1",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 1",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 1",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 1",
+                                "price": "3.99"
+                            }
+                        ]
+                    },
+                    {
+                        "groupName": "Group 2",
+                        "items": [
+                            {
+                                "itemName": "Item 1 of Group 2",
+                                "price": "1.99"
+                            },
+                            {
+                                "itemName": "Item 2 of Group 2",
+                                "price": "2.99"
+                            },
+                            {
+                                "itemName": "Item 3 of Group 2",
+                                "price": "3.99"
+                            }
+                        ]
+                    }
                 ]
             }
         ]

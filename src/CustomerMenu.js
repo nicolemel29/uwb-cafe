@@ -9,6 +9,8 @@ function CustomerMenu() {
     const [selectedCategory, setSelectedCategory] = useState(-1)
     const [selectedSubcategory, setSelectedSubcategory] = useState(undefined) // category, subcategory index
 
+    
+
     function changeCategory(index) {
         setSelectedCategory(index)
         console.log(selectedCategory)
@@ -40,8 +42,15 @@ function CustomerMenu() {
                     <h2 id="results-header">{selectedSubcategory.subcategoryName}</h2>
                     <div id="results-content">
                         {
-                            selectedSubcategory.groups.map((group) => (
-                                <p>{group}</p>
+                            selectedSubcategory.groups.map(group => (
+                                <>
+                                <h3>{group.groupName}</h3>
+                                {
+                                    group.items.map(item => (
+                                        <p>{item.itemName}</p>
+                                    ))
+                                }
+                                </>
                             ))
                         }
                     </div>
