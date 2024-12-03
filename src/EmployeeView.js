@@ -103,6 +103,7 @@ function EmployeeView(props) {
                 </header>
                 <main>
                     <section id="categories" class="card">
+                    { /* Should be on same column but in a seperate card*/ }
                         <div id="store-open-employee">
                             <label>
                                 <input
@@ -126,6 +127,12 @@ function EmployeeView(props) {
                         </ul>
                     </section>
                     <section id="results" class="card">
+                        { /* Should be on same column but in a seperate card*/ }
+                        <div id="soonest-order">
+                            <p>The next order is at: 5:45pm</p>
+                            <p>Item Name for User Name</p>
+                            <p>Extra Notes</p>
+                        </div>
                         {
                             renderResults()
                         }

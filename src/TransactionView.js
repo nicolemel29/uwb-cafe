@@ -11,22 +11,32 @@ function TransactionView() {
         }
         setTransactionsLoaded(true)
     }, [])
+    
+    function renderTransactions() {
+        let transactionsReverse = []
+
+        for (let i = 0; i < 10 && i < transactionHistory.length; i++) {
+            transactionsReverse.push(transactionHistory[i])
+        }
+        transactionsReverse.reverse()
+
+        return transactionsReverse.map((transaction, index) => (
+            <div class="transaction-card">
+                <h3>Transaction: {index+1}</h3>
+                {
+                    transaction.map((item) => (
+                        <p>{item.itemName}</p>
+                    ))
+                }
+            </div>
+        ))
+    }
 
     if (transactionsLoaded) {
         return (
             <>
-                {
-                    transactionHistory.map((transaction, index) => (
-                        <>
-                            <h2>Transaction {index}:</h2>
-                            {
-                                transaction.map(item => (
-                                    <p>{item.itemName}</p>
-                                ))
-                            }
-                        </>
-                    ))
-                }  
+                <p>We'll save your last 10 orders here!</p>
+                {renderTransactions()}
             </>
         )
     } else {
