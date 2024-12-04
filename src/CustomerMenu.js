@@ -77,18 +77,27 @@ function CustomerMenu(props) {
                 <>
                     <h2 id="results-header" class="menu-heading">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
-                        {
-                            categories[selectedCategory].items.map(item => (
-                                <>
-                                <h3 class="clickable" onClick={() => {
-                                        addToCart(item)
-                                        saveCart()
-                                    }
-                                }>{item.itemName}</h3>
-                                </>
-                            ))
-                        }
-                    </div>
+                    {categories[selectedCategory].items.map((item, index) => (
+                        <div 
+                            key={index} 
+                            class="menu-item clickable" 
+                            onClick={() => {
+                                addToCart(item);
+                                saveCart();
+                            }}
+                        >
+                        <div class="item-header">
+                            <h3 class="item-name">{item.itemName}</h3>
+                            <span class="item-price">${item.price}</span>
+                        </div>
+                        <div class="item-details">
+                            <p>{item.desc}</p>
+                            <p><strong>Calories:</strong> {item.calories}</p>
+                        </div>
+                        </div>
+                    ))}
+                </div>
+
                 </>
             )
         }

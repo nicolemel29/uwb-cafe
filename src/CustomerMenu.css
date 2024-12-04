@@ -149,7 +149,7 @@ main {
     transition: width 0.2s ease, background-color 0.2s ease, color 0.2s ease;
 }
 
-.category:hover, .category.active, .clickable:hover {
+.category:hover, .category.active {
     width: 100%;
     color: white;
     background-color: #4b2e83;
@@ -157,6 +157,56 @@ main {
     padding-left: 5px;
     border-radius: 5px;
 }
+
+.menu-item {
+    position: relative;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3 ease;
+}
+
+.menu-item:hover {
+    background-color: #f0f8ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.item-price {
+    font-size: 1em;
+    color: #555;
+    font-weight: bold;
+    text-align: right;
+}
+
+.item-details {
+    display: none;
+    margin-top: 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.menu-item:hover .item-details {
+    display: block;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
 
 #cart-content {
     color: #4b2e83;
