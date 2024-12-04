@@ -1,0 +1,45 @@
+h2 {
+    text-align: center;
+}
+
+.transaction-card {
+    text-align: left;
+    display: inline-block;
+    background-color: white;
+    border: 2px solid gold;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.transaction-card p {
+    margin: 20px;
+    color: #4b2e83;
+    text-decoration: bold;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+}
+
+.transaction-card h2 {
+    padding: 5px;
+    margin: 10px;
+    text-align: left;
+    color: black;
+    size: 40px;
+    text-decoration: underline;
+}
+
+.transaction-card p:hover {
+    transform: scale(1.1);
+    scale: 1.0;
+}
+/*
+.transaction-card:hover {
+    transform: translateY(-0.1rem) scale(1.1);
+    scale: 1.0;
+    border: 2px solid gold;
+}
+*/
