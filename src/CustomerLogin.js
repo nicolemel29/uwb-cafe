@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'
 import { Link } from 'react-router-dom'
+import stulogo from './cafe-logo.PNG'
 import './CustomerLogin.css'
 
 
@@ -61,7 +62,11 @@ function CustomerLogin() {
   return (
     <>
       <div id="login-container">
-        <h2>Student Login</h2>
+        <div id="student-login-box">
+        <div id="student-login-logo">
+          <img src={stulogo} alt="Cafe logo student login" />
+        </div>
+        <h2 id="student-login-header">Student Login</h2>
         <div className="input-field" id="username">
           <label>Username: </label>
           <input
@@ -78,9 +83,10 @@ function CustomerLogin() {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <button onClick={handleSubmit}>
+        <button id="cust-login-button" onClick={handleSubmit}>
           Login
         </button>
+        </div>
         <Link to={"/employee-login"}>
           I am an employee
         </Link>
