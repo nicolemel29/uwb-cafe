@@ -13,6 +13,7 @@ import { ref, set, get, push, update, remove, onValue } from 'firebase/database'
 
 function EmployeeView(props) {
     const navigate = useNavigate()
+    const [categoryIDs, setCategoryIDs] = useState([])
     const [categories, setCategories] = useState([])
     const [isOpen, setIsOpen] = useState(false)
 
@@ -39,17 +40,28 @@ function EmployeeView(props) {
 
     // get Categories
     useEffect(() => {
+        fetchCategoriesFromDatabase()
+    }, [])
+
+    const fetchCategoriesFromDatabase = () => {
         const orderRef = ref(db, `categories`);
         get(orderRef)
             .then((snapshot) => {
                 if (snapshot.exists) {
-                    setCategories(snapshot.val())
+                    let tempCategoryIDs = []
+                    let tempCategories = []
+                    for (let [key, value] of Object.entries(snapshot.val())) {
+                        tempCategoryIDs.push(key)
+                        tempCategories.push(value)
+                    }
+                    setCategoryIDs(tempCategoryIDs)
+                    setCategories(tempCategories)
                 }
             })
             .catch((error) => {
                 console.error(`Couldn't load categories data: `, error)
             })
-    })
+    }
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
@@ -75,9 +87,9 @@ function EmployeeView(props) {
                     <div id="results-content">
                         {
                             categories[selectedCategory].items.map(item => (
-                                <>
+                                
                                 <h3>{item.itemName}</h3>
-                                </>
+                                
                             ))
                         }
                     </div>
@@ -91,41 +103,17 @@ function EmployeeView(props) {
         get(orderRef)
             .then((snapshot) => {
                 if (snapshot.exists) {
-                    
-                    
                     update(ref(db, `categories/${snapshot.val().length}`), {
                             categoryName: "New Category",
                             items: [
                                 {
                                     itemName: "N/A",
-                                    price: "N/A",
-                                    calories: "N/A",
+                                    price: "0",
+                                    calories: "0",
                                     desc: "N/A"
                                 }
                             ]
-                        
                     })
-
-                    /*const newCategory = push(orderRef)
-                    const newObject = {
-                        categoryName: "New Category",
-                        items: [
-                            {
-                                itemName: "N/A",
-                                price: "N/A",
-                                calories: "N/A",
-                                desc: "N/A"
-                            }
-                        ]
-                    }
-
-                    set(newCategory, newObject)
-                    .then(() => {
-                        setCategories([...categories, newObject])
-                    })
-                    .catch((error) => {
-                        console.error("Error setting the new category: ", error)
-                    })*/
                 }
             })
             .catch((error) => {
@@ -138,7 +126,15 @@ function EmployeeView(props) {
     }
 
     function deleteCategory() {
-
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}`);
+        remove(orderRef)
+            .then(() => {
+                setSelectedCategory(undefined)
+                fetchCategoriesFromDatabase()
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function reorganizeCategory() {
@@ -290,6 +286,9 @@ function EmployeeView(props) {
                         <h2>Categories</h2>
                         <ul>
                             {
+                                console.log(categories)}
+                            {console.log(categoryIDs)}
+                            {
                                 categories.map((category, index1) => (
                                     <>
                                         <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
@@ -297,6 +296,7 @@ function EmployeeView(props) {
                                 ))
                             }
                             <button onClick={addCategory}>Add Category</button>
+                            { 0 <= selectedCategory && selectedCategory < categories.length && 1 < categories.length ? <button onClick={deleteCategory}>Delete Category</button> : <></>}
                         </ul>
                     </section>
                     <section id="results" class="card">
