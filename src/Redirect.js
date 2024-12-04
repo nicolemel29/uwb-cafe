@@ -6,7 +6,7 @@ function Redirect() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        navigate("/")
+        navigate("/customer-login")
     }, [])
 }
 
