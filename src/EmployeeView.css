@@ -79,7 +79,7 @@ footer {
     margin-top: auto;
 }
 
-#add-category-button {
+.modify-category-button {
     height: 3rem;
     width: 10rem;
     font-family: Arial, sans-serif;
