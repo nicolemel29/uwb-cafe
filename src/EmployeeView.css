@@ -44,6 +44,11 @@ nav ul li a {
     font-weight: bold;
     text-align: center;
     padding-top: 15px;
+    
+}
+
+#store-open-input {
+    margin-right: 10px;
 }
 
 main {
