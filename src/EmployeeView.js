@@ -415,7 +415,7 @@ function EmployeeView(props) {
                                     </>
                                 ))
                             }
-                            <button onClick={addCategory}>Add Category</button>
+                            <button id="add-category-button" onClick={addCategory}>Add Category</button>
                             { 0 <= selectedCategory && selectedCategory < categories.length && 1 < categories.length ? <button onClick={deleteCategory}>Delete Category</button> : <></>}
                             { 0 <= selectedCategory && selectedCategory < categories.length ? <button onClick={editCategory}>Rename Category</button> : <></>}
                             { 0 <= selectedCategory && selectedCategory < categories.length ? <input type="text" value={newCategoryName} onChange={(e) => {setNewCategoryName(e.target.value)}} />: <></>}
@@ -440,7 +440,7 @@ function EmployeeView(props) {
                                 </div>
                             ))
                         ) : (
-                            <p>No pending orders</p>
+                            <p id="no-orders">No pending orders</p>
                         )}
                         </div>
                         {
