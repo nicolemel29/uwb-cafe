@@ -46,6 +46,7 @@ function TransactionView() {
                         <p><strong>{`Total: $${getTotal(index)}`}</strong></p>
                         <button id="repurchase-button" onClick={() => {
                             //add to cart
+                            localStorage.setItem("cart", JSON.stringify(transactionHistory[index].order))
                             navigate('/pay');
                         }}>Buy again</button>
                     </div>
