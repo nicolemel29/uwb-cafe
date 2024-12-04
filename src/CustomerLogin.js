@@ -59,6 +59,7 @@ function CustomerLogin() {
         if (user.emailVerified) {
           console.log("Email verified! User logged in:", user);
           localStorage.setItem("customerLogin", true)
+        
           navigate("/menu"); // Navigate to the logged-in user dashboard or home page
         } else {
           console.log("Email not verified yet.");

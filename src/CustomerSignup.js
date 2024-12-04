@@ -46,7 +46,9 @@ function CustomerSignup() {
         .then(() => {
           // Email sent
           console.log("Verification email sent to:", user.email);
+          alert(`Verification Link Sent to ${user.email}`)
         })
+
       })
       .catch((error) => {
         const errorCode = error.code;
