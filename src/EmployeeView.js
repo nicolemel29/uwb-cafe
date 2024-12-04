@@ -17,6 +17,8 @@ function EmployeeView(props) {
     const [categories, setCategories] = useState([])
     const [isOpen, setIsOpen] = useState(false)
 
+    const [newNameIdea, setNewNameIdea] = useState("")
+
     useEffect(() => {
         if (localStorage.getItem("employeeLogin") !== "true") {
             localStorage.setItem("employeeLogin", false)
@@ -123,6 +125,34 @@ function EmployeeView(props) {
 
     function editCategory() {
         // includes name
+        if (newNameIdea.length === 0) return;
+        
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    const ssValue = {
+                        categoryName: newNameIdea,
+                        items: snapshot.val().items
+                    }
+                    remove(orderRef)
+                        .then(() => {
+                            update(orderRef, ssValue)
+                                .then((snapshot2) => {
+                                    fetchCategoriesFromDatabase()
+                                })
+                                .catch((error) => {
+                                    console.error("Couldn't replace file: ", error)
+                                })
+                        })
+                        .catch((error) => {
+                            console.error("Couldn't remove file: ", error)
+                        })
+                }
+            })
+            .catch((error) => {
+                console.error("Couldn't retrieve category to edit: ", error)
+            })
     }
 
     function deleteCategory() {
@@ -297,6 +327,10 @@ function EmployeeView(props) {
                             }
                             <button onClick={addCategory}>Add Category</button>
                             { 0 <= selectedCategory && selectedCategory < categories.length && 1 < categories.length ? <button onClick={deleteCategory}>Delete Category</button> : <></>}
+                            { 0 <= selectedCategory && selectedCategory < categories.length ? <button onClick={editCategory}>Rename Category</button> : <></>}
+                            { 0 <= selectedCategory && selectedCategory < categories.length ? <input type="text" value={newNameIdea} onChange={(e) => {setNewNameIdea(e.target.value)}} />: <></>}
+
+
                         </ul>
                     </section>
                     <section id="results" class="card">
