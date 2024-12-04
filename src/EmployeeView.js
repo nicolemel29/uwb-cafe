@@ -13,11 +13,20 @@ import { ref, set, get, push, update, remove, onValue } from 'firebase/database'
 
 function EmployeeView(props) {
     const navigate = useNavigate()
+
     const [categoryIDs, setCategoryIDs] = useState([])
     const [categories, setCategories] = useState([])
+
+    const [itemIDs, setItemIDs] = useState([])
+    const [items, setItems] = useState([])
+
     const [isOpen, setIsOpen] = useState(false)
 
-    const [newNameIdea, setNewNameIdea] = useState("")
+    const [newCategoryName, setNewCategoryName] = useState("")
+    const [newItemName, setNewItemName] = useState("")
+
+    const [selectedCategory, setSelectedCategory] = useState(undefined)
+    const [selectedItem, setSelectedItem] = useState(undefined)
 
     useEffect(() => {
         if (localStorage.getItem("employeeLogin") !== "true") {
@@ -65,9 +74,26 @@ function EmployeeView(props) {
             })
     }
 
-    const [selectedCategory, setSelectedCategory] = useState(undefined)
+    const fetchItemsFromDatabase = () => {
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    let tempItemIDs = []
+                    for (let [key, _] of Object.entries(snapshot.val())) {
+                        tempItemIDs.push(key)
+                    }
+                    setItemIDs(tempItemIDs)
+                }
+            })
+            .catch((error) => {
+                console.error(`Couldn't load categories data: `, error)
+            })
+    }
 
-    
+    function changeItem(index) {
+        setSelectedItem(index)
+    }
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -88,12 +114,18 @@ function EmployeeView(props) {
                     <h2 id="results-header">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
                         {
-                            categories[selectedCategory].items.map(item => (
+                            categories[selectedCategory].items.map((item, index) => (
                                 
-                                <h3>{item.itemName}</h3>
+                                <h3 key={`item${index}`} class={`category ${selectedItem === index ? 'active' : ''}`} onClick={() => changeItem(index)} >{item.itemName}</h3>
                                 
                             ))
                         }
+                        <button onClick={addItem}>Add Item</button>
+                        { 0 <= selectedItem && selectedItem < categories[selectedCategory].items.length && 1 < categories[selectedCategory].items.length ? <button onClick={deleteItem}>Delete Item</button> : <></>}
+                        { 0 <= selectedItem && selectedItem < categories[selectedCategory].items.length ? <button onClick={editItem}>Rename Item</button> : <></>}
+                        { 0 <= selectedItem && selectedItem < categories[selectedCategory].items.length ? <input type="text" value={newItemName} onChange={(e) => {setNewItemName(e.target.value)}} />: <></>}
+
+
                     </div>
                 </>
             )
@@ -116,6 +148,7 @@ function EmployeeView(props) {
                                 }
                             ]
                     })
+                    fetchCategoriesFromDatabase()
                 }
             })
             .catch((error) => {
@@ -125,14 +158,14 @@ function EmployeeView(props) {
 
     function editCategory() {
         // includes name
-        if (newNameIdea.length === 0) return;
+        if (newCategoryName.length === 0) return;
         
         const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}`);
         get(orderRef)
             .then((snapshot) => {
                 if (snapshot.exists) {
                     const ssValue = {
-                        categoryName: newNameIdea,
+                        categoryName: newCategoryName,
                         items: snapshot.val().items
                     }
                     remove(orderRef)
@@ -172,15 +205,72 @@ function EmployeeView(props) {
     }
 
     function addItem() {
-
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    console.log(snapshot.val())
+                    update(ref(db, `categories/${categoryIDs[selectedCategory]}/items/${snapshot.val().length}`), {
+                          
+                                    itemName: "N/A",
+                                    price: "0",
+                                    calories: "0",
+                                    desc: "N/A"
+                                
+                    })
+                    fetchCategoriesFromDatabase()
+                }
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function editItem() {
+        if (newItemName.length === 0) return;
+        
+        fetchItemsFromDatabase()
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items/${itemIDs[selectedItem]}`);
 
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    const ssValue = {
+                        itemName: newItemName,
+                        price: snapshot.val().price,
+                        calories: snapshot.val().calories,
+                        desc: snapshot.val().desc
+                    }
+                    remove(orderRef)
+                        .then(() => {
+                            update(orderRef, ssValue)
+                                .then((snapshot2) => {
+                                    fetchCategoriesFromDatabase()
+                                })
+                                .catch((error) => {
+                                    console.error("Couldn't replace file: ", error)
+                                })
+                        })
+                        .catch((error) => {
+                            console.error("Couldn't remove file: ", error)
+                        })
+                }
+            })
+            .catch((error) => {
+                console.error("Couldn't retrieve category to edit: ", error)
+            })
     }
 
     function deleteItem() {
-
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items/${itemIDs[selectedItem]}`);
+        remove(orderRef)
+            .then(() => {
+                setSelectedItem(undefined)
+                fetchCategoriesFromDatabase()
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function reorganizeItem() {
@@ -321,14 +411,14 @@ function EmployeeView(props) {
                             {
                                 categories.map((category, index1) => (
                                     <>
-                                        <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
+                                        <li key={`category${index1}`} class={`category ${selectedCategory === index1 ? 'active' : ''}`} onClick={() => changeCategory(index1)}>{category.categoryName}</li>
                                     </>
                                 ))
                             }
                             <button onClick={addCategory}>Add Category</button>
                             { 0 <= selectedCategory && selectedCategory < categories.length && 1 < categories.length ? <button onClick={deleteCategory}>Delete Category</button> : <></>}
                             { 0 <= selectedCategory && selectedCategory < categories.length ? <button onClick={editCategory}>Rename Category</button> : <></>}
-                            { 0 <= selectedCategory && selectedCategory < categories.length ? <input type="text" value={newNameIdea} onChange={(e) => {setNewNameIdea(e.target.value)}} />: <></>}
+                            { 0 <= selectedCategory && selectedCategory < categories.length ? <input type="text" value={newCategoryName} onChange={(e) => {setNewCategoryName(e.target.value)}} />: <></>}
 
 
                         </ul>
