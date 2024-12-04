@@ -74,7 +74,7 @@ function PaymentView() {
             const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
 
             let tempTransactionHistory = [cartItem]
-            for (let i = 0; i < 9 && i < oldTransactionHistory.length; i++) tempTransactionHistory.push(oldTransactionHistory[i])
+            for (let i = 0; i < 11 && i < oldTransactionHistory.length; i++) tempTransactionHistory.push(oldTransactionHistory[i])
 
             const newTransactionHistory = JSON.stringify(tempTransactionHistory)
             localStorage.setItem("transaction", newTransactionHistory)

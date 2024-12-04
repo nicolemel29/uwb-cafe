@@ -82,10 +82,12 @@ function TransactionView() {
                         </ul>
                     </nav>
                 </header>
-                <h2 id="transaction-history-title">We'll save your last 10 orders here!</h2>
+                <h2 id="transaction-history-title">We'll save your last 12 orders here!</h2>
+                <div id="transaction-grid">
                 {
                     renderTransactions()
                 }
+                </div>
                 
             </body>
             </>
