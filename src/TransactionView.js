@@ -13,14 +13,8 @@ function TransactionView() {
     }, [])
     
     function renderTransactions() {
-        let transactionsReverse = []
 
-        for (let i = 0; i < 10 && i < transactionHistory.length; i++) {
-            transactionsReverse.push(transactionHistory[i])
-        }
-        transactionsReverse.reverse()
-
-        return transactionsReverse.map((transaction, index) => (
+        return transactionHistory.map((transaction, index) => (
             <div class="transaction-card">
                 <h3>Transaction: {index+1}</h3>
                 {
