@@ -188,24 +188,24 @@ function PaymentView() {
                             <div id="order-info-content">
                                 <div class="time">
                                     <label>Pick-Up Time</label>    
-                                    <input type="time" min="08:00" max="18:00"></input>
+                                    <input class="payment-view" type="time" min="08:00" max="18:00"></input>
                                 </div>
                                 <div class="card-details">
                                     <label>Card Details</label>
-                                    <input type="text" placeholder="Address Line 1..." required></input>
-                                    <input type="text" placeholder="Address Line 2..."></input>
+                                    <input class="payment-view" type="text" placeholder="Address Line 1..." required></input>
+                                    <input class="payment-view" type="text" placeholder="Address Line 2..."></input>
                                     <div class="card-row">
-                                        <input type="text" placeholder="City..." required></input>
-                                        <input type="text" placeholder="Country..." required></input>
+                                        <input class="payment-view" type="text" placeholder="City..." required></input>
+                                        <input class="payment-view" type="text" placeholder="Country..." required></input>
                                     </div>
                                     <div class="card-row">
-                                        <input type="text" placeholder="State..." required></input>
-                                        <input type="text" placeholder="Zip..." required></input>
+                                        <input class="payment-view" type="text" placeholder="State..." required></input>
+                                        <input class="payment-view" type="text" placeholder="Zip..." required></input>
                                     </div>
-                                    <input type="text" placeholder="Card Number..." required></input>
+                                    <input class="payment-view" type="text" placeholder="Card Number..." required></input>
                                     <div class="card-row">
-                                        <input type="text" placeholder="Expiration..." required></input>
-                                        <input type="password" placeholder="CVV..." required></input>
+                                        <input class="payment-view" type="text" placeholder="Expiration..." required></input>
+                                        <input class="payment-view" type="password" placeholder="CVV..." required></input>
                                     </div>
 
                                     <button onClick={handlePay} class="pay-button">
