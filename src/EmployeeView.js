@@ -87,7 +87,50 @@ function EmployeeView(props) {
     }
 
     function addCategory() {
+        const orderRef = ref(db, 'categories');
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    
+                    
+                    update(ref(db, `categories/${snapshot.val().length}`), {
+                            categoryName: "New Category",
+                            items: [
+                                {
+                                    itemName: "N/A",
+                                    price: "N/A",
+                                    calories: "N/A",
+                                    desc: "N/A"
+                                }
+                            ]
+                        
+                    })
 
+                    /*const newCategory = push(orderRef)
+                    const newObject = {
+                        categoryName: "New Category",
+                        items: [
+                            {
+                                itemName: "N/A",
+                                price: "N/A",
+                                calories: "N/A",
+                                desc: "N/A"
+                            }
+                        ]
+                    }
+
+                    set(newCategory, newObject)
+                    .then(() => {
+                        setCategories([...categories, newObject])
+                    })
+                    .catch((error) => {
+                        console.error("Error setting the new category: ", error)
+                    })*/
+                }
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function editCategory() {
