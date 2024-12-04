@@ -13,6 +13,8 @@ function CustomerLogin() {
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
 
+  const [errorMessage, setErrorMessage] = useState("")
+
   useEffect(() => {
     if (localStorage.getItem("customerLogin") === "true") {
       navigate("/menu")
@@ -25,10 +27,11 @@ function CustomerLogin() {
     try {
       
       // Check if the email ends with @uw.edu or @uw.netid
-      if (!username.endsWith("@uw.edu")) {
-        alert("Only University of Washington email addresses are allowed.");
-      return;
-      }
+      // if (!username.endsWith("@uw.edu")) {
+      //   setErrorMessage("Only University of Washington email addresses are allowed.");
+      //   setLoginError(true)
+      //   return;
+      // }
       // // Sign in with Firebase Authentication
       // const userCredential = await signInWithEmailAndPassword(auth, username, password)
 
@@ -57,13 +60,13 @@ function CustomerLogin() {
   
         // Check if the email is verified
         if (user.emailVerified) {
-          console.log("Email verified! User logged in:", user);
+          //console.log("Email verified! User logged in:", user);
           localStorage.setItem("customerLogin", true)
         
           navigate("/menu"); // Navigate to the logged-in user dashboard or home page
         } else {
-          console.log("Email not verified yet.");
-          alert("Please verify your email address before logging in. Check your inbox for the verification email.");
+          //console.log("Email not verified yet.");
+          setErrorMessage("Please verify your email address before logging in. Check your inbox for the verification email.");
         }
       })
       .catch((error) => {
@@ -73,18 +76,18 @@ function CustomerLogin() {
         // Handle specific error codes
         if (errorCode === 'auth/user-not-found') {
           console.error("No user found with this email.");
-          alert("No account found with this email address. Please check your email or sign up.");
+          setErrorMessage("No account found with this email address. Please check your email or sign up.");
         } else if (errorCode === 'auth/wrong-password') {
           console.error("Incorrect password.");
-          alert("Incorrect password. Please try again.");
+          setErrorMessage("Incorrect password. Please try again.");
         } else {
           console.error("Error signing in:", errorMessage);
-          alert("Login failed! Please check your credentials.");
+          setErrorMessage("Login failed! Please check your credentials.");
         }
       });
     } catch (error) {
       console.error("Error signing in: ", error)
-      alert("Login failed! Please check your credentials.")
+      setErrorMessage("Login failed! Please check your credentials.")
     }
   }
 
@@ -96,6 +99,7 @@ function CustomerLogin() {
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
         <h2 id="student-login-header">Student Login</h2>
+        { errorMessage !== "" ? <p class="error">{errorMessage}</p> : <></> }
         <div className="input-field" id="cust-email">
           <label>Email: </label>
           <input
