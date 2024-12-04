@@ -13,15 +13,26 @@ import { ref, set, get, push, update, remove, onValue } from 'firebase/database'
 
 function EmployeeView(props) {
     const navigate = useNavigate()
-    const isOpen = props.isOpen
-    const toggleOpen = props.toggleOpen
+    const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
         if (localStorage.getItem("employeeLogin") !== "true") {
-            console.log("Here")
             localStorage.setItem("employeeLogin", false)
             navigate("/employee-login")
         }
+    }, [])
+
+    useEffect(() => {
+        const orderRef = ref(db, `isOpen`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    setIsOpen(snapshot.val())
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching isOpen: ", error);
+            });
     }, [])
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
@@ -130,7 +141,7 @@ function EmployeeView(props) {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const orderData = snapshot.val(); // Get the data from the pending order
-                    console.log('Order status updated successfully');
+                    // console.log('Order status updated successfully');
                     
                     // Move the order to the "orders-completed" node
                     const ordersCompletedRef = ref(db, 'orders-completed'); // Reference to the "orders-completed" node
@@ -139,7 +150,7 @@ function EmployeeView(props) {
                     // Set the order data in the new reference
                     set(newOrderRef, orderData)
                         .then(() => {
-                            console.log('Order moved to completed successfully');
+                            // console.log('Order moved to completed successfully');
                             setOrderData((prevOrders) => prevOrders.filter(order => order.id !== orderId)); // Remove the completed order from the state
                         })
                         .catch((error) => {
@@ -158,13 +169,29 @@ function EmployeeView(props) {
     
         remove(orderRef)
             .then(() => {
-                console.log("Order removed successfully");
+                //console.log("Order removed successfully");
                 // Optionally, update the state to remove the deleted order from UI
             })
             .catch((error) => {
                 console.error("Error removing order: ", error);
             });
     };
+
+
+
+    const toggleStoreOpen = () => {
+        const orderRef = ref(db, `isOpen`);
+        set(orderRef, !isOpen)
+            .then((snapshot) => {
+                //console.log("Updated isOpen successfully")
+                setIsOpen(!isOpen)
+            })
+            .catch((error) => {
+                console.error("Error updating isOpen: ", error)
+            })
+
+        //update("isOpen", !isOpen)
+    }
 
 
     return (
@@ -195,7 +222,7 @@ function EmployeeView(props) {
                                     id="store-open-input"
                                     type="checkbox"
                                     checked={isOpen}
-                                    onChange={toggleOpen}
+                                    onChange={toggleStoreOpen}
                                 />
                                 Is the Store Open?
                             </label>

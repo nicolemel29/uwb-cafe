@@ -100,6 +100,7 @@ function PaymentView() {
             localStorage.setItem("transaction", newTransactionHistory)
         }
         localStorage.setItem("cart", [])
+        
         const user = auth.currentUser; // Get the currently logged-in user
         if (!user) {
             alert("You need to be logged in to complete the payment.");

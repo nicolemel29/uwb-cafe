@@ -11,7 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerMenu(props) {
-    const isOpen = props.isOpen
+    const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
 
     const seenOrdersRef = useRef(new Set(JSON.parse(localStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
@@ -23,6 +23,24 @@ function CustomerMenu(props) {
             navigate("/customer-login")
         }
     }, [])
+
+    // real time listener
+    useEffect(() => {
+        const orderRef = ref(db, 'isOpen'); // Reference to the 'isOpen' node in Firebase
+    
+        // Set up the real-time listener
+        const unsubscribe = onValue(orderRef, (snapshot) => {
+            if (snapshot.exists()) {
+                setIsOpen(snapshot.val()); // Update the state with the fetched data
+            } else {
+                console.log('No isOpen data available');
+            }
+        });
+    
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+    
+    }, []);
 
     useEffect(() => {
         const user = auth.currentUser;
