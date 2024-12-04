@@ -84,6 +84,10 @@ function EmployeeView(props) {
         navigate("/employee-login")
     }
 
+    function dismissOrder() {
+        
+    }
+
 
     return (
     <>
@@ -137,8 +141,13 @@ function EmployeeView(props) {
                         { /* Should be on same column but in a seperate card*/ }
                         <div id="soonest-order">
                             <p>The next order is at: 5:45pm</p>
-                            <p>Item Name for User Name</p>
-                            <p>Extra Notes</p>
+                            <p>Item Name 1</p>
+                            <p>Item Name 2</p>
+                            <p>Item Name 3</p>
+                            <p>For: User's Name</p>
+                            <button onClick={dismissOrder}>
+                                Dismiss
+                            </button>
                         </div>
                         {
                             renderResults()
