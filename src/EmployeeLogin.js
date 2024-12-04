@@ -58,8 +58,8 @@ function EmployeeLogin() {
       <div id="login-container">
         <div id="employee-login-box">
         <h2 id="employee-login-header">Employee Login</h2>
-        <div className="input-field" id="employee-username">
-          <label>Username: </label>
+        <div className="input-field" id="employee-email">
+          <label>Email: </label>
           <input
             type="email"
             value={username}

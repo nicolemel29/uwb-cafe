@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'
 import { Link } from 'react-router-dom'
@@ -40,7 +40,15 @@ function CustomerSignup() {
           Lname: lastName,  // or use a registration form to get real user details
           Phone_Number: '123-456-7890',
           Staff: false,  // Default for regular users
-      })
+        })
+        // Send the email verification
+        sendEmailVerification(user)
+        .then(() => {
+          // Email sent
+          console.log("Verification email sent to:", user.email);
+          alert(`Verification Link Sent to ${user.email}`)
+        })
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -63,7 +71,7 @@ function CustomerSignup() {
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
         <h2 id="student-login-header">Student Signup</h2>
-        <div className="input-field" id="cust-username">
+        <div className="input-field" id="cust-first-name">
           <label>First Name: </label>
           <input
             type="text"
@@ -71,7 +79,7 @@ function CustomerSignup() {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div className="input-field" id="cust-username">
+        <div className="input-field" id="cust-last-name">
           <label>Last Name: </label>
           <input
             type="text"
@@ -79,8 +87,8 @@ function CustomerSignup() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <div className="input-field" id="cust-username">
-          <label>Username: </label>
+        <div className="input-field" id="cust-email">
+          <label>Email: </label>
           <input
             type="email" 
             value={username}
@@ -91,6 +99,8 @@ function CustomerSignup() {
           <label>Set Password: </label>
           <input
             type="password"
+            required minlength="6" 
+            maxlength="6"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
