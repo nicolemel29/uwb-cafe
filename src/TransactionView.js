@@ -17,6 +17,14 @@ function TransactionView() {
         }
         setTransactionsLoaded(true)
     }, [])
+
+    function getTotal(index) {
+        let total = 0;
+        transactionHistory[index].order.forEach(cartItem => {
+            total += (parseFloat(cartItem.item.price)*cartItem.quantity)
+        });
+        return total.toFixed(2)
+    }
     
     function renderTransactions() {
 
@@ -25,7 +33,7 @@ function TransactionView() {
                 <h2>Transaction: {index+1}</h2>
                 {
                     transaction.map((cartItem) => (
-                        <p><strong>{cartItem.item.itemName}</strong></p> 
+                        <p><strong>{cartItem.item.itemName}</strong></p>
                     ))
                 }
                 <button onClick={() => {
@@ -63,8 +71,12 @@ function TransactionView() {
                         </ul>
                     </nav>
                 </header>
-                <h2>We'll save your last 10 orders here!</h2>
-                {renderTransactions()}
+                <h2 id="transaction-history-title">We'll save your last 12 orders here!</h2>
+                <div id="transaction-grid">
+                {
+                    renderTransactions()
+                }
+                </div>
                 
             </body>
             </>

@@ -1,10 +1,16 @@
-.transaction-card h2 {
+#transaction-history-title {
+    width: 100%;
     text-align: center;
 }
 
+#transaction-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+
 .transaction-card {
-    text-align: left;
-    display: inline-block;
+    display: grid;
+    grid-template-rows: min-content 1fr;
     background-color: white;
     border: 2px solid gold;
     border-radius: 15px;
@@ -13,30 +19,66 @@
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
                 box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    margin: 16px;
+    padding-bottom: 32px;
+}
+
+.transaction-card h2 {
+    padding: 15px;
+    margin: 10px;
+    text-align: center;
+    color: black;
+    size: 40px;
+    text-decoration: underline;
+}
+
+.transaction-card #transaction-details {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    align-items: center;
+    margin: 0px 16px;
+}
+
+.transaction-card #transaction-items {
+    display: flex;
+    flex-direction: column;
 }
 
 .transaction-card p {
-    margin-left: 40px;
+    display: inline;
     color: #4b2e83;
     text-decoration: bold;
     position: relative;
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
 }
 
-.transaction-card h2 {
-    padding: 15px;
-    margin: 10px;
-    text-align: left;
-    color: black;
-    size: 40px;
-    text-decoration: underline;
+.transaction-card p.transaction-item {
+    margin-bottom: 0;
+}
+
+.transaction-card p.indent {
+    opacity: 0.8;
+    font-size: 0.9em;
+    text-indent: 32px;
+    margin-bottom: 0;
+    margin-top: 0;
 }
 
 .transaction-card button {
     float:right;
-    margin-right: 30px;
-    margin-bottom: 30px;
     background-color: gold;
+}
+
+#repurchase-button {
+    height: 32px;
+    border-radius: 8px;
+}
+
+#right-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 /*
