@@ -102,7 +102,19 @@ main {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover {
+.customer-card-center {
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    flex: 1.5;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card:hover, .customer-card-center:hover {
     top: -5px;
     transform: translateY(-0.5rem);
     box-shadow: inset 0 0 0 3px gold, 0 8px 16px rgba(0, 0, 0, 0.2);
@@ -273,6 +285,23 @@ main {
 .cart-quantity-change {
     display: flex;
     gap: 8px;
+}
+
+.cart-item-button {
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    background-color: #4b2e83;
+    font-weight: bold;
+    color: white;
+    border-radius: 5px;;
+    border: solid 2px #4b2e83;
+}
+
+.cart-item-button:hover {
+    background-color: grey;
+    transform: translateY(-0.1rem) scale(1.1);
+    scale: 1.0;
+    border: solid 2px grey;
 }
 
 

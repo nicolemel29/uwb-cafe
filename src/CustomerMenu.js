@@ -138,17 +138,17 @@ function CustomerMenu(props) {
                                 <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
                             </div>
                             <div class="cart-item-options">
-                                <button onClick={() => {
+                                <button class="cart-item-button" onClick={() => {
                                     removeFromCart(index)
                                     saveCart()
                                 }}>Delete</button>
                                 <div class="cart-quantity-change">
-                                    <button onClick={() => {
+                                    <button class="cart-item-button" onClick={() => {
                                         subtractQuantity(cartItem, index)
                                         saveCart();
                                     }}>-</button>
 
-                                    <button onClick={() => {
+                                    <button class="cart-item-button" onClick={() => {
                                         addQuantity(cartItem)
                                         saveCart();
                                     }}>+</button>
@@ -236,7 +236,7 @@ function CustomerMenu(props) {
                             }
                         </ul>
                     </section>
-                    <section id="results" class="card">
+                    <section id="results" class="customer-card-center">
                         {
                             renderResults()
                         }
