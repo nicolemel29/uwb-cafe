@@ -115,6 +115,16 @@ main {
     font-size: 1.8rem;
 }
 
+.cart-bottom {
+    color: #4b2e83;
+    font-weight: bold;
+    position: absolute;
+    bottom: .7rem;
+    left: 50%;
+    text-align: center;
+    transform: translateX(-50%);
+}
+
 .menu-button {
     height: 3rem;
     width: 12rem;
@@ -126,10 +136,6 @@ main {
     border-radius: 5px;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    position: absolute;
-    bottom: .7rem;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 .menu-button:hover {
@@ -156,6 +162,7 @@ main {
     color: #4b2e83;
     font-size: 1.4rem;
     font-weight: bold;
+    margin-bottom: 80px;
 }
 
 .cart-item {

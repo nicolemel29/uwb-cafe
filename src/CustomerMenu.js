@@ -13,6 +13,7 @@ function CustomerMenu(props) {
 
     const [cart, setCart] = useState([])
     const [cartLoaded, setCartLoaded] = useState(false)
+    const [cartTotal, setCartTotal] = useState(0)
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -108,11 +109,15 @@ function CustomerMenu(props) {
         }
     }, [cart]);
 
-    function renderCartItems() {
+    useEffect(() => {
         let total = 0
         cart.forEach(cartItem => {
             total += parseFloat(cartItem.item.price)*parseFloat(cartItem.quantity)
         });
+        setCartTotal(total)
+    }, [cart])
+
+    function renderCartItems() {
         return (
             <>
                 {cart.map((cartItem, index) => (
@@ -143,7 +148,6 @@ function CustomerMenu(props) {
                         </div>
                     </div>
                 ))}
-                <p>{`Total: ${(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
             </>
         )
     }
@@ -167,11 +171,15 @@ function CustomerMenu(props) {
                             renderCartItems()
                         }
                     </div>
-                    <Link to={"/pay"} >
-                        <button class="menu-button">
-                            Go To Payment Page
-                        </button>
-                    </Link>
+                    <div class="cart-bottom">
+                        <p>{`Total: ${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
+                        <Link to={"/pay"} >
+                            <button class="menu-button">
+                                Go To Payment Page
+                            </button>
+                        </Link>
+                    </div>
+                    
                 </>
             )
         }
