@@ -23,8 +23,8 @@ function TransactionView() {
             <div class="transaction-card">
                 <h2>Transaction: {index+1}</h2>
                 {
-                    transaction.map((item) => (
-                        <p><strong>{item.itemName}</strong></p>
+                    transaction.map((cartItem) => (
+                        <p><strong>{cartItem.item.itemName}</strong></p>
                     ))
                 }
             </div>
