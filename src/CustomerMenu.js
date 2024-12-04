@@ -182,7 +182,7 @@ function CustomerMenu(props) {
                         </div>
                     </div>
                     <div class="cart-bottom">
-                        <p>{`Total: ${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
+                        <p>{`Total: $${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
                         <Link to={"/pay"} >
                             <button class="menu-button">
                                 Go To Payment Page
