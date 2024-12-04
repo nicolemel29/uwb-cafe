@@ -7,6 +7,10 @@ import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+import { db } from './firebase';  // import the db reference
+import { ref, set, get, push, update, remove, onValue } from 'firebase/database'  // Import get method to read data from DB
+
+
 function EmployeeView(props) {
     const navigate = useNavigate()
     const isOpen = props.isOpen
@@ -20,7 +24,7 @@ function EmployeeView(props) {
     }
 
 
-        function renderResults() {
+    function renderResults() {
         if (selectedCategory === undefined) {
             return (
                 <>
@@ -78,15 +82,79 @@ function EmployeeView(props) {
 
     }
 
-
-
     function signout() {
         navigate("/employee-login")
     }
 
-    function dismissOrder() {
+
+
+    const [orderData, setOrderData] = useState([]);
+    useEffect(() => {
+        const orderRef = ref(db, 'orders-pending'); // Reference to the 'orders-pending' node in Firebase
+    
+        // Set up the real-time listener
+        const unsubscribe = onValue(orderRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();  // Get the data from the snapshot
+                const orderArray = Object.keys(data).map(key => ({
+                    ...data[key],
+                    id: key
+                }));
+                setOrderData(orderArray); // Update the state with the fetched data
+            } else {
+                console.log('No orders data available');
+            }
+        });
+    
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+    
+    }, []);
+
+    // Function to mark order as completed
+    const completeOrder = (orderId) => {
+        const orderRef = ref(db, `orders-pending/${orderId}`); // Reference to the specific order in "orders-pending"
         
-    }
+        // Get the current data of the order
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const orderData = snapshot.val(); // Get the data from the pending order
+                    console.log('Order status updated successfully');
+                    
+                    // Move the order to the "orders-completed" node
+                    const ordersCompletedRef = ref(db, 'orders-completed'); // Reference to the "orders-completed" node
+                    const newOrderRef = push(ordersCompletedRef); // Create a new unique entry in "orders-completed"
+                    
+                    // Set the order data in the new reference
+                    set(newOrderRef, orderData)
+                        .then(() => {
+                            console.log('Order moved to completed successfully');
+                            setOrderData((prevOrders) => prevOrders.filter(order => order.id !== orderId)); // Remove the completed order from the state
+                        })
+                        .catch((error) => {
+                            console.error("Error moving order to completed: ", error);
+                        });
+                    } 
+                    deleteOrder(orderId);   
+            })
+            .catch((error) => {
+                console.error("Error fetching order data: ", error);
+            });
+    };
+
+    const deleteOrder = (orderId) => {
+        const orderRef = ref(db, `orders-pending/${orderId}`); // Reference to the specific order by ID
+    
+        remove(orderRef)
+            .then(() => {
+                console.log("Order removed successfully");
+                // Optionally, update the state to remove the deleted order from UI
+            })
+            .catch((error) => {
+                console.error("Error removing order: ", error);
+            });
+    };
 
 
     return (
@@ -141,18 +209,25 @@ function EmployeeView(props) {
                     <section id="results" class="card">
                         { /* Should be on same column but in a seperate card*/ }
                         <div id="soonest-order">
-                            <p>The next order is at: 5:45pm</p>
-                            <p>Item Name 1</p>
-                            <p>Item Name 2</p>
-                            <p>Item Name 3</p>
-                            <p>For: User's Name</p>
-                            <button onClick={dismissOrder}>
-                                Dismiss
-                            </button>
+                        {orderData.length ? (
+                            orderData.map((order, index) => (
+                                <div key={order.id} className="order-card">
+                                    <p>The next order is at: {new Date(order.timestamp).toLocaleTimeString()}</p>
+                                    {order.cartItems.map((item, itemIndex) => (
+                                        <p key={itemIndex}>{item.quantity} x {item.item.itemName}</p>
+                                    ))}
+                                    <p>Total: {order.totalAmount}</p>
+                                    <p>For: {order.userName}</p>
+                                    <button onClick={() => completeOrder(order.id)}>Complete</button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No pending orders</p>
+                        )}
                         </div>
-                        {
+                        {/* {
                             renderResults()
-                        }
+                        } */}
                         
                     </section>
                 </main>
@@ -165,4 +240,4 @@ function EmployeeView(props) {
     )
 }
 
-export default EmployeeView
+export default EmployeeView;

@@ -1,11 +1,51 @@
 import React from 'react';
 import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import categories from './menuData.json'
 import {useNavigate, Link} from 'react-router-dom'
 
+import { ref, onValue, off } from 'firebase/database';
+import { db, auth } from './firebase'; // Import your Firebase config
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 function CustomerMenu(props) {
+    const seenOrdersRef = useRef(new Set(JSON.parse(localStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
+    // localStorage.clear();
+
+    useEffect(() => {
+        const user = auth.currentUser;
+        if (!user) return;
+
+        const userId = user.uid;
+        const ordersCompletedRef = ref(db, 'orders-completed');
+
+        // Listen for changes in the orders-completed node
+        const listener = onValue(ordersCompletedRef, (snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+
+                Object.entries(data).forEach(([orderId, order]) => {
+                    if (order.userId === userId && !seenOrdersRef.current.has(orderId)) {
+                        alert(`Order ${orderId} has been completed!`);
+                        seenOrdersRef.current.add(orderId); // Add order to the seen set
+                        // Persist seenOrders in localStorage
+                        localStorage.setItem(
+                            'seenOrders',
+                            JSON.stringify([...seenOrdersRef.current])
+                        );
+                    }
+                });
+            }
+        });
+
+        // Cleanup listener when component unmounts
+        return () => off(ordersCompletedRef, 'value', listener); // Remove listener
+    }, []); // Empty dependency array ensures it runs only once
+
+
+
     const isOpen = props.isOpen
     const navigate = useNavigate()
 
