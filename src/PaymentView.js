@@ -150,6 +150,11 @@ function PaymentView() {
                     alert("Order placed successfully!");
                     localStorage.removeItem("cart"); // Clear local cart
                     setCart([]); // Clear cart state in the component
+                    /*
+                    setTimeout(() => {
+                        navigate("/menu"); // if Modal, will navigate to menu after 15 min if the ok button is not pressed
+                      }, 900000);
+                    */
                     navigate("/menu"); // Redirect to menu or confirmation page
                 })
                 .catch((error) => {
