@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { createUserWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword, sendEmailVerification } from 'firebase/auth'
 import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'
 import { Link } from 'react-router-dom'
@@ -40,7 +40,15 @@ function CustomerSignup() {
           Lname: lastName,  // or use a registration form to get real user details
           Phone_Number: '123-456-7890',
           Staff: false,  // Default for regular users
-      })
+        })
+        // Send the email verification
+        sendEmailVerification(user)
+        .then(() => {
+          // Email sent
+          console.log("Verification email sent to:", user.email);
+          alert(`Verification Link Sent to ${user.email}`)
+        })
+
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -91,6 +99,8 @@ function CustomerSignup() {
           <label>Set Password: </label>
           <input
             type="password"
+            required minlength="6" 
+            maxlength="6"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
