@@ -79,7 +79,24 @@ footer {
     margin-top: auto;
 }
 
+#add-category-button {
+    height: 3rem;
+    width: 10rem;
+    font-family: Arial, sans-serif;
+    font-size: .9rem;
+    background-color: #4b2e83;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
 
+#no-orders {
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    color: red;
+}
 
 /* Additional CSS Edits by Antony */
 

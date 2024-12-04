@@ -462,7 +462,7 @@ function EmployeeView(props) {
                     </li>
                   </>
                 ))}
-                <button onClick={addCategory}>Add Category</button>
+                <button id="add-category-button" onClick={addCategory}>Add Category</button>
                 {0 <= selectedCategory &&
                 selectedCategory < categories.length &&
                 1 < categories.length ? (
@@ -515,7 +515,7 @@ function EmployeeView(props) {
                   </div>
                 ))
               ) : (
-                <p>No pending orders</p>
+                <p id="no-orders">No pending orders</p>
               )}
             </div>
             {renderResults()}
