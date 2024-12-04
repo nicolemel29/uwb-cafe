@@ -17,21 +17,39 @@ function TransactionView() {
         }
         setTransactionsLoaded(true)
     }, [])
+
+    function getTotal(index) {
+        let total = 0;
+        transactionHistory[index].order.forEach(cartItem => {
+            total += (parseFloat(cartItem.item.price)*cartItem.quantity)
+        });
+        return total.toFixed(2)
+    }
     
     function renderTransactions() {
 
         return transactionHistory.map((transaction, index) => (
             <div class="transaction-card">
                 <h2>Transaction on: {transaction.date}</h2>
-                {
-                    transaction.order.map((cartItem) => (
-                        <p><strong>{cartItem.item.itemName}</strong></p>
-                    ))
-                }
-                <button onClick={() => {
-                    //add to cart
-                    navigate('/pay');
-                }}>Buy again</button>
+                <div id="transaction-details">
+                    <div id="transaction-items">
+                        {
+                            transaction.order.map((cartItem, index2) => (
+                                <>
+                                    <p class="transaction-item"><strong>{`${cartItem.quantity} ${cartItem.item.itemName}${cartItem.quantity > 1 ? "s" : ""}`}</strong></p>
+                                    <p class='indent'><strong>{`$${(parseFloat(cartItem.item.price)*cartItem.quantity).toFixed(2)}`}</strong> {`($${cartItem.item.price} each)`}</p>
+                                </>
+                            ))
+                        }
+                    </div>
+                    <div id="right-content">
+                        <p><strong>{`Total: $${getTotal(index)}`}</strong></p>
+                        <button id="repurchase-button" onClick={() => {
+                            //add to cart
+                            navigate('/pay');
+                        }}>Buy again</button>
+                    </div>
+                </div>
             </div>
         ))
     }
@@ -63,8 +81,10 @@ function TransactionView() {
                         </ul>
                     </nav>
                 </header>
-                <h2>We'll save your last 10 orders here!</h2>
-                {renderTransactions()}
+                <h2 id="transaction-history-title">We'll save your last 10 orders here!</h2>
+                {
+                    renderTransactions()
+                }
                 
             </body>
             </>
