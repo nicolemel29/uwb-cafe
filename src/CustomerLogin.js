@@ -29,37 +29,42 @@ function CustomerLogin() {
       alert("Only University of Washington email addresses are allowed.");
       return;
       }
-      // Sign in with Firebase Authentication
-      const userCredential = await signInWithEmailAndPassword(auth, username, password)
+      // // Sign in with Firebase Authentication
+      // const userCredential = await signInWithEmailAndPassword(auth, username, password)
 
-      // Get user data from Firebase Authentication
-      const user = userCredential.user
+      // // Get user data from Firebase Authentication
+      // const user = userCredential.user
 
-      const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
-      // console.log(user.uid);
-      // Since we don't have a signup page, I manually added a user // 
-      // set(userRef, {
-      //   Net_ID_Email: user.email,
-      //   Fname: 'Corzette', // You can set these values based on user input
-      //   Lname: 'Dampac',  // or use a registration form to get real user details
-      //   Phone_Number: '123-456-7890',
-      //   Staff: false,  // Default for regular users
-      // })
+      // const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
 
-        // Get user data from Realtime Database
-        const snapshot = await get(userRef)  // Fetch data from Firebase
-        if (snapshot.exists()) {
-            localStorage.setItem("customerLogin", true)
-            navigate("/menu")
+      //   // Get user data from Realtime Database
+      //   const snapshot = await get(userRef)  // Fetch data from Firebase
+      //   if (snapshot.exists()) {
+      //       localStorage.setItem("customerLogin", true)
+      //       navigate("/menu")
+      //   } else {
+      //     // Handle case where user data doesn't exist in the database
+      //     console.error("No user data found")
+      //     alert("Login failed! User not found in database.")
+      //   }
+
+
+      // // Navigate to menu page after successful login
+      // navigate("/menu")
+      signInWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        const user = userCredential.user;
+  
+        // Check if the email is verified
+        if (user.emailVerified) {
+          console.log("Email verified! User logged in:", user);
+          localStorage.setItem("customerLogin", true)
+          navigate("/menu"); // Navigate to the logged-in user dashboard or home page
         } else {
-          // Handle case where user data doesn't exist in the database
-          console.error("No user data found")
-          alert("Login failed! User not found in database.")
+          console.log("Email not verified yet.");
+          alert("Please verify your email address before logging in. Check your inbox for the verification email.");
         }
-
-
-      // Navigate to menu page after successful login
-      navigate("/menu")
+      })
     } catch (error) {
       console.error("Error signing in: ", error)
       alert("Login failed! Please check your credentials.")
