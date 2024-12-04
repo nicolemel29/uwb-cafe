@@ -49,7 +49,7 @@ function CustomerMenu(props) {
         } else {
             return (
                 <>
-                    <h2 id="results-header">{categories[selectedCategory].categoryName}</h2>
+                    <h2 id="results-header" class="menu-heading">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
                         {
                             categories[selectedCategory].items.map(item => (
@@ -96,11 +96,11 @@ function CustomerMenu(props) {
         } else {
             return (
                 <>
-                    <h2>Cart</h2>
+                    <h2 class="menu-heading">Cart</h2>
                     <div id="cart-content">
                         {
                             cart.map((cartItem, index) => (
-                                <p onClick={() => {
+                                <p class="cart-items" onClick={() => {
                                     removeFromCart(index)
                                     saveCart()
                                 }} key={`cart${index}`}>{cartItem.itemName}</p>
@@ -141,7 +141,7 @@ function CustomerMenu(props) {
                         </ul>
                     </nav>
                 </header>
-                {!isOpen ? <p>We're closed!</p> : <></>} {/* This does NOT happen in real time */}
+                {!isOpen ? <p id="closed">We are currently closed. Gold Brew Opens at 8:00 AM.</p> : <></>} {/* This does NOT happen in real time */}
                 <main>
                     <section id="categories" class="card">
                         <h2 class="menu-heading">Categories</h2>
@@ -149,7 +149,7 @@ function CustomerMenu(props) {
                             {
                                 categories.map((category, index1) => (
                                     <>
-                                        <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
+                                        <li key={index1} class={`category ${selectedCategory === index1 ? 'active' : ''}`} onClick={() => changeCategory(index1)}>{category.categoryName}</li>
                                     </>
                                 ))
                             }
