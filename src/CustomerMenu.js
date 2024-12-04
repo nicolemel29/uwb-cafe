@@ -5,30 +5,28 @@ import { useEffect, useState, useRef } from 'react'
 //import categories from './menuData.json'
 import {useNavigate, Link} from 'react-router-dom'
 
-import { ref, onValue, off } from 'firebase/database';
+import { ref, onValue, off, get } from 'firebase/database';
 import { db, auth } from './firebase'; // Import your Firebase config
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerMenu(props) {
     const [categories, setCategories] = useState([])
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
-
+    
     const seenOrdersRef = useRef(new Set(JSON.parse(localStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
     // localStorage.clear();
-
+    
     useEffect(() => {
         if (localStorage.getItem("customerLogin") !== "true") {
             localStorage.setItem("customerLogin", false)
             navigate("/customer-login")
         }
     }, [])
-
+    
     // real time listener for isOpen
     useEffect(() => {
         const orderRef = ref(db, 'isOpen'); // Reference to the 'isOpen' node in Firebase
-    
+        
         // Set up the real-time listener
         const unsubscribe = onValue(orderRef, (snapshot) => {
             if (snapshot.exists()) {
@@ -37,11 +35,34 @@ function CustomerMenu(props) {
                 console.log('No isOpen data available');
             }
         });
-    
+        
         // Cleanup the listener on component unmount
         return () => unsubscribe();
-    
+        
     }, []);
+    
+    // // real time listener for Users
+    // const [userName, setUserName] = useState('');
+    // useEffect(() => {
+    //     const user = auth.currentUser; // Get the currently logged-in user
+    //     // Assuming `db` is your Firebase Realtime Database instance
+    //     const userRef = ref(db, 'users/' + user.uid); // Reference to the user's data in DB
+        
+    //     // Fetch the data from Firebase
+    //     get(userRef)
+    //     .then((snapshot) => {
+    //         if (snapshot.exists()) {
+    //         const userData = snapshot.val(); // Get the data as an object
+    //         console.log(userData.Fname); // Access and log the Fname
+    //         } else {
+    //         console.log("No data available");
+    //         }
+    //     })
+    //     .catch((error) => {
+    //         console.error("Error getting user data:", error);
+    //     });
+
+    // }, []);
 
     // real time listener for Categories
     useEffect(() => {
