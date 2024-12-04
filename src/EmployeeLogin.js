@@ -54,7 +54,7 @@ function EmployeeLogin() {
     }
 
     return (
-        <>
+        <div id="employee-background">
         <div id="login-container">
             <h2>Employee Login</h2>
             <div className="input-field" id="username">
@@ -80,7 +80,7 @@ function EmployeeLogin() {
             I am a student
             </Link>
         </div>           
-        </>
+        </div>
     )
 }
 

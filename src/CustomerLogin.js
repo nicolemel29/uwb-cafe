@@ -60,7 +60,7 @@ function CustomerLogin() {
   }
 
   return (
-    <>
+    <div id="customer-background">
       <div id="login-container">
         <div id="student-login-box">
         <div id="student-login-logo">
@@ -91,7 +91,7 @@ function CustomerLogin() {
           I am an employee
         </Link>
       </div>
-    </>
+    </div>
   )
 }
 
