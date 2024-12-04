@@ -182,6 +182,7 @@ main {
 .item-name {
     font-size: 1.2em;
     font-weight: bold;
+    margin-top: 5px;
     margin-bottom: 5px;
 }
 
