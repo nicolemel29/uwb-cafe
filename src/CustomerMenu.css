@@ -54,8 +54,9 @@ nav {
 }
 
 nav:hover {
-    scale: 1.1;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-0.1rem) scale(1.1);
+    scale: 1.0;
+    border: 2px solid gold;
 }
 
 header .logo img {
@@ -97,11 +98,37 @@ main {
     flex: 1;
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
                 box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
     transform: translateY(-0.5rem);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border: 3px solid gold;
+}
+
+.menu-heading {
+    text-decoration: underline;
+    margin-top: 0;
+    padding-top: 0;
+    font-size: 1.8rem;
+}
+
+.menu-button {
+    height: 3rem;
+    width: auto;
+    font-family: Arial, sans-serif;
+    font-size: .9rem;
+    background-color: #4b2e83;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.menu-button:hover {
+    background-color: grey;
 }
 
 footer {

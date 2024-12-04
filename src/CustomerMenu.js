@@ -42,7 +42,7 @@ function CustomerMenu(props) {
         if (selectedCategory === undefined) {
             return (
                 <>
-                    <h2 id="results-header">Select a Category</h2>
+                    <h2 id="results-header" class="menu-heading">Select a Category</h2>
                     <div id="results-content"></div>
                 </>
             )
@@ -87,7 +87,7 @@ function CustomerMenu(props) {
         if (cart.length === 0) {
             return (
                 <>
-                    <h2>Cart</h2>
+                    <h2 class="menu-heading">Cart</h2>
                     <div id="cart-content">
                         No Items Yet
                     </div>
@@ -108,7 +108,7 @@ function CustomerMenu(props) {
                         }
                     </div>
                     <Link to={"/pay"} >
-                        <button>
+                        <button class="menu-button">
                             Go To Payment Page
                         </button>
                     </Link>
@@ -144,7 +144,7 @@ function CustomerMenu(props) {
                 {!isOpen ? <p>We're closed!</p> : <></>} {/* This does NOT happen in real time */}
                 <main>
                     <section id="categories" class="card">
-                        <h2>Categories</h2>
+                        <h2 class="menu-heading">Categories</h2>
                         <ul>
                             {
                                 categories.map((category, index1) => (
