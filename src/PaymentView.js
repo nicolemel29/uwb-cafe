@@ -101,11 +101,13 @@ function PaymentView() {
                                 <input type="text" placeholder="Expiration..." required></input>
                                 <input type="password" placeholder="CVV..." required></input>
                             </div>
+
+                            <button onClick={handlePay} class="pay-button">
+                                Pay!
+                            </button>
                         </div>
-
-
-
                     </div>
+    
                     <div class="content-container" id="order-recap">
                         {cart.map((cartItem, index) => (
                             <div class="cart-item">
@@ -137,9 +139,6 @@ function PaymentView() {
                         </div>
                     </div>
                 </div>
-                <button onClick={handlePay} class="pay-button">
-                    Pay!
-                </button>
             </body>
         </>
     )

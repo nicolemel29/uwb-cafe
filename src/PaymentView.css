@@ -15,8 +15,7 @@ body {
     border-radius: 5px;
     padding: 0.5rem 1rem;
     cursor: pointer;
-    display: block;
-    margin: 0 auto;
+    margin: 16px auto 0;
 }
 
 .pay-button:hover {
