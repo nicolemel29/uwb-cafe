@@ -24,7 +24,7 @@ function TransactionView() {
                 <h2>Transaction: {index+1}</h2>
                 {
                     transaction.map((cartItem) => (
-                        <p><strong>{cartItem.item.itemName}</strong></p>
+                        <p><strong>{cartItem.item.itemName}</strong></p> 
                     ))
                 }
             </div>

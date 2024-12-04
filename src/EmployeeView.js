@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import { db } from './firebase';  // import the db reference
-import { ref, set, get, push } from 'firebase/database'  // Import get method to read data from DB
+import { ref, set, get, push, update, remove, onValue } from 'firebase/database'  // Import get method to read data from DB
 
 
 function EmployeeView(props) {
@@ -90,32 +90,70 @@ function EmployeeView(props) {
 
     const [orderData, setOrderData] = useState([]);
     useEffect(() => {
-        // Pull categories from Firebase on component mount
-        const orderRef = ref(db, 'orders'); // Path to categories node in Firebase
-            
-        get(orderRef)
-        .then((snapshot) => {
+        const orderRef = ref(db, 'orders-pending'); // Reference to the 'orders-pending' node in Firebase
+    
+        // Set up the real-time listener
+        const unsubscribe = onValue(orderRef, (snapshot) => {
             if (snapshot.exists()) {
-                const data = snapshot.val();
-                // Map Firebase data to an array
+                const data = snapshot.val();  // Get the data from the snapshot
                 const orderArray = Object.keys(data).map(key => ({
                     ...data[key],
                     id: key
                 }));
-                setOrderData(orderArray);
+                setOrderData(orderArray); // Update the state with the fetched data
             } else {
                 console.log('No orders data available');
             }
-        })
-        .catch((error) => {
-            console.error("Error getting orders data: ", error);
-        });    
+        });
+    
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+    
     }, []);
 
     // Function to mark order as completed
     const completeOrder = (orderId) => {
-        // Logic to mark the order as completed (e.g., update the order status in Firebase)
-        console.log("Order Completed:", orderId);
+        const orderRef = ref(db, `orders-pending/${orderId}`); // Reference to the specific order in "orders-pending"
+        
+        // Get the current data of the order
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const orderData = snapshot.val(); // Get the data from the pending order
+                    console.log('Order status updated successfully');
+                    
+                    // Move the order to the "orders-completed" node
+                    const ordersCompletedRef = ref(db, 'orders-completed'); // Reference to the "orders-completed" node
+                    const newOrderRef = push(ordersCompletedRef); // Create a new unique entry in "orders-completed"
+                    
+                    // Set the order data in the new reference
+                    set(newOrderRef, orderData)
+                        .then(() => {
+                            console.log('Order moved to completed successfully');
+                            setOrderData((prevOrders) => prevOrders.filter(order => order.id !== orderId)); // Remove the completed order from the state
+                        })
+                        .catch((error) => {
+                            console.error("Error moving order to completed: ", error);
+                        });
+                    } 
+                    deleteOrder(orderId);   
+            })
+            .catch((error) => {
+                console.error("Error fetching order data: ", error);
+            });
+    };
+
+    const deleteOrder = (orderId) => {
+        const orderRef = ref(db, `orders-pending/${orderId}`); // Reference to the specific order by ID
+    
+        remove(orderRef)
+            .then(() => {
+                console.log("Order removed successfully");
+                // Optionally, update the state to remove the deleted order from UI
+            })
+            .catch((error) => {
+                console.error("Error removing order: ", error);
+            });
     };
 
 
@@ -170,7 +208,7 @@ function EmployeeView(props) {
                     <section id="results" class="card">
                         { /* Should be on same column but in a seperate card*/ }
                         <div id="soonest-order">
-                        {orderData.length > 0 ? (
+                        {orderData.length ? (
                             orderData.map((order, index) => (
                                 <div key={order.id} className="order-card">
                                     <p>The next order is at: {new Date(order.timestamp).toLocaleTimeString()}</p>

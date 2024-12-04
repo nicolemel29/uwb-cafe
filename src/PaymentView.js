@@ -54,6 +54,19 @@ function PaymentView() {
     }, [cart])
 
     function handlePay() {
+        if (localStorage.getItem("transaction")) {
+            const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
+
+            let tempTransactionHistory = [cart]
+            for (let i = 0; i < 9 && i < oldTransactionHistory.length; i++) tempTransactionHistory.push(oldTransactionHistory[i])
+
+            const newTransactionHistory = JSON.stringify(tempTransactionHistory)
+            localStorage.setItem("transaction", newTransactionHistory)
+        } else {
+            const newTransactionHistory = JSON.stringify([cart])
+            localStorage.setItem("transaction", newTransactionHistory)
+        }
+        localStorage.setItem("cart", [])
         const user = auth.currentUser; // Get the currently logged-in user
         if (!user) {
             alert("You need to be logged in to complete the payment.");
@@ -63,7 +76,7 @@ function PaymentView() {
         const userId = user.uid;
         console.log("userId:", userId);
     
-        const ordersRef = ref(db, 'orders'); // Reference to the orders node
+        const ordersRef = ref(db, 'orders-pending'); // Reference to the orders node
         const newOrderRef = push(ordersRef); // Create a new unique order entry
     
         const userRef = ref(db, `users/${userId}`); // Reference to the user node based on userId
@@ -80,12 +93,13 @@ function PaymentView() {
                 const quantity = cartItem.quantity; // Access the quantity directly
                 return sum + (price * quantity);  // Multiply price by quantity and add to sum
             }, 0);
+            const formattedTotalAmount = totalAmount.toFixed(2);
     
             const orderData = {
                 userId: userId,
                 userName: userName, // Add userName to the order data
                 cartItems: cart, // Use current cart state
-                totalAmount: totalAmount,
+                totalAmount: formattedTotalAmount,
                 timestamp: Date.now(),
                 status: 'pending' // Default status for new orders
             };
