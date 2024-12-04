@@ -11,7 +11,8 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerMenu(props) {
-    const seenOrdersRef = useRef(new Set(JSON.parse(sessionStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
+    const seenOrdersRef = useRef(new Set(JSON.parse(localStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
+    // localStorage.clear();
 
     useEffect(() => {
         const user = auth.currentUser;
@@ -30,7 +31,7 @@ function CustomerMenu(props) {
                         alert(`Order ${orderId} has been completed!`);
                         seenOrdersRef.current.add(orderId); // Add order to the seen set
                         // Persist seenOrders in localStorage
-                        sessionStorage.setItem(
+                        localStorage.setItem(
                             'seenOrders',
                             JSON.stringify([...seenOrdersRef.current])
                         );
