@@ -12,6 +12,13 @@ import {Link} from 'react-router-dom'
 function PaymentView() {
     const navigate = useNavigate()
 
+    useEffect(() => {
+        if (localStorage.getItem("customerLogin") !== true) {
+            localStorage.setItem("customerLogin", false)
+            navigate("/customer-login")
+        }
+    }, [])
+
     const [cart, setCart] = useState([])
     const [cartTotal, setCartTotal] = useState(0)
 
@@ -70,6 +77,7 @@ function PaymentView() {
     }
 
     function signout() {
+        localStorage.setItem("customerLogin", false)
         navigate("/customer-login")
     }
 

@@ -16,6 +16,13 @@ function EmployeeView(props) {
     const isOpen = props.isOpen
     const toggleOpen = props.toggleOpen
 
+    useEffect(() => {
+        if (localStorage.getItem("employeeLogin") !== true) {
+            localStorage.setItem("employeeLogin", false)
+            navigate("/employee-login")
+        }
+    }, [])
+
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
 
@@ -83,6 +90,7 @@ function EmployeeView(props) {
     }
 
     function signout() {
+        localStorage.setItem("employeeLogin", false)
         navigate("/employee-login")
     }
 

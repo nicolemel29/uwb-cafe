@@ -11,8 +11,18 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerMenu(props) {
+    const isOpen = props.isOpen
+    const navigate = useNavigate()
+
     const seenOrdersRef = useRef(new Set(JSON.parse(localStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
     // localStorage.clear();
+
+    useEffect(() => {
+        if (localStorage.getItem("customerLogin") !== true) {
+            localStorage.setItem("customerLogin", false)
+            navigate("/customer-login")
+        }
+    }, [])
 
     useEffect(() => {
         const user = auth.currentUser;
@@ -43,11 +53,6 @@ function CustomerMenu(props) {
         // Cleanup listener when component unmounts
         return () => off(ordersCompletedRef, 'value', listener); // Remove listener
     }, []); // Empty dependency array ensures it runs only once
-
-
-
-    const isOpen = props.isOpen
-    const navigate = useNavigate()
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
@@ -237,6 +242,7 @@ function CustomerMenu(props) {
     }
 
     function signout() {
+        localStorage.setItem("customerLogin", false)
         navigate("/customer-login")
     }
 

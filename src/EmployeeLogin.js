@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from './firebase.js'
@@ -10,6 +10,14 @@ function EmployeeLogin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+
+    useEffect(() => {
+      if (localStorage.getItem("employeeLogin") === true) {
+        navigate("\employee")
+      } else {
+        localStorage.setItem("employeeLogin", false)
+      }
+    }, [])
 
     const handleSubmit = async () => {
       try {
@@ -28,6 +36,7 @@ function EmployeeLogin() {
           // Check if the user is a staff member
           if (userData.Staff === true) {
             // If the user is a staff member, navigate to the employee page
+            localStorage.setItem("employeeLogin", true)
             navigate("/employee")
           } else {
             // If the user is not a staff member, show an error

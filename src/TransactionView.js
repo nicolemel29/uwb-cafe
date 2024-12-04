@@ -8,6 +8,14 @@ import {useNavigate, Link} from 'react-router-dom'
 
 function TransactionView() {
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.getItem("customerLogin") !== true) {
+            localStorage.setItem("customerLogin", false)
+            navigate("/customer-login")
+        }
+    }, [])
+
     const [transactionHistory, setTransactionHistory] = useState([])
     const [transactionsLoaded, setTransactionsLoaded] = useState(false)
 
@@ -55,6 +63,7 @@ function TransactionView() {
         ))
     }
     function signout() {
+        localStorage.setItem("customerLogin", false)
         navigate("/customer-login")
     }
 
