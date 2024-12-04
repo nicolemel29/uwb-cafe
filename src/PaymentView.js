@@ -52,17 +52,34 @@ function PaymentView() {
         setCartTotal(total)
     }, [cart])
 
+    function getDate() {
+        const today = new Date();
+        const yyyy = today.getFullYear();
+        let mm = today.getMonth() + 1; // Months start at 0!
+        let dd = today.getDate();
+
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+
+        return dd + '/' + mm + '/' + yyyy;
+    }
+
     function handlePay() {
+        const cartItem = {
+            order: cart,
+            date: getDate()
+        }
+
         if (localStorage.getItem("transaction")) {
             const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
 
-            let tempTransactionHistory = [cart]
+            let tempTransactionHistory = [cartItem]
             for (let i = 0; i < 9 && i < oldTransactionHistory.length; i++) tempTransactionHistory.push(oldTransactionHistory[i])
 
             const newTransactionHistory = JSON.stringify(tempTransactionHistory)
             localStorage.setItem("transaction", newTransactionHistory)
         } else {
-            const newTransactionHistory = JSON.stringify([cart])
+            const newTransactionHistory = JSON.stringify([cartItem])
             localStorage.setItem("transaction", newTransactionHistory)
         }
         localStorage.setItem("cart", [])

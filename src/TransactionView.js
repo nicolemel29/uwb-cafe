@@ -22,9 +22,9 @@ function TransactionView() {
 
         return transactionHistory.map((transaction, index) => (
             <div class="transaction-card">
-                <h2>Transaction: {index+1}</h2>
+                <h2>Transaction on: {transaction.date}</h2>
                 {
-                    transaction.map((cartItem) => (
+                    transaction.order.map((cartItem) => (
                         <p><strong>{cartItem.item.itemName}</strong></p>
                     ))
                 }
