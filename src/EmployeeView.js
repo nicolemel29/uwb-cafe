@@ -4,13 +4,16 @@ import logo from './cafe-logo.PNG'
 import { useEffect, useState } from 'react'
 import categories from './menuData.json'
 import {Link} from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 function EmployeeView(props) {
+    const navigate = useNavigate()
     const isOpen = props.isOpen
     const toggleOpen = props.toggleOpen
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
+
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -77,6 +80,10 @@ function EmployeeView(props) {
 
 
 
+    function signout() {
+        navigate("/employee-login")
+    }
+
 
     return (
     <>
@@ -97,7 +104,7 @@ function EmployeeView(props) {
                             <li hidden><a href="#featured">Featured</a></li>
                             <li><Link to={`/transaction-history`}>Transaction History</Link></li>
                             <li hidden><a href="#favorites">Favorites</a></li>
-                            <li><Link to={`/employee`} >Employees Only!</Link></li>
+                            <li class="signout" onClick={signout}>Sign Out</li>
                         </ul>
                     </nav>
                 </header>

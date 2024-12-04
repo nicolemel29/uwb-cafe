@@ -7,15 +7,19 @@ import { useNavigate } from 'react-router-dom'
 
 
 function EmployeeLogin() {
+    // validation/authentication
+    //
+    
+
     const navigate = useNavigate()
 
     function handleSubmit() {
+
         navigate("/employee")
     }
 
     return (
         <>
-            
             <div id="login-container">
                 <h2>Employee Login</h2>
                 <div class="input-field" id="username">
