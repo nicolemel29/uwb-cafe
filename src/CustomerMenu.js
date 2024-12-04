@@ -13,6 +13,7 @@ function CustomerMenu(props) {
 
     const [cart, setCart] = useState([])
     const [cartLoaded, setCartLoaded] = useState(false)
+    const [cartTotal, setCartTotal] = useState(0)
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -20,8 +21,21 @@ function CustomerMenu(props) {
 
 
     function addToCart(item) {
-        setCart([...cart, item])
-        
+
+        for (let i = 0; i < cart.length; i++) {
+            const cartItem = cart[i]
+            if (item.itemName === cartItem.item.itemName) {
+                cartItem.quantity += 1
+                setCart([...cart])
+                return
+            }
+        }
+
+        const cartItem = {
+            item: item,
+            quantity: 1
+        }
+        setCart([...cart, cartItem])
     }
 
     function removeFromCart(index) {
@@ -33,6 +47,17 @@ function CustomerMenu(props) {
             }
         }
         setCart(cartCopy)
+    }
+
+    function subtractQuantity(cartItem, index) {
+        cartItem.quantity -= 1
+        if (cartItem.quantity <= 0) removeFromCart(index)
+        else setCart([...cart])
+    }
+
+    function addQuantity(cartItem) {
+        cartItem.quantity += 1
+        setCart([...cart])
     }
 
     function saveCart() {
@@ -84,21 +109,45 @@ function CustomerMenu(props) {
         }
     }, [cart]);
 
-    function renderCartItems() {
+    useEffect(() => {
         let total = 0
         cart.forEach(cartItem => {
-            total += parseFloat(cartItem.price)
+            total += parseFloat(cartItem.item.price)*parseFloat(cartItem.quantity)
         });
+        setCartTotal(total)
+    }, [cart])
+
+    function renderCartItems() {
         return (
             <>
                 {cart.map((cartItem, index) => (
-                    <p class="cart-items" onClick={() => {
-                        removeFromCart(index)
-                        saveCart()
-                        console.log(1 + cartItem.price)
-                    }} key={`cart${index}`}>{cartItem.itemName}</p>
+                    <div class="cart-item">
+                        <span class="cart-item-title" key={`cart${index}`}>{cartItem.item.itemName}</span>
+                        <div class="cart-item-details">
+                            <div class="cart-item-info">
+                                <span class="cart-item-price">{`$${cartItem.item.price} each`}</span>
+                                <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
+                            </div>
+                            <div class="cart-item-options">
+                                <button onClick={() => {
+                                    removeFromCart(index)
+                                    saveCart()
+                                }}>Delete</button>
+                                <div class="cart-quantity-change">
+                                    <button onClick={() => {
+                                        subtractQuantity(cartItem, index)
+                                        saveCart();
+                                    }}>-</button>
+
+                                    <button onClick={() => {
+                                        addQuantity(cartItem)
+                                        saveCart();
+                                    }}>+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ))}
-                <p>{(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
             </>
         )
     }
@@ -122,11 +171,15 @@ function CustomerMenu(props) {
                             renderCartItems()
                         }
                     </div>
-                    <Link to={"/pay"} >
-                        <button class="menu-button">
-                            Go To Payment Page
-                        </button>
-                    </Link>
+                    <div class="cart-bottom">
+                        <p>{`Total: ${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
+                        <Link to={"/pay"} >
+                            <button class="menu-button">
+                                Go To Payment Page
+                            </button>
+                        </Link>
+                    </div>
+                    
                 </>
             )
         }
