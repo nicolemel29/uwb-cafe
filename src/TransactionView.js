@@ -30,16 +30,27 @@ function TransactionView() {
 
         return transactionHistory.map((transaction, index) => (
             <div class="transaction-card">
-                <h2>Transaction: {index+1}</h2>
-                {
-                    transaction.map((cartItem) => (
-                        <p><strong>{cartItem.item.itemName}</strong></p>
-                    ))
-                }
-                <button onClick={() => {
-                    //add to cart
-                    navigate('/pay');
-                }}>Buy again</button>
+                <h2>Transaction on: {transaction.date}</h2>
+                <div id="transaction-details">
+                    <div id="transaction-items">
+                        {
+                            transaction.order.map((cartItem, index2) => (
+                                <>
+                                    <p class="transaction-item"><strong>{`${cartItem.quantity} ${cartItem.item.itemName}${cartItem.quantity > 1 ? "s" : ""}`}</strong></p>
+                                    <p class='indent'><strong>{`$${(parseFloat(cartItem.item.price)*cartItem.quantity).toFixed(2)}`}</strong> {`($${cartItem.item.price} each)`}</p>
+                                </>
+                            ))
+                        }
+                    </div>
+                    <div id="right-content">
+                        <p><strong>{`Total: $${getTotal(index)}`}</strong></p>
+                        <button id="repurchase-button" onClick={() => {
+                            //add to cart
+                            localStorage.setItem("cart", JSON.stringify(transactionHistory[index].order))
+                            navigate('/pay');
+                        }}>Buy again</button>
+                    </div>
+                </div>
             </div>
         ))
     }
