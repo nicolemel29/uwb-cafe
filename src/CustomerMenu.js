@@ -48,6 +48,17 @@ function CustomerMenu(props) {
         setCart(cartCopy)
     }
 
+    function subtractQuantity(cartItem, index) {
+        cartItem.quantity -= 1
+        if (cartItem.quantity <= 0) removeFromCart(index)
+        else setCart([...cart])
+    }
+
+    function addQuantity(cartItem) {
+        cartItem.quantity += 1
+        setCart([...cart])
+    }
+
     function saveCart() {
         localStorage.setItem("cart", JSON.stringify(cart))
     }
@@ -105,14 +116,32 @@ function CustomerMenu(props) {
         return (
             <>
                 {cart.map((cartItem, index) => (
-                    <>
-                        <p class="cart-items" onClick={() => {
-                            removeFromCart(index)
-                            saveCart()
-                        }} key={`cart${index}`}>{cartItem.item.itemName}</p>
-                        <p>{`$${cartItem.item.price}`}</p>
-                        <p>{`Quantity: ${cartItem.quantity}`}</p>
-                    </>
+                    <div class="cart-item">
+                        <span class="cart-item-title" key={`cart${index}`}>{cartItem.item.itemName}</span>
+                        <div class="cart-item-details">
+                            <div class="cart-item-info">
+                                <span class="cart-item-price">{`$${cartItem.item.price} each`}</span>
+                                <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
+                            </div>
+                            <div class="cart-item-options">
+                                <button onClick={() => {
+                                    removeFromCart(index)
+                                    saveCart()
+                                }}>Delete</button>
+                                <div class="cart-quantity-change">
+                                    <button onClick={() => {
+                                        subtractQuantity(cartItem, index)
+                                        saveCart();
+                                    }}>-</button>
+
+                                    <button onClick={() => {
+                                        addQuantity(cartItem)
+                                        saveCart();
+                                    }}>+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ))}
                 <p>{`Total: ${(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
             </>
