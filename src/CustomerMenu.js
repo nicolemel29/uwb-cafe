@@ -226,7 +226,7 @@ function CustomerMenu(props) {
                 <main>
                     <section id="categories" class="card">
                         <h2 class="menu-heading">Categories</h2>
-                        <ul>
+                        <ul id="category-list">
                             {
                                 categories.map((category, index1) => (
                                     <>

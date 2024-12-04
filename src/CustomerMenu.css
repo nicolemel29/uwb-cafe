@@ -200,7 +200,7 @@ main {
     font-size: 0.9em;
     color: #555;
     transition: max-height 0.4s ease, opacity 0.3s ease;
-    opacity: 0; 
+    opacity: 0;
 }
 
 .menu-item:hover .item-details {
@@ -309,7 +309,7 @@ li.category {
     font-weight: bold;
 }
 
-li.category, li.subcategory-item {
+li, .clickable, .cart-item {
     /* Makes text unselectable */
     -webkit-touch-callout: none;
     -webkit-user-select: none;
@@ -319,7 +319,13 @@ li.category, li.subcategory-item {
     user-select: none;
 }
 
-li.category:hover, li.subcategory-item, .clickable {
+ul#category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+li.category:hover, li.subcategory-item, .clickable, .cart-item button, .signout {
     cursor: pointer;
 }
 
