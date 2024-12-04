@@ -2,13 +2,37 @@ import React from 'react'
 import './PaymentView.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { ref, push, set } from 'firebase/database'
-import { auth, db } from './firebase' // Ensure auth is imported for current user
 
 function PaymentView() {
     const navigate = useNavigate()
 
     const [cart, setCart] = useState([])
+
+    function removeFromCart(index) {
+        const iterations = cart.length
+        let cartCopy = []
+        for (let i = 0; i < iterations; i++) {
+            if (i != index) {
+                cartCopy.push(cart[i])
+            }
+        }
+        setCart(cartCopy)
+    }
+
+    function subtractQuantity(cartItem, index) {
+        cartItem.quantity -= 1
+        if (cartItem.quantity <= 0) removeFromCart(index)
+        else setCart([...cart])
+    }
+
+    function addQuantity(cartItem) {
+        cartItem.quantity += 1
+        setCart([...cart])
+    }
+
+    function saveCart() {
+        localStorage.setItem("cart", JSON.stringify(cart))
+    }
 
     useEffect(() => {
         if (!localStorage.getItem("cart")) {
@@ -53,25 +77,22 @@ function PaymentView() {
 
     return (
         <>
-            <h1 id="order-header">Review Order</h1>
-            <div id="cart-container">
-                {cart.length === 0 ? (
-                    <p>No items in your cart</p> // Show a message if the cart is empty
-                ) : (
-                    cart.map((cartItem, index) => (
-                        <div key={index} className="cart-item">
-                            <p>Item: {cartItem.itemName}</p>
-                            <p>Quantity: {cartItem.quantity}</p>
-                            <p>Price: ${cartItem.price}</p>
-                            <p>Total: ${cartItem.price * cartItem.quantity}</p>
-                        </div>
+            <head>
+                <meta charset="UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <title>Pay - UW Bothell Cafe</title>
+            </head>
+            <body>
+                <h1 id="order-header">Review Order</h1>
+                {
+                    cart.map(cartItem => (
+                        <p class="cart-item">{cartItem.itemName}</p>
                     ))
-                )}
-            </div>
-
-            <button onClick={handlePay} className="pay-button">
-                Pay!
-            </button>
+                }
+                <button onClick={handlePay} class="pay-button">
+                    Pay!
+                </button>
+            </body>
         </>
     )
 }
