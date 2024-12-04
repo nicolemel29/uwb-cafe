@@ -36,11 +36,12 @@ function CustomerLogin() {
       const user = userCredential.user
 
       const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
+      // console.log(user.uid);
       // Since we don't have a signup page, I manually added a user // 
       // set(userRef, {
       //   Net_ID_Email: user.email,
-      //   Fname: 'John', // You can set these values based on user input
-      //   Lname: 'Doe',  // or use a registration form to get real user details
+      //   Fname: 'Corzette', // You can set these values based on user input
+      //   Lname: 'Dampac',  // or use a registration form to get real user details
       //   Phone_Number: '123-456-7890',
       //   Staff: false,  // Default for regular users
       // })
