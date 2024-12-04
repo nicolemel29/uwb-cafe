@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react'
 import {useNavigate, Link} from 'react-router-dom'
 
 
+
 function TransactionView() {
     const navigate = useNavigate()
     const [transactionHistory, setTransactionHistory] = useState([])
@@ -27,6 +28,10 @@ function TransactionView() {
                         <p><strong>{cartItem.item.itemName}</strong></p>
                     ))
                 }
+                <button onClick={() => {
+                    //add to cart
+                    navigate('/pay');
+                }}>Buy again</button>
             </div>
         ))
     }
