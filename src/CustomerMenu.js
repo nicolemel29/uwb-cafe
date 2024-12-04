@@ -3,10 +3,11 @@ import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState } from 'react'
 import categories from './menuData.json'
-import {Link} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 
 function CustomerMenu(props) {
     const isOpen = props.isOpen
+    const navigate = useNavigate()
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
@@ -49,7 +50,7 @@ function CustomerMenu(props) {
         } else {
             return (
                 <>
-                    <h2 id="results-header">{categories[selectedCategory].categoryName}</h2>
+                    <h2 id="results-header" class="menu-heading">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
                         {
                             categories[selectedCategory].items.map(item => (
@@ -83,6 +84,25 @@ function CustomerMenu(props) {
         }
     }, [cart]);
 
+    function renderCartItems() {
+        let total = 0
+        cart.forEach(cartItem => {
+            total += parseFloat(cartItem.price)
+        });
+        return (
+            <>
+                {cart.map((cartItem, index) => (
+                    <p class="cart-items" onClick={() => {
+                        removeFromCart(index)
+                        saveCart()
+                        console.log(1 + cartItem.price)
+                    }} key={`cart${index}`}>{cartItem.itemName}</p>
+                ))}
+                <p>{(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+            </>
+        )
+    }
+
     function renderCart() {
         if (cart.length === 0) {
             return (
@@ -96,15 +116,10 @@ function CustomerMenu(props) {
         } else {
             return (
                 <>
-                    <h2>Cart</h2>
+                    <h2 class="menu-heading">Cart</h2>
                     <div id="cart-content">
                         {
-                            cart.map((cartItem, index) => (
-                                <p onClick={() => {
-                                    removeFromCart(index)
-                                    saveCart()
-                                }} key={`cart${index}`}>{cartItem.itemName}</p>
-                            ))
+                            renderCartItems()
                         }
                     </div>
                     <Link to={"/pay"} >
@@ -116,6 +131,10 @@ function CustomerMenu(props) {
             )
         }
         
+    }
+
+    function signout() {
+        navigate("/customer-login")
     }
 
     return (
@@ -137,11 +156,11 @@ function CustomerMenu(props) {
                             <li hidden><a href="#featured">Featured</a></li>
                             <li><Link to={`/transaction-history`}>Transaction History</Link></li>
                             <li hidden><a href="#favorites">Favorites</a></li>
-                            <li><Link to={`/employee`} >Employees Only!</Link></li>
+                            <li class="signout" onClick={signout}>Sign Out</li>
                         </ul>
                     </nav>
                 </header>
-                {!isOpen ? <p>We're closed!</p> : <></>} {/* This does NOT happen in real time */}
+                {!isOpen ? <p id="closed">We are currently closed. Gold Brew Opens at 8:00 AM.</p> : <></>} {/* This does NOT happen in real time */}
                 <main>
                     <section id="categories" class="card">
                         <h2 class="menu-heading">Categories</h2>
@@ -149,7 +168,7 @@ function CustomerMenu(props) {
                             {
                                 categories.map((category, index1) => (
                                     <>
-                                        <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
+                                        <li key={index1} class={`category ${selectedCategory === index1 ? 'active' : ''}`} onClick={() => changeCategory(index1)}>{category.categoryName}</li>
                                     </>
                                 ))
                             }

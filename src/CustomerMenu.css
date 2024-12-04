@@ -3,7 +3,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background: linear-gradient(180deg, #c0b5fa,#dedbf4);
+    background: linear-gradient(180deg, #dbdada,#ffffff);
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -96,15 +96,16 @@ main {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     flex: 1;
+    position: relative;
     transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
                 box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .card:hover {
+    top: -5px;
     transform: translateY(-0.5rem);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    border: 3px solid gold;
+    box-shadow: inset 0 0 0 3px gold, 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .menu-heading {
@@ -116,7 +117,7 @@ main {
 
 .menu-button {
     height: 3rem;
-    width: auto;
+    width: 12rem;
     font-family: Arial, sans-serif;
     font-size: .9rem;
     background-color: #4b2e83;
@@ -125,10 +126,52 @@ main {
     border-radius: 5px;
     padding: 0.5rem 1rem;
     cursor: pointer;
+    position: absolute;
+    bottom: .7rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 .menu-button:hover {
     background-color: grey;
+}
+
+
+.category, .clickable {
+    cursor: pointer;
+    color: #4b2e83;
+    transition: width 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+}
+
+.category:hover, .category.active, .clickable:hover {
+    width: 100%;
+    color: white;
+    background-color: #4b2e83;
+    width: 100%;
+    padding-left: 5px;
+    border-radius: 5px;
+}
+
+#cart-content {
+    color: #4b2e83;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.cart-items {
+    color: #4b2e83;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+
+#closed {
+    font-weight: bold;
+    text-align: center;
+    padding-top: .7rem;
+    font-family: Arial, sans-serif;
+    background-color: rgb(249, 220, 230);
+    height: 1.8rem;
 }
 
 footer {
@@ -167,4 +210,8 @@ li.category, li.subcategory-item {
 
 li.category:hover, li.subcategory-item, .clickable {
     cursor: pointer;
+}
+
+.signout {
+    font-weight: bold;
 }
