@@ -2,7 +2,7 @@ import React from 'react'
 import './EmployeeView.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState } from 'react'
-import categories from './menuData.json'
+// import categories from './menuData.json'
 import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -13,6 +13,7 @@ import { ref, set, get, push, update, remove, onValue } from 'firebase/database'
 
 function EmployeeView(props) {
     const navigate = useNavigate()
+    const [categories, setCategories] = useState([])
     const [isOpen, setIsOpen] = useState(false)
 
     useEffect(() => {
@@ -22,6 +23,7 @@ function EmployeeView(props) {
         }
     }, [])
 
+    // get isOpen
     useEffect(() => {
         const orderRef = ref(db, `isOpen`);
         get(orderRef)
@@ -35,8 +37,23 @@ function EmployeeView(props) {
             });
     }, [])
 
+    // get Categories
+    useEffect(() => {
+        const orderRef = ref(db, `categories`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    setCategories(snapshot.val())
+                }
+            })
+            .catch((error) => {
+                console.error(`Couldn't load categories data: `, error)
+            })
+    })
+
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
+    
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -259,9 +276,9 @@ function EmployeeView(props) {
                             <p>No pending orders</p>
                         )}
                         </div>
-                        {/* {
+                        {
                             renderResults()
-                        } */}
+                        }
                         
                     </section>
                 </main>

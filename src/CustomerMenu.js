@@ -2,7 +2,7 @@ import React from 'react';
 import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState, useRef } from 'react'
-import categories from './menuData.json'
+//import categories from './menuData.json'
 import {useNavigate, Link} from 'react-router-dom'
 
 import { ref, onValue, off } from 'firebase/database';
@@ -11,6 +11,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerMenu(props) {
+    const [categories, setCategories] = useState([])
     const [isOpen, setIsOpen] = useState(false)
     const navigate = useNavigate()
 
@@ -24,7 +25,7 @@ function CustomerMenu(props) {
         }
     }, [])
 
-    // real time listener
+    // real time listener for isOpen
     useEffect(() => {
         const orderRef = ref(db, 'isOpen'); // Reference to the 'isOpen' node in Firebase
     
@@ -41,6 +42,26 @@ function CustomerMenu(props) {
         return () => unsubscribe();
     
     }, []);
+
+    // real time listener for Categories
+    useEffect(() => {
+        const orderRef = ref(db, 'categories'); // Reference to the 'isOpen' node in Firebase
+    
+        // Set up the real-time listener
+        const unsubscribe = onValue(orderRef, (snapshot) => {
+            if (snapshot.exists()) {
+                setCategories(snapshot.val())
+            } else {
+                console.log('No category data available');
+            }
+        });
+    
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+    
+    }, []);
+
+    
 
     useEffect(() => {
         const user = auth.currentUser;
