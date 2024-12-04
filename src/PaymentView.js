@@ -1,4 +1,5 @@
 import React from 'react'
+import './PaymentView.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -38,12 +39,13 @@ function PaymentView() {
                 <title>Pay - UW Bothell Cafe</title>
             </head>
             <body>
+                <h1 id="order-header">Review Order</h1>
                 {
                     cart.map(cartItem => (
-                        <p>{cartItem.itemName}</p>
+                        <p class="cart-item">{cartItem.itemName}</p>
                     ))
                 }
-                <button onClick={handlePay}>
+                <button onClick={handlePay} class="pay-button">
                     Pay!
                 </button>
             </body>
