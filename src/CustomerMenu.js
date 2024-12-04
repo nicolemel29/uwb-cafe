@@ -62,7 +62,7 @@ function CustomerMenu(props) {
     }, []);
 
     
-
+/*
     useEffect(() => {
         const user = auth.currentUser;
         if (!user) return;
@@ -92,6 +92,7 @@ function CustomerMenu(props) {
         // Cleanup listener when component unmounts
         return () => off(ordersCompletedRef, 'value', listener); // Remove listener
     }, []); // Empty dependency array ensures it runs only once
+    */
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
