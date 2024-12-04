@@ -84,6 +84,25 @@ function CustomerMenu(props) {
         }
     }, [cart]);
 
+    function renderCartItems() {
+        let total = 0
+        cart.forEach(cartItem => {
+            total += parseFloat(cartItem.price)
+        });
+        return (
+            <>
+                {cart.map((cartItem, index) => (
+                    <p class="cart-items" onClick={() => {
+                        removeFromCart(index)
+                        saveCart()
+                        console.log(1 + cartItem.price)
+                    }} key={`cart${index}`}>{cartItem.itemName}</p>
+                ))}
+                <p>{(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+            </>
+        )
+    }
+
     function renderCart() {
         if (cart.length === 0) {
             return (
@@ -100,12 +119,7 @@ function CustomerMenu(props) {
                     <h2 class="menu-heading">Cart</h2>
                     <div id="cart-content">
                         {
-                            cart.map((cartItem, index) => (
-                                <p class="cart-items" onClick={() => {
-                                    removeFromCart(index)
-                                    saveCart()
-                                }} key={`cart${index}`}>{cartItem.itemName}</p>
-                            ))
+                            renderCartItems()
                         }
                     </div>
                     <Link to={"/pay"} >
