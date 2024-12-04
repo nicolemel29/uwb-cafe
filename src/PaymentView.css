@@ -85,6 +85,6 @@ input[type='text'], input[type='password'] {
     padding: 4px 8px;
 }
 
-.card-row > input[type='text'], input[type='password'] {
+.card-row > input[type='text'], .card-row > input[type='password'] {
     width: 100%;
 }

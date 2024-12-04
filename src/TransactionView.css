@@ -1,4 +1,4 @@
-h2 {
+.transaction-card h2 {
     text-align: center;
 }
 
@@ -16,7 +16,7 @@ h2 {
 }
 
 .transaction-card p {
-    margin: 20px;
+    margin-left: 40px;
     color: #4b2e83;
     text-decoration: bold;
     position: relative;
@@ -24,7 +24,7 @@ h2 {
 }
 
 .transaction-card h2 {
-    padding: 5px;
+    padding: 15px;
     margin: 10px;
     text-align: left;
     color: black;
@@ -32,11 +32,19 @@ h2 {
     text-decoration: underline;
 }
 
+.transaction-card button {
+    float:right;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    background-color: gold;
+}
+
+/*
 .transaction-card p:hover {
     transform: scale(1.1);
     scale: 1.0;
 }
-/*
+
 .transaction-card:hover {
     transform: translateY(-0.1rem) scale(1.1);
     scale: 1.0;

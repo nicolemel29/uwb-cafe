@@ -186,6 +186,7 @@ function EmployeeView(props) {
                         <div id="store-open-employee">
                             <label>
                                 <input
+                                    id="store-open-input"
                                     type="checkbox"
                                     checked={isOpen}
                                     onChange={toggleOpen}
