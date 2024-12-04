@@ -133,17 +133,17 @@ function EmployeeView(props) {
                 {item.itemName}
               </h3>
             ))}
-            <button onClick={addItem}>Add Item</button>
+            <button class="modify-category-button" onClick={addItem}>Add Item</button>
             {0 <= selectedItem &&
             selectedItem < categories[selectedCategory].items.length &&
             1 < categories[selectedCategory].items.length ? (
-              <button onClick={deleteItem}>Delete Item</button>
+              <button class="modify-category-button" onClick={deleteItem}>Delete Item</button>
             ) : (
               <></>
             )}
             {0 <= selectedItem &&
             selectedItem < categories[selectedCategory].items.length ? (
-              <button onClick={editItem}>Rename Item</button>
+              <button class="modify-category-button" onClick={editItem}>Rename Item</button>
             ) : (
               <></>
             )}
