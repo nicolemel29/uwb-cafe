@@ -54,34 +54,41 @@ function EmployeeLogin() {
     }
 
     return (
-        <div id="employee-background">
-        <div id="login-container">
-            <h2>Employee Login</h2>
-            <div className="input-field" id="username">
-            <label>Username: </label>
-            <input
-                type="email"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
-            </div>
-            <div className="input-field" id="password">
-            <label>Password: </label>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            </div>
-            <button onClick={handleSubmit}>
-            Login
-            </button>
-            <Link to={"/customer-login"}>
-            I am a student
-            </Link>
-        </div>           
+      <div id="employee-background">
+      <div id="login-container">
+        <div id="employee-login-box">
+        <h2 id="employee-login-header">Employee Login</h2>
+        <div className="input-field" id="employee-username">
+          <label>Username: </label>
+          <input
+            type="email"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
+        <div className="input-field" id="employee-password">
+          <label>Password: </label>
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
+        <button id="employee-login-button" onClick={handleSubmit}>
+          Login
+        </button>
+        </div>
+        <Link id="to-customer-link" to={"/customer-login"}>
+          I am an customer
+        </Link>
+      </div>
+    </div>
     )
 }
 
 export default EmployeeLogin
+
+
+
+
+
