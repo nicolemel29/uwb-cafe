@@ -20,8 +20,21 @@ function CustomerMenu(props) {
 
 
     function addToCart(item) {
-        setCart([...cart, item])
-        
+
+        for (let i = 0; i < cart.length; i++) {
+            const cartItem = cart[i]
+            if (item.itemName === cartItem.item.itemName) {
+                cartItem.quantity += 1
+                setCart([...cart])
+                return
+            }
+        }
+
+        const cartItem = {
+            item: item,
+            quantity: 1
+        }
+        setCart([...cart, cartItem])
     }
 
     function removeFromCart(index) {
@@ -87,18 +100,21 @@ function CustomerMenu(props) {
     function renderCartItems() {
         let total = 0
         cart.forEach(cartItem => {
-            total += parseFloat(cartItem.price)
+            total += parseFloat(cartItem.item.price)*parseFloat(cartItem.quantity)
         });
         return (
             <>
                 {cart.map((cartItem, index) => (
-                    <p class="cart-items" onClick={() => {
-                        removeFromCart(index)
-                        saveCart()
-                        console.log(1 + cartItem.price)
-                    }} key={`cart${index}`}>{cartItem.itemName}</p>
+                    <>
+                        <p class="cart-items" onClick={() => {
+                            removeFromCart(index)
+                            saveCart()
+                        }} key={`cart${index}`}>{cartItem.item.itemName}</p>
+                        <p>{`$${cartItem.item.price}`}</p>
+                        <p>{`Quantity: ${cartItem.quantity}`}</p>
+                    </>
                 ))}
-                <p>{(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+                <p>{`Total: ${(total).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
             </>
         )
     }
