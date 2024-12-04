@@ -7,6 +7,10 @@ import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
+import { db } from './firebase';  // import the db reference
+import { ref, set, get, push } from 'firebase/database'  // Import get method to read data from DB
+
+
 function EmployeeView(props) {
     const navigate = useNavigate()
     const isOpen = props.isOpen
@@ -20,7 +24,7 @@ function EmployeeView(props) {
     }
 
 
-        function renderResults() {
+    function renderResults() {
         if (selectedCategory === undefined) {
             return (
                 <>
@@ -78,15 +82,41 @@ function EmployeeView(props) {
 
     }
 
-
-
     function signout() {
         navigate("/employee-login")
     }
 
-    function dismissOrder() {
-        
-    }
+
+
+    const [orderData, setOrderData] = useState([]);
+    useEffect(() => {
+        // Pull categories from Firebase on component mount
+        const orderRef = ref(db, 'orders'); // Path to categories node in Firebase
+            
+        get(orderRef)
+        .then((snapshot) => {
+            if (snapshot.exists()) {
+                const data = snapshot.val();
+                // Map Firebase data to an array
+                const orderArray = Object.keys(data).map(key => ({
+                    ...data[key],
+                    id: key
+                }));
+                setOrderData(orderArray);
+            } else {
+                console.log('No orders data available');
+            }
+        })
+        .catch((error) => {
+            console.error("Error getting orders data: ", error);
+        });    
+    }, []);
+
+    // Function to mark order as completed
+    const completeOrder = (orderId) => {
+        // Logic to mark the order as completed (e.g., update the order status in Firebase)
+        console.log("Order Completed:", orderId);
+    };
 
 
     return (
@@ -140,18 +170,25 @@ function EmployeeView(props) {
                     <section id="results" class="card">
                         { /* Should be on same column but in a seperate card*/ }
                         <div id="soonest-order">
-                            <p>The next order is at: 5:45pm</p>
-                            <p>Item Name 1</p>
-                            <p>Item Name 2</p>
-                            <p>Item Name 3</p>
-                            <p>For: User's Name</p>
-                            <button onClick={dismissOrder}>
-                                Dismiss
-                            </button>
+                        {orderData.length > 0 ? (
+                            orderData.map((order, index) => (
+                                <div key={order.id} className="order-card">
+                                    <p>The next order is at: {new Date(order.timestamp).toLocaleTimeString()}</p>
+                                    {order.cartItems.map((item, itemIndex) => (
+                                        <p key={itemIndex}>{item.quantity} x {item.item.itemName}</p>
+                                    ))}
+                                    <p>Total: {order.totalAmount}</p>
+                                    <p>For: {order.userName}</p>
+                                    <button onClick={() => completeOrder(order.id)}>Complete</button>
+                                </div>
+                            ))
+                        ) : (
+                            <p>No pending orders</p>
+                        )}
                         </div>
-                        {
+                        {/* {
                             renderResults()
-                        }
+                        } */}
                         
                     </section>
                 </main>
@@ -164,4 +201,4 @@ function EmployeeView(props) {
     )
 }
 
-export default EmployeeView
+export default EmployeeView;

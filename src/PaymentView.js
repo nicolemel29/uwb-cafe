@@ -45,36 +45,61 @@ function PaymentView() {
     }, [])
 
     function handlePay() {
-        const user = auth.currentUser // Get the currently logged-in user
+        const user = auth.currentUser; // Get the currently logged-in user
         if (!user) {
-            alert("You need to be logged in to complete the payment.")
-            return
+            alert("You need to be logged in to complete the payment.");
+            return;
         }
-
-        const userId = user.uid
-        const ordersRef = ref(db, 'orders') // Reference to the orders node
-        const newOrderRef = push(ordersRef) // Create a new unique order entry
-
-        const orderData = {
-            userId: userId,
-            cartItems: cart, // Use current cart state
-            // totalAmount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0), // Calculate total amount
-            timestamp: Date.now(),
-            status: 'pending' // Default status for new orders
-        }
-
-        // Push the new order to Firebase
-        set(newOrderRef, orderData)
-            .then(() => {
-                alert("Order placed successfully!")
-                localStorage.removeItem("cart") // Clear local cart
-                setCart([]) // Clear cart state in the component
-                navigate("/menu") // Redirect to menu or confirmation page
-            })
-            .catch((error) => {
-                console.error("Error placing order: ", error)
-                alert("Failed to place order. Please try again.")
-            })
+    
+        const userId = user.uid;
+        console.log("userId:", userId);
+    
+        const ordersRef = ref(db, 'orders'); // Reference to the orders node
+        const newOrderRef = push(ordersRef); // Create a new unique order entry
+    
+        const userRef = ref(db, `users/${userId}`); // Reference to the user node based on userId
+    
+        get(userRef)
+        .then((snapshot) => {
+            const userData = snapshot.val();
+            console.log("User Data:", userData); // Check if userData contains Fname and Lname
+            
+            const userName = `${userData.Fname || "No First Name"} ${userData.Lname || "No Last Name"}`;
+            console.log("userName:", userName);
+            const totalAmount = cart.reduce((sum, cartItem) => {
+                const price = parseFloat(cartItem.item.price); // Access price from the nested `item` object
+                const quantity = cartItem.quantity; // Access the quantity directly
+                return sum + (price * quantity);  // Multiply price by quantity and add to sum
+            }, 0);
+    
+            const orderData = {
+                userId: userId,
+                userName: userName, // Add userName to the order data
+                cartItems: cart, // Use current cart state
+                totalAmount: totalAmount,
+                timestamp: Date.now(),
+                status: 'pending' // Default status for new orders
+            };
+    
+        //     console.log("Order Data:", orderData);
+    
+        //     // Push the new order to Firebase
+            set(newOrderRef, orderData)
+                .then(() => {
+                    alert("Order placed successfully!");
+                    localStorage.removeItem("cart"); // Clear local cart
+                    setCart([]); // Clear cart state in the component
+                    navigate("/menu"); // Redirect to menu or confirmation page
+                })
+                .catch((error) => {
+                    console.error("Error placing order: ", error);
+                    alert("Failed to place order. Please try again.");
+                });
+        })
+        .catch((error) => {
+            console.error("Error getting user data: ", error);
+            alert("Failed to retrieve user information. Please try again.");
+        });
     }
 
     return (
