@@ -52,7 +52,7 @@
 #student-login-box {
     background: linear-gradient(180deg, #dbdada,#ffffff);
     width: 18rem;
-    height: 20rem;
+    height: min-content;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 2rem;
@@ -68,7 +68,7 @@
 }
 
 #cust-login-button {
-    margin-top: 5rem;
+    margin-top: 2rem;
     font-family: Arial, sans-serif;
     font-size: .9rem;
     background-color: #4b2e83;
@@ -91,6 +91,15 @@
     text-align: left;
 }
 
-#username, #password {
+#cust-password {
+    margin-top: 16px;
+}
+
+#cust-username, #cust-password {
     width: 200px;
+}
+
+#to-employee-link {
+    color: gold;
+    text-underline-offset: 4px;
 }

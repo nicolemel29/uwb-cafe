@@ -67,7 +67,7 @@ function CustomerLogin() {
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
         <h2 id="student-login-header">Student Login</h2>
-        <div className="input-field" id="username">
+        <div className="input-field" id="cust-username">
           <label>Username: </label>
           <input
             type="email"
@@ -75,7 +75,7 @@ function CustomerLogin() {
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
-        <div className="input-field" id="password">
+        <div className="input-field" id="cust-password">
           <label>Password: </label>
           <input
             type="password"
@@ -87,7 +87,7 @@ function CustomerLogin() {
           Login
         </button>
         </div>
-        <Link to={"/employee-login"}>
+        <Link id="to-employee-link" to={"/employee-login"}>
           I am an employee
         </Link>
       </div>
