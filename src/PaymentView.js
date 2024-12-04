@@ -84,11 +84,41 @@ function PaymentView() {
             </head>
             <body>
                 <h1 id="order-header">Review Order</h1>
-                {
-                    cart.map(cartItem => (
-                        <p class="cart-item">{cartItem.itemName}</p>
-                    ))
-                }
+                <div id="order-container">
+                    <div class="content-container" id="order-info">
+                        <input type="text"></input>
+                    </div>
+                    <div class="content-container" id="order-recap">
+                        {cart.map((cartItem, index) => (
+                            <div class="cart-item">
+                                <span class="cart-item-title" key={`cart${index}`}>{cartItem.item.itemName}</span>
+                                <div class="cart-item-details">
+                                    <div class="cart-item-info">
+                                        <span class="cart-item-price">{`$${cartItem.item.price} each`}</span>
+                                        <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
+                                    </div>
+                                    <div class="cart-item-options">
+                                        <button onClick={() => {
+                                            removeFromCart(index)
+                                            saveCart()
+                                        }}>Delete</button>
+                                        <div class="cart-quantity-change">
+                                            <button onClick={() => {
+                                                subtractQuantity(cartItem, index)
+                                                saveCart();
+                                            }}>-</button>
+
+                                            <button onClick={() => {
+                                                addQuantity(cartItem)
+                                                saveCart();
+                                            }}>+</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
                 <button onClick={handlePay} class="pay-button">
                     Pay!
                 </button>
