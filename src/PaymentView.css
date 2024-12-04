@@ -94,10 +94,10 @@ body {
     padding: 0px 0px 40px 0px
 }
 
-input[type='text'], input[type='password'] {
+input[type='text'].payment-view, input[type='password'].payment-view {
     padding: 4px 8px;
 }
 
-.card-row > input[type='text'], .card-row > input[type='password'] {
-    width: 100%;
+.card-row > input[type='text'].payment-view, .card-row > input[type='password'].payment-view {
+    width: 50%;
 }

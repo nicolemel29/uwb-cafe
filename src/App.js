@@ -12,8 +12,6 @@ import EmployeeLogin from './EmployeeLogin.js';
 // Controller
 function App() {
   /* Allows for communication between employee and customer view... NOT REAL TIME! */
-  const [isOpen, setIsOpen] = useState(false)
-  const toggleOpen = () => { setIsOpen(!isOpen) }
 
   return (
     <BrowserRouter>
@@ -22,18 +20,13 @@ function App() {
           <CustomerLogin/>
         } />
         <Route path="/menu" element={
-          <CustomerMenu
-            isOpen={isOpen}
-          />
+          <CustomerMenu/>
         } />
         <Route path="/pay" element={ <PaymentView/> } />
         <Route path="/transaction-history" element={ <TransactionView/> } />
         <Route path="/employee-login" element={ <EmployeeLogin/> } />
         <Route path="/employee" element={
-          <EmployeeView
-            isOpen={isOpen}
-            toggleOpen={toggleOpen}
-          />
+          <EmployeeView/>
         } />
         <Route path="*" element={ <Redirect/> } />
       </Routes>
