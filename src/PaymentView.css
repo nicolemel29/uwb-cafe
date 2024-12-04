@@ -60,3 +60,32 @@ body {
     background-color: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
+.time {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 32px;
+    gap: 8px;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+.card-row {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    width: 100%;
+}
+
+input[type='text'], input[type='password'] {
+    padding: 4px 8px;
+}
+
+.card-row > input[type='text'], input[type='password'] {
+    width: 100%;
+}

@@ -8,6 +8,7 @@ function PaymentView() {
     const navigate = useNavigate()
 
     const [cart, setCart] = useState([])
+    const [cartTotal, setCartTotal] = useState(0)
 
     function removeFromCart(index) {
         const iterations = cart.length
@@ -43,6 +44,14 @@ function PaymentView() {
         }
     }, [])
 
+    useEffect(() => {
+        let total = 0
+        cart.forEach(cartItem => {
+            total += parseFloat(cartItem.item.price)*parseFloat(cartItem.quantity)
+        });
+        setCartTotal(total)
+    }, [cart])
+
     function handlePay() {
         if (localStorage.getItem("transaction")) {
             const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
@@ -71,7 +80,31 @@ function PaymentView() {
                 <h1 id="order-header">Review Order</h1>
                 <div id="order-container">
                     <div class="content-container" id="order-info">
-                        <input type="text"></input>
+                        <div class="time">
+                            <label>Pick-Up Time</label>    
+                            <input type="time" min="08:00" max="18:00"></input>
+                        </div>
+                        <div class="card-details">
+                            <label>Card Details</label>
+                            <input type="text" placeholder="Address Line 1..." required></input>
+                            <input type="text" placeholder="Address Line 2..."></input>
+                            <div class="card-row">
+                                <input type="text" placeholder="City..." required></input>
+                                <input type="text" placeholder="Country..." required></input>
+                            </div>
+                            <div class="card-row">
+                                <input type="text" placeholder="State..." required></input>
+                                <input type="text" placeholder="Zip..." required></input>
+                            </div>
+                            <input type="text" placeholder="Card Number..." required></input>
+                            <div class="card-row">
+                                <input type="text" placeholder="Expiration..." required></input>
+                                <input type="password" placeholder="CVV..." required></input>
+                            </div>
+                        </div>
+
+
+
                     </div>
                     <div class="content-container" id="order-recap">
                         {cart.map((cartItem, index) => (
@@ -83,10 +116,7 @@ function PaymentView() {
                                         <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
                                     </div>
                                     <div class="cart-item-options">
-                                        <button onClick={() => {
-                                            removeFromCart(index)
-                                            saveCart()
-                                        }}>Delete</button>
+                                        <div class="spacer"></div>
                                         <div class="cart-quantity-change">
                                             <button onClick={() => {
                                                 subtractQuantity(cartItem, index)
@@ -102,6 +132,9 @@ function PaymentView() {
                                 </div>
                             </div>
                         ))}
+                        <div class="cart-item cart-item-title">
+                            {`Total: $${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}
+                        </div>
                     </div>
                 </div>
                 <button onClick={handlePay} class="pay-button">
