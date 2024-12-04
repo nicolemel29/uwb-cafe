@@ -63,7 +63,7 @@ function CustomerSignup() {
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
         <h2 id="student-login-header">Student Signup</h2>
-        <div className="input-field" id="cust-username">
+        <div className="input-field" id="cust-first-name">
           <label>First Name: </label>
           <input
             type="text"
@@ -71,7 +71,7 @@ function CustomerSignup() {
             onChange={(e) => setFirstName(e.target.value)}
           />
         </div>
-        <div className="input-field" id="cust-username">
+        <div className="input-field" id="cust-last-name">
           <label>Last Name: </label>
           <input
             type="text"
