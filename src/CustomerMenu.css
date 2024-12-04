@@ -182,16 +182,18 @@ main {
     position: relative;
     margin-bottom: 15px;
     padding: 10px;
+    padding-bottom: 0px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3 ease;
+    transition: background-color 0.3s ease, box-shadow 0.3 ease, padding-bottom 0.3 ease;
 }
 
 .menu-item:hover {
     background-color: #eaecee;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
 }
 
 .item-header {
