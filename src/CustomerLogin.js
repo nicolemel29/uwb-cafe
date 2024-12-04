@@ -26,7 +26,7 @@ function CustomerLogin() {
       
       // Check if the email ends with @uw.edu or @uw.netid
       if (!username.endsWith("@uw.edu")) {
-      alert("Only University of Washington email addresses are allowed.");
+        alert("Only University of Washington email addresses are allowed.");
       return;
       }
       // // Sign in with Firebase Authentication
@@ -66,6 +66,22 @@ function CustomerLogin() {
           alert("Please verify your email address before logging in. Check your inbox for the verification email.");
         }
       })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+  
+        // Handle specific error codes
+        if (errorCode === 'auth/user-not-found') {
+          console.error("No user found with this email.");
+          alert("No account found with this email address. Please check your email or sign up.");
+        } else if (errorCode === 'auth/wrong-password') {
+          console.error("Incorrect password.");
+          alert("Incorrect password. Please try again.");
+        } else {
+          console.error("Error signing in:", errorMessage);
+          alert("Login failed! Please check your credentials.");
+        }
+      });
     } catch (error) {
       console.error("Error signing in: ", error)
       alert("Login failed! Please check your credentials.")

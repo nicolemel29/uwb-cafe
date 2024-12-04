@@ -99,6 +99,8 @@ function CustomerSignup() {
           <label>Set Password: </label>
           <input
             type="password"
+            required minlength="6" 
+            maxlength="6"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
