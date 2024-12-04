@@ -46,6 +46,10 @@ nav ul li a {
     padding-top: 15px;
 }
 
+#store-open-input {
+    margin-right: 10px;
+}
+
 main {
     flex: 1;
     padding: 2rem;
