@@ -1,3 +1,7 @@
+body {
+  overscroll-behavior-y: none;
+}
+
 .App {
   text-align: center;
 }

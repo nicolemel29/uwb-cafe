@@ -5,10 +5,10 @@ import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'
 import { Link } from 'react-router-dom'
 import stulogo from './cafe-logo.PNG'
-import './CustomerLogin.css'
+import './CustomerSignup.css'
 
 
-function CustomerLogin() {
+function CustomerSignup() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -23,30 +23,23 @@ function CustomerLogin() {
 
   const handleSubmit = async () => {
     try {
-      
-      // Check if the email ends with @uw.edu or @uw.netid
-      if (!username.endsWith("@uw.edu")) {
-      alert("Only University of Washington email addresses are allowed.");
-      return;
-      }
       // Sign in with Firebase Authentication
       const userCredential = await signInWithEmailAndPassword(auth, username, password)
 
       // Get user data from Firebase Authentication
       const user = userCredential.user
 
-      const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
-      // console.log(user.uid);
-      // Since we don't have a signup page, I manually added a user // 
-      // set(userRef, {
-      //   Net_ID_Email: user.email,
-      //   Fname: 'Corzette', // You can set these values based on user input
-      //   Lname: 'Dampac',  // or use a registration form to get real user details
-      //   Phone_Number: '123-456-7890',
-      //   Staff: false,  // Default for regular users
-      // })
+    // Since we don't have a signup page, I manually added a user // 
+    //   set(userRef, {
+    //     Net_ID_Email: user.email,
+    //     Fname: 'John', // You can set these values based on user input
+    //     Lname: 'Doe',  // or use a registration form to get real user details
+    //     Phone_Number: '123-456-7890',
+    //     Staff: false,  // Default for regular users
+    //   })
 
         // Get user data from Realtime Database
+        const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
         const snapshot = await get(userRef)  // Fetch data from Firebase
         if (snapshot.exists()) {
             localStorage.setItem("customerLogin", true)
@@ -73,7 +66,7 @@ function CustomerLogin() {
         <div id="student-login-logo">
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
-        <h2 id="student-login-header">Student Login</h2>
+        <h2 id="student-login-header">Student Signup</h2>
         <div className="input-field" id="cust-username">
           <label>Username: </label>
           <input
@@ -91,11 +84,11 @@ function CustomerLogin() {
           />
         </div>
         <button id="cust-login-button" onClick={handleSubmit}>
-          Login
+          Sign Up
         </button>
         </div>
-        <Link id="to-employee-link" to={"/customer-signup"}>
-          New User? Sign Up!
+        <Link id="to-employee-link" to={"/customer-login"}>
+          I already have an account
         </Link>
         <Link id="to-employee-link" to={"/employee-login"}>
           I am an employee
@@ -105,4 +98,4 @@ function CustomerLogin() {
   )
 }
 
-export default CustomerLogin
+export default CustomerSignup

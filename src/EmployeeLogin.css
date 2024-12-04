@@ -1,3 +1,9 @@
+
+
+#employee-background {
+    background: radial-gradient(circle, #b19cd9, #926dcc, #4b2e83);
+}
+
 #login-container {
     width: auto;
     height: 100vh;
@@ -6,9 +12,89 @@
     gap: 10px;
     justify-content: center;
     align-items: center;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0;}
+    100% { opacity: 1}
+}
+
+img {
+    height: 10rem;
+    width: auto;
+    margin-top: -50px;
+}
+.input-field {
+    display: flex;
+    flex-direction: column;
+    width: 100%; 
+    gap: 4px; 
+}
+
+#password, #username {
+    height: 30px;
+    padding: .5rem;
+}
+
+
+
+#employee-login-header {
+    text-align: center;
+    margin-top: 0;
+}
+
+#employee-login-box {
+    background: linear-gradient(180deg, #dbdada,#ffffff);
+    width: 18rem;
+    height: min-content;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: popIn 1s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1;}
+}
+
+#employee-login-button {
+    margin-top: 2rem;
+    font-family: Arial, sans-serif;
+    font-size: .9rem;
+    background-color: #4b2e83;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
 }
 
 .input-field {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    align-items: center;
+}
+
+.input-field label {
+    font-weight: bold;
+    text-align: left;
+}
+
+#employee-password {
+    margin-top: 16px;
+}
+
+#employee-username, #employee-password {
+    width: 200px;
+}
+
+#to-customer-link {
+    color: gold;
+    text-underline-offset: 4px;
 }

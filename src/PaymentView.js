@@ -12,6 +12,10 @@ import {Link} from 'react-router-dom'
 function PaymentView() {
     const navigate = useNavigate()
 
+    const goToMenu = () => {
+        navigate('/menu');
+      };
+
     useEffect(() => {
         if (localStorage.getItem("customerLogin") !== "true") {
             localStorage.setItem("customerLogin", false)
@@ -139,19 +143,29 @@ function PaymentView() {
             };
     
         //     console.log("Order Data:", orderData);
-    
-        //     // Push the new order to Firebase
-            set(newOrderRef, orderData)
+            if (orderData.cartItems != 0) {
+                // Push the new order to Firebase
+                set(newOrderRef, orderData)
                 .then(() => {
                     alert("Order placed successfully!");
                     localStorage.removeItem("cart"); // Clear local cart
                     setCart([]); // Clear cart state in the component
+                    /*
+                    setTimeout(() => {
+                        navigate("/menu"); // if Modal, will navigate to menu after 15 min if the ok button is not pressed
+                      }, 900000);
+                    */
                     navigate("/menu"); // Redirect to menu or confirmation page
                 })
                 .catch((error) => {
                     console.error("Error placing order: ", error);
                     alert("Failed to place order. Please try again.");
                 });
+            }
+            else {
+                alert("Cart cannot be empty.")
+                navigate("/menu");
+            }  
         })
         .catch((error) => {
             console.error("Error getting user data: ", error);
@@ -208,9 +222,16 @@ function PaymentView() {
                                         <input class="payment-view" type="password" placeholder="CVV..." required></input>
                                     </div>
 
+                                    <div className="button-container">
+                                    <button onClick={goToMenu} class="cancel-button">
+                                        Cancel
+                                    </button>
+
                                     <button onClick={handlePay} class="pay-button">
                                         Pay!
                                     </button>
+                                    </div>
+                                  
                                 </div>
                             </div>
                         </div>

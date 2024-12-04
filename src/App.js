@@ -1,6 +1,7 @@
 import './App.css';
 import CustomerMenu from './CustomerMenu.js'
 import CustomerLogin from './CustomerLogin.js'
+import CustomerSignup from './CustomerSignup.js'
 import EmployeeView from './EmployeeView.js';
 import PaymentView from './PaymentView.js'
 import Redirect from './Redirect.js'
@@ -16,9 +17,8 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/customer-login" element={
-          <CustomerLogin/>
-        } />
+        <Route path="/customer-login" element={ <CustomerLogin/> } />
+        <Route path="/customer-signup" element={ <CustomerSignup/> } />
         <Route path="/menu" element={
           <CustomerMenu/>
         } />

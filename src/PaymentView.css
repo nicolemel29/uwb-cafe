@@ -4,12 +4,31 @@ body {
     gap: 16px;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-between; 
+    width: 100%;
+  }
+
 .pay-button {
     height: 3rem;
     width: 7rem;
     font-family: Arial, sans-serif;
     font-size: .9rem;
     background-color: #4b2e83;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    margin: 16px auto 0;
+}
+.cancel-button {
+    height: 3rem;
+    width: 7rem;
+    font-family: Arial, sans-serif;
+    font-size: .9rem;
+    background-color: gray;
     color: white;
     border: none;
     border-radius: 5px;
