@@ -19,16 +19,18 @@ function PaymentView() {
     function handlePay() {
         if (localStorage.getItem("transaction")) {
             const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
-            const newTransactionHistory = JSON.stringify([...oldTransactionHistory, cart])
+
+            let tempTransactionHistory = [cart]
+            for (let i = 0; i < 9 && i < oldTransactionHistory.length; i++) tempTransactionHistory.push(oldTransactionHistory[i])
+
+            const newTransactionHistory = JSON.stringify(tempTransactionHistory)
             localStorage.setItem("transaction", newTransactionHistory)
-            localStorage.setItem("cart", [])
-            navigate("/")
         } else {
             const newTransactionHistory = JSON.stringify([cart])
             localStorage.setItem("transaction", newTransactionHistory)
-            localStorage.setItem("cart", [])
-            navigate("/")
         }
+        localStorage.setItem("cart", [])
+        navigate("/menu")
     }
 
     return (

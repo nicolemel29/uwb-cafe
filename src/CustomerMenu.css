@@ -211,3 +211,7 @@ li.category, li.subcategory-item {
 li.category:hover, li.subcategory-item, .clickable {
     cursor: pointer;
 }
+
+.signout {
+    font-weight: bold;
+}
