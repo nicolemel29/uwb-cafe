@@ -79,8 +79,8 @@ function CustomerSignup() {
             onChange={(e) => setLastName(e.target.value)}
           />
         </div>
-        <div className="input-field" id="cust-username">
-          <label>Username: </label>
+        <div className="input-field" id="cust-email">
+          <label>Email: </label>
           <input
             type="email" 
             value={username}

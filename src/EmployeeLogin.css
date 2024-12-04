@@ -32,7 +32,7 @@ img {
     gap: 4px; 
 }
 
-#password, #username {
+#employee-password, #employee-email {
     height: 30px;
     padding: .5rem;
 }

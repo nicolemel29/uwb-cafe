@@ -74,8 +74,8 @@ function CustomerLogin() {
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
         <h2 id="student-login-header">Student Login</h2>
-        <div className="input-field" id="cust-username">
-          <label>Username: </label>
+        <div className="input-field" id="cust-email">
+          <label>Email: </label>
           <input
             type="email"
             value={username}
