@@ -127,6 +127,7 @@ main {
     font-size: 1.8rem;
 }
 
+
 .cart-bottom {
     box-sizing: border-box;
     background-color: white;
@@ -140,6 +141,8 @@ main {
     text-align: center;
     border: 1px solid black;
 }
+
+
 
 .menu-button {
     height: 3rem;
@@ -226,6 +229,12 @@ main {
 
 .clickable {
     cursor: pointer;
+}
+
+#cart.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 

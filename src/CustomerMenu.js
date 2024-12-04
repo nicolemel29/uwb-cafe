@@ -172,13 +172,14 @@ function CustomerMenu(props) {
                 </>
             )
         } else {
-            return (
-                <>
-                    <h2 class="menu-heading">Cart</h2>
-                    <div id="cart-content">
-                        {
-                            renderCartItems()
-                        }
+            return (<>
+                    <div id="cart-top-content">
+                        <h2 class="menu-heading">Cart</h2>
+                        <div id="cart-content">
+                            {
+                                renderCartItems()
+                            }
+                        </div>
                     </div>
                     <div class="cart-bottom">
                         <p>{`Total: ${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
