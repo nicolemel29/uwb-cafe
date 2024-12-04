@@ -15,6 +15,12 @@ function CustomerSignup() {
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
 
+  const [firstNameError, setFirstNameError] = useState(false)
+  const [lastNameError, setLastNameError] = useState(false)
+  const [emailError, setEmailError] = useState(false)
+  const [passwordError, setPasswordError] = useState(false)
+
+
 
   useEffect(() => {
     if (localStorage.getItem("customerLogin") === "true") {
@@ -25,6 +31,38 @@ function CustomerSignup() {
   }, [])
 
   const handleSubmit = async () => {
+    let flag = false;
+
+    if (firstName.length <= 0) {
+      flag = true
+      setFirstNameError(true)
+    } else {
+      setFirstNameError(false)
+    }
+
+    if (lastName.length <= 0) {
+      flag = true
+      setLastNameError(true)
+    } else {
+      setLastNameError(false)
+    }
+
+    if (!username.endsWith("@uw.edu")) {
+      flag = true
+      setEmailError(true)
+    } else {
+      setEmailError(false)
+    }
+
+    if (password.length < 6) {
+      flag = true
+      setPasswordError(true)
+    } else {
+      setPasswordError(false)
+    }
+
+    if (flag) return;
+
     try {
       createUserWithEmailAndPassword(auth, username, password)
       .then((userCredential) => {
@@ -78,6 +116,7 @@ function CustomerSignup() {
             value={firstName}
             onChange={(e) => setFirstName(e.target.value)}
           />
+          { firstNameError ? <p class="error">First Name Should Be Filled</p> : <></> }
         </div>
         <div className="input-field" id="cust-last-name">
           <label>Last Name: </label>
@@ -86,6 +125,7 @@ function CustomerSignup() {
             value={lastName}
             onChange={(e) => setLastName(e.target.value)}
           />
+          { lastNameError ? <p class="error">Last Name Should Be Filled</p> : <></> }
         </div>
         <div className="input-field" id="cust-email">
           <label>Email: </label>
@@ -94,6 +134,7 @@ function CustomerSignup() {
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
+          { emailError ? <p class="error">Email Should End With @uw.edu</p> : <></> }
         </div>
         <div className="input-field" id="cust-password">
           <label>Set Password: </label>
@@ -104,6 +145,7 @@ function CustomerSignup() {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          { passwordError ? <p class="error">Password Should Be 6+ Characters Long</p> : <></> }
         </div>
         <button id="cust-login-button" onClick={handleSubmit}>
           Sign Up

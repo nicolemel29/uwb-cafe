@@ -1,3 +1,10 @@
 #cust-email, #cust-last-name {
     margin-top: 16px;
 }
+
+p.error {
+    text-align: center;
+    font-size: 12px;
+    color: red;
+    margin: 0;
+}
