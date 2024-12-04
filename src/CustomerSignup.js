@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { signInWithEmailAndPassword } from 'firebase/auth'
+import { createUserWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'
 import { Link } from 'react-router-dom'
@@ -12,6 +12,9 @@ function CustomerSignup() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+
 
   useEffect(() => {
     if (localStorage.getItem("customerLogin") === "true") {
@@ -23,36 +26,29 @@ function CustomerSignup() {
 
   const handleSubmit = async () => {
     try {
-      // Sign in with Firebase Authentication
-      const userCredential = await signInWithEmailAndPassword(auth, username, password)
+      createUserWithEmailAndPassword(auth, username, password)
+      .then((userCredential) => {
+        
+        const user = userCredential.user; // Populate Authentication on Firebase
 
-      // Get user data from Firebase Authentication
-      const user = userCredential.user
-
-    // Since we don't have a signup page, I manually added a user // 
-    //   set(userRef, {
-    //     Net_ID_Email: user.email,
-    //     Fname: 'John', // You can set these values based on user input
-    //     Lname: 'Doe',  // or use a registration form to get real user details
-    //     Phone_Number: '123-456-7890',
-    //     Staff: false,  // Default for regular users
-    //   })
-
-        // Get user data from Realtime Database
+        console.log("User created:", user);
         const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
-        const snapshot = await get(userRef)  // Fetch data from Firebase
-        if (snapshot.exists()) {
-            localStorage.setItem("customerLogin", true)
-            navigate("/menu")
-        } else {
-          // Handle case where user data doesn't exist in the database
-          console.error("No user data found")
-          alert("Login failed! User not found in database.")
-        }
-
-
-      // Navigate to menu page after successful login
-      navigate("/menu")
+        // Set the Realtime Database
+        set(userRef, {
+          Net_ID_Email: user.email,
+          Fname: firstName, // You can set these values based on user input
+          Lname: lastName,  // or use a registration form to get real user details
+          Phone_Number: '123-456-7890',
+          Staff: false,  // Default for regular users
+      })
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error("Error creating user:", errorCode, errorMessage);
+      });
+      
+      navigate("/customer-login")
     } catch (error) {
       console.error("Error signing in: ", error)
       alert("Login failed! Please check your credentials.")
@@ -68,15 +64,31 @@ function CustomerSignup() {
         </div>
         <h2 id="student-login-header">Student Signup</h2>
         <div className="input-field" id="cust-username">
+          <label>First Name: </label>
+          <input
+            type="text"
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
+          />
+        </div>
+        <div className="input-field" id="cust-username">
+          <label>Last Name: </label>
+          <input
+            type="text"
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
+          />
+        </div>
+        <div className="input-field" id="cust-username">
           <label>Username: </label>
           <input
-            type="email"
+            type="email" 
             value={username}
             onChange={(e) => setUsername(e.target.value)}
           />
         </div>
         <div className="input-field" id="cust-password">
-          <label>Password: </label>
+          <label>Set Password: </label>
           <input
             type="password"
             value={password}

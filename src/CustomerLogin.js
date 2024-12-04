@@ -23,23 +23,30 @@ function CustomerLogin() {
 
   const handleSubmit = async () => {
     try {
+      
+      // Check if the email ends with @uw.edu or @uw.netid
+      if (!username.endsWith("@uw.edu")) {
+      alert("Only University of Washington email addresses are allowed.");
+      return;
+      }
       // Sign in with Firebase Authentication
       const userCredential = await signInWithEmailAndPassword(auth, username, password)
 
       // Get user data from Firebase Authentication
       const user = userCredential.user
 
-    // Since we don't have a signup page, I manually added a user // 
-    //   set(userRef, {
-    //     Net_ID_Email: user.email,
-    //     Fname: 'John', // You can set these values based on user input
-    //     Lname: 'Doe',  // or use a registration form to get real user details
-    //     Phone_Number: '123-456-7890',
-    //     Staff: false,  // Default for regular users
-    //   })
+      const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
+      // console.log(user.uid);
+      // Since we don't have a signup page, I manually added a user // 
+      // set(userRef, {
+      //   Net_ID_Email: user.email,
+      //   Fname: 'Corzette', // You can set these values based on user input
+      //   Lname: 'Dampac',  // or use a registration form to get real user details
+      //   Phone_Number: '123-456-7890',
+      //   Staff: false,  // Default for regular users
+      // })
 
         // Get user data from Realtime Database
-        const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
         const snapshot = await get(userRef)  // Fetch data from Firebase
         if (snapshot.exists()) {
             localStorage.setItem("customerLogin", true)
