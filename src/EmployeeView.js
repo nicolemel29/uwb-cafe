@@ -89,6 +89,7 @@ function EmployeeView(props) {
 
 
     const [orderData, setOrderData] = useState([]);
+
     useEffect(() => {
         const orderRef = ref(db, 'orders-pending'); // Reference to the 'orders-pending' node in Firebase
     
@@ -208,6 +209,7 @@ function EmployeeView(props) {
                     </section>
                     <section id="results" class="card">
                         { /* Should be on same column but in a seperate card*/ }
+                        {/* If there is a customer order, then parse throught array to output, else no pending orders */} 
                         <div id="soonest-order">
                         {orderData.length ? (
                             orderData.map((order, index) => (
