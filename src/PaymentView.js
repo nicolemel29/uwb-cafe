@@ -2,6 +2,8 @@ import React from 'react'
 import './PaymentView.css'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { ref, push, set } from 'firebase/database'
+import { auth, db } from './firebase' // Ensure auth is imported for current user
 
 function PaymentView() {
     const navigate = useNavigate()
@@ -10,49 +12,68 @@ function PaymentView() {
 
     useEffect(() => {
         if (!localStorage.getItem("cart")) {
-            navigate("/")
+            navigate("/") // Redirect if no cart found
         } else {
-            setCart(JSON.parse(localStorage.getItem("cart")))
+            setCart(JSON.parse(localStorage.getItem("cart"))) // Set cart items from localStorage
         }
     }, [])
 
     function handlePay() {
-        if (localStorage.getItem("transaction")) {
-            const oldTransactionHistory = JSON.parse(localStorage.getItem("transaction"))
-
-            let tempTransactionHistory = [cart]
-            for (let i = 0; i < 9 && i < oldTransactionHistory.length; i++) tempTransactionHistory.push(oldTransactionHistory[i])
-
-            const newTransactionHistory = JSON.stringify(tempTransactionHistory)
-            localStorage.setItem("transaction", newTransactionHistory)
-        } else {
-            const newTransactionHistory = JSON.stringify([cart])
-            localStorage.setItem("transaction", newTransactionHistory)
+        const user = auth.currentUser // Get the currently logged-in user
+        if (!user) {
+            alert("You need to be logged in to complete the payment.")
+            return
         }
-        localStorage.setItem("cart", [])
-        navigate("/menu")
+
+        const userId = user.uid
+        const ordersRef = ref(db, 'orders') // Reference to the orders node
+        const newOrderRef = push(ordersRef) // Create a new unique order entry
+
+        const orderData = {
+            userId: userId,
+            cartItems: cart, // Use current cart state
+            // totalAmount: cart.reduce((sum, item) => sum + (item.price * item.quantity), 0), // Calculate total amount
+            timestamp: Date.now(),
+            status: 'pending' // Default status for new orders
+        }
+
+        // Push the new order to Firebase
+        set(newOrderRef, orderData)
+            .then(() => {
+                alert("Order placed successfully!")
+                localStorage.removeItem("cart") // Clear local cart
+                setCart([]) // Clear cart state in the component
+                navigate("/menu") // Redirect to menu or confirmation page
+            })
+            .catch((error) => {
+                console.error("Error placing order: ", error)
+                alert("Failed to place order. Please try again.")
+            })
     }
 
     return (
         <>
-            <head>
-                <meta charset="UTF-8" />
-                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-                <title>Pay - UW Bothell Cafe</title>
-            </head>
-            <body>
-                <h1 id="order-header">Review Order</h1>
-                {
-                    cart.map(cartItem => (
-                        <p class="cart-item">{cartItem.itemName}</p>
+            <h1 id="order-header">Review Order</h1>
+            <div id="cart-container">
+                {cart.length === 0 ? (
+                    <p>No items in your cart</p> // Show a message if the cart is empty
+                ) : (
+                    cart.map((cartItem, index) => (
+                        <div key={index} className="cart-item">
+                            <p>Item: {cartItem.itemName}</p>
+                            <p>Quantity: {cartItem.quantity}</p>
+                            <p>Price: ${cartItem.price}</p>
+                            <p>Total: ${cartItem.price * cartItem.quantity}</p>
+                        </div>
                     ))
-                }
-                <button onClick={handlePay} class="pay-button">
-                    Pay!
-                </button>
-            </body>
+                )}
+            </div>
+
+            <button onClick={handlePay} className="pay-button">
+                Pay!
+            </button>
         </>
     )
 }
 
-export default PaymentView
+export default PaymentView;
