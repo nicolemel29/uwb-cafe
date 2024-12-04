@@ -2,7 +2,7 @@ import React from 'react'
 import './EmployeeView.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState } from 'react'
-import categories from './menuData.json'
+// import categories from './menuData.json'
 import {Link} from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
@@ -13,11 +13,87 @@ import { ref, set, get, push, update, remove, onValue } from 'firebase/database'
 
 function EmployeeView(props) {
     const navigate = useNavigate()
-    const isOpen = props.isOpen
-    const toggleOpen = props.toggleOpen
+
+    const [categoryIDs, setCategoryIDs] = useState([])
+    const [categories, setCategories] = useState([])
+
+    const [itemIDs, setItemIDs] = useState([])
+    const [items, setItems] = useState([])
+
+    const [isOpen, setIsOpen] = useState(false)
+
+    const [newCategoryName, setNewCategoryName] = useState("")
+    const [newItemName, setNewItemName] = useState("")
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
+    const [selectedItem, setSelectedItem] = useState(undefined)
 
+    useEffect(() => {
+        if (localStorage.getItem("employeeLogin") !== "true") {
+            localStorage.setItem("employeeLogin", false)
+            navigate("/employee-login")
+        }
+    }, [])
+
+    // get isOpen
+    useEffect(() => {
+        const orderRef = ref(db, `isOpen`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    setIsOpen(snapshot.val())
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching isOpen: ", error);
+            });
+    }, [])
+
+    // get Categories
+    useEffect(() => {
+        fetchCategoriesFromDatabase()
+    }, [])
+
+    const fetchCategoriesFromDatabase = () => {
+        const orderRef = ref(db, `categories`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    let tempCategoryIDs = []
+                    let tempCategories = []
+                    for (let [key, value] of Object.entries(snapshot.val())) {
+                        tempCategoryIDs.push(key)
+                        tempCategories.push(value)
+                    }
+                    setCategoryIDs(tempCategoryIDs)
+                    setCategories(tempCategories)
+                }
+            })
+            .catch((error) => {
+                console.error(`Couldn't load categories data: `, error)
+            })
+    }
+
+    const fetchItemsFromDatabase = () => {
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    let tempItemIDs = []
+                    for (let [key, _] of Object.entries(snapshot.val())) {
+                        tempItemIDs.push(key)
+                    }
+                    setItemIDs(tempItemIDs)
+                }
+            })
+            .catch((error) => {
+                console.error(`Couldn't load categories data: `, error)
+            })
+    }
+
+    function changeItem(index) {
+        setSelectedItem(index)
+    }
 
     function changeCategory(index) {
         setSelectedCategory(index)
@@ -38,12 +114,18 @@ function EmployeeView(props) {
                     <h2 id="results-header">{categories[selectedCategory].categoryName}</h2>
                     <div id="results-content">
                         {
-                            categories[selectedCategory].items.map(item => (
-                                <>
-                                <h3>{item.itemName}</h3>
-                                </>
+                            categories[selectedCategory].items.map((item, index) => (
+                                
+                                <h3 key={`item${index}`} class={`category ${selectedItem === index ? 'active' : ''}`} onClick={() => changeItem(index)} >{item.itemName}</h3>
+                                
                             ))
                         }
+                        <button onClick={addItem}>Add Item</button>
+                        { 0 <= selectedItem && selectedItem < categories[selectedCategory].items.length && 1 < categories[selectedCategory].items.length ? <button onClick={deleteItem}>Delete Item</button> : <></>}
+                        { 0 <= selectedItem && selectedItem < categories[selectedCategory].items.length ? <button onClick={editItem}>Rename Item</button> : <></>}
+                        { 0 <= selectedItem && selectedItem < categories[selectedCategory].items.length ? <input type="text" value={newItemName} onChange={(e) => {setNewItemName(e.target.value)}} />: <></>}
+
+
                     </div>
                 </>
             )
@@ -51,15 +133,71 @@ function EmployeeView(props) {
     }
 
     function addCategory() {
-
+        const orderRef = ref(db, 'categories');
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    update(ref(db, `categories/${snapshot.val().length}`), {
+                            categoryName: "New Category",
+                            items: [
+                                {
+                                    itemName: "N/A",
+                                    price: "0",
+                                    calories: "0",
+                                    desc: "N/A"
+                                }
+                            ]
+                    })
+                    fetchCategoriesFromDatabase()
+                }
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function editCategory() {
         // includes name
+        if (newCategoryName.length === 0) return;
+        
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    const ssValue = {
+                        categoryName: newCategoryName,
+                        items: snapshot.val().items
+                    }
+                    remove(orderRef)
+                        .then(() => {
+                            update(orderRef, ssValue)
+                                .then((snapshot2) => {
+                                    fetchCategoriesFromDatabase()
+                                })
+                                .catch((error) => {
+                                    console.error("Couldn't replace file: ", error)
+                                })
+                        })
+                        .catch((error) => {
+                            console.error("Couldn't remove file: ", error)
+                        })
+                }
+            })
+            .catch((error) => {
+                console.error("Couldn't retrieve category to edit: ", error)
+            })
     }
 
     function deleteCategory() {
-
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}`);
+        remove(orderRef)
+            .then(() => {
+                setSelectedCategory(undefined)
+                fetchCategoriesFromDatabase()
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function reorganizeCategory() {
@@ -67,15 +205,72 @@ function EmployeeView(props) {
     }
 
     function addItem() {
-
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items`);
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    console.log(snapshot.val())
+                    update(ref(db, `categories/${categoryIDs[selectedCategory]}/items/${snapshot.val().length}`), {
+                          
+                                    itemName: "N/A",
+                                    price: "0",
+                                    calories: "0",
+                                    desc: "N/A"
+                                
+                    })
+                    fetchCategoriesFromDatabase()
+                }
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function editItem() {
+        if (newItemName.length === 0) return;
+        
+        fetchItemsFromDatabase()
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items/${itemIDs[selectedItem]}`);
 
+        get(orderRef)
+            .then((snapshot) => {
+                if (snapshot.exists) {
+                    const ssValue = {
+                        itemName: newItemName,
+                        price: snapshot.val().price,
+                        calories: snapshot.val().calories,
+                        desc: snapshot.val().desc
+                    }
+                    remove(orderRef)
+                        .then(() => {
+                            update(orderRef, ssValue)
+                                .then((snapshot2) => {
+                                    fetchCategoriesFromDatabase()
+                                })
+                                .catch((error) => {
+                                    console.error("Couldn't replace file: ", error)
+                                })
+                        })
+                        .catch((error) => {
+                            console.error("Couldn't remove file: ", error)
+                        })
+                }
+            })
+            .catch((error) => {
+                console.error("Couldn't retrieve category to edit: ", error)
+            })
     }
 
     function deleteItem() {
-
+        const orderRef = ref(db, `categories/${categoryIDs[selectedCategory]}/items/${itemIDs[selectedItem]}`);
+        remove(orderRef)
+            .then(() => {
+                setSelectedItem(undefined)
+                fetchCategoriesFromDatabase()
+            })
+            .catch((error) => {
+                console.error("Error adding category: ", error)
+            })
     }
 
     function reorganizeItem() {
@@ -83,12 +278,14 @@ function EmployeeView(props) {
     }
 
     function signout() {
+        localStorage.setItem("employeeLogin", false)
         navigate("/employee-login")
     }
 
 
 
     const [orderData, setOrderData] = useState([]);
+
     useEffect(() => {
         const orderRef = ref(db, 'orders-pending'); // Reference to the 'orders-pending' node in Firebase
     
@@ -120,7 +317,7 @@ function EmployeeView(props) {
             .then((snapshot) => {
                 if (snapshot.exists()) {
                     const orderData = snapshot.val(); // Get the data from the pending order
-                    console.log('Order status updated successfully');
+                    // console.log('Order status updated successfully');
                     
                     // Move the order to the "orders-completed" node
                     const ordersCompletedRef = ref(db, 'orders-completed'); // Reference to the "orders-completed" node
@@ -129,7 +326,7 @@ function EmployeeView(props) {
                     // Set the order data in the new reference
                     set(newOrderRef, orderData)
                         .then(() => {
-                            console.log('Order moved to completed successfully');
+                            // console.log('Order moved to completed successfully');
                             setOrderData((prevOrders) => prevOrders.filter(order => order.id !== orderId)); // Remove the completed order from the state
                         })
                         .catch((error) => {
@@ -148,13 +345,29 @@ function EmployeeView(props) {
     
         remove(orderRef)
             .then(() => {
-                console.log("Order removed successfully");
+                //console.log("Order removed successfully");
                 // Optionally, update the state to remove the deleted order from UI
             })
             .catch((error) => {
                 console.error("Error removing order: ", error);
             });
     };
+
+
+
+    const toggleStoreOpen = () => {
+        const orderRef = ref(db, `isOpen`);
+        set(orderRef, !isOpen)
+            .then((snapshot) => {
+                //console.log("Updated isOpen successfully")
+                setIsOpen(!isOpen)
+            })
+            .catch((error) => {
+                console.error("Error updating isOpen: ", error)
+            })
+
+        //update("isOpen", !isOpen)
+    }
 
 
     return (
@@ -172,10 +385,6 @@ function EmployeeView(props) {
                     </div>
                     <nav>
                     <ul>
-                            <li><Link to={`/menu`}>Menu</Link></li>
-                            <li hidden><a href="#featured">Featured</a></li>
-                            <li><Link to={`/transaction-history`}>Transaction History</Link></li>
-                            <li hidden><a href="#favorites">Favorites</a></li>
                             <li class="signout" onClick={signout}>Sign Out</li>
                         </ul>
                     </nav>
@@ -189,7 +398,7 @@ function EmployeeView(props) {
                                     id="store-open-input"
                                     type="checkbox"
                                     checked={isOpen}
-                                    onChange={toggleOpen}
+                                    onChange={toggleStoreOpen}
                                 />
                                 Is the Store Open?
                             </label>
@@ -197,17 +406,26 @@ function EmployeeView(props) {
                         <h2>Categories</h2>
                         <ul>
                             {
+                                console.log(categories)}
+                            {console.log(categoryIDs)}
+                            {
                                 categories.map((category, index1) => (
                                     <>
-                                        <li key={index1} class="category" onClick={() => changeCategory(index1)}>{category.categoryName}</li>
+                                        <li key={`category${index1}`} class={`category ${selectedCategory === index1 ? 'active' : ''}`} onClick={() => changeCategory(index1)}>{category.categoryName}</li>
                                     </>
                                 ))
                             }
                             <button onClick={addCategory}>Add Category</button>
+                            { 0 <= selectedCategory && selectedCategory < categories.length && 1 < categories.length ? <button onClick={deleteCategory}>Delete Category</button> : <></>}
+                            { 0 <= selectedCategory && selectedCategory < categories.length ? <button onClick={editCategory}>Rename Category</button> : <></>}
+                            { 0 <= selectedCategory && selectedCategory < categories.length ? <input type="text" value={newCategoryName} onChange={(e) => {setNewCategoryName(e.target.value)}} />: <></>}
+
+
                         </ul>
                     </section>
                     <section id="results" class="card">
                         { /* Should be on same column but in a seperate card*/ }
+                        {/* If there is a customer order, then parse throught array to output, else no pending orders */} 
                         <div id="soonest-order">
                         {orderData.length ? (
                             orderData.map((order, index) => (
@@ -225,9 +443,9 @@ function EmployeeView(props) {
                             <p>No pending orders</p>
                         )}
                         </div>
-                        {/* {
+                        {
                             renderResults()
-                        } */}
+                        }
                         
                     </section>
                 </main>

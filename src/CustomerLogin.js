@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from './firebase.js'
@@ -11,6 +11,14 @@ function CustomerLogin() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
+
+  useEffect(() => {
+    if (localStorage.getItem("customerLogin") === "true") {
+      navigate("/menu")
+    } else {
+      localStorage.setItem("customerLogin", false)
+    }
+  }, [])
 
   const handleSubmit = async () => {
     try {
@@ -33,6 +41,7 @@ function CustomerLogin() {
         const userRef = ref(db, 'users/' + user.uid) // Reference to the user's data in DB
         const snapshot = await get(userRef)  // Fetch data from Firebase
         if (snapshot.exists()) {
+            localStorage.setItem("customerLogin", true)
             navigate("/menu")
         } else {
           // Handle case where user data doesn't exist in the database

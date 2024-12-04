@@ -2,7 +2,7 @@ import React from 'react';
 import './CustomerMenu.css'
 import logo from './cafe-logo.PNG'
 import { useEffect, useState, useRef } from 'react'
-import categories from './menuData.json'
+//import categories from './menuData.json'
 import {useNavigate, Link} from 'react-router-dom'
 
 import { ref, onValue, off } from 'firebase/database';
@@ -11,8 +11,57 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function CustomerMenu(props) {
+    const [categories, setCategories] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
+    const navigate = useNavigate()
+
     const seenOrdersRef = useRef(new Set(JSON.parse(localStorage.getItem('seenOrders') || '[]'))); // Use `useRef` to track seen orders without causing re-renders
     // localStorage.clear();
+
+    useEffect(() => {
+        if (localStorage.getItem("customerLogin") !== "true") {
+            localStorage.setItem("customerLogin", false)
+            navigate("/customer-login")
+        }
+    }, [])
+
+    // real time listener for isOpen
+    useEffect(() => {
+        const orderRef = ref(db, 'isOpen'); // Reference to the 'isOpen' node in Firebase
+    
+        // Set up the real-time listener
+        const unsubscribe = onValue(orderRef, (snapshot) => {
+            if (snapshot.exists()) {
+                setIsOpen(snapshot.val()); // Update the state with the fetched data
+            } else {
+                console.log('No isOpen data available');
+            }
+        });
+    
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+    
+    }, []);
+
+    // real time listener for Categories
+    useEffect(() => {
+        const orderRef = ref(db, 'categories'); // Reference to the 'isOpen' node in Firebase
+    
+        // Set up the real-time listener
+        const unsubscribe = onValue(orderRef, (snapshot) => {
+            if (snapshot.exists()) {
+                setCategories(snapshot.val())
+            } else {
+                console.log('No category data available');
+            }
+        });
+    
+        // Cleanup the listener on component unmount
+        return () => unsubscribe();
+    
+    }, []);
+
+    
 
     useEffect(() => {
         const user = auth.currentUser;
@@ -43,11 +92,6 @@ function CustomerMenu(props) {
         // Cleanup listener when component unmounts
         return () => off(ordersCompletedRef, 'value', listener); // Remove listener
     }, []); // Empty dependency array ensures it runs only once
-
-
-
-    const isOpen = props.isOpen
-    const navigate = useNavigate()
 
     const [selectedCategory, setSelectedCategory] = useState(undefined)
 
@@ -204,24 +248,25 @@ function CustomerMenu(props) {
     function renderCart() {
         if (cart.length === 0) {
             return (
-                <>
+                <div>
                     <h2 class="menu-heading">Cart</h2>
                     <div id="cart-content">
                         No Items Yet
                     </div>
-                </>
+                </div>
             )
         } else {
-            return (
-                <>
-                    <h2 class="menu-heading">Cart</h2>
-                    <div id="cart-content">
-                        {
-                            renderCartItems()
-                        }
+            return (<>
+                    <div id="cart-top-content">
+                        <h2 class="menu-heading">Cart</h2>
+                        <div id="cart-content">
+                            {
+                                renderCartItems()
+                            }
+                        </div>
                     </div>
                     <div class="cart-bottom">
-                        <p>{`Total: ${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
+                        <p>{`Total: $${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}</p>
                         <Link to={"/pay"} >
                             <button class="menu-button">
                                 Go To Payment Page
@@ -236,6 +281,7 @@ function CustomerMenu(props) {
     }
 
     function signout() {
+        localStorage.setItem("customerLogin", false)
         navigate("/customer-login")
     }
 

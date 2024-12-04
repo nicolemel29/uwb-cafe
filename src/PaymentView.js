@@ -1,12 +1,23 @@
 import React from 'react'
 import './PaymentView.css'
+import logo from './cafe-logo.PNG'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { auth, db } from './firebase.js'
 import { ref, set, get, push } from 'firebase/database'  // Import get method to read data from DB
 
+import {Link} from 'react-router-dom'
+
 function PaymentView() {
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.getItem("customerLogin") !== "true") {
+            localStorage.setItem("customerLogin", false)
+            navigate("/customer-login")
+        }
+    }, [])
 
     const [cart, setCart] = useState([])
     const [cartTotal, setCartTotal] = useState(0)
@@ -65,6 +76,11 @@ function PaymentView() {
         return dd + '/' + mm + '/' + yyyy;
     }
 
+    function signout() {
+        localStorage.setItem("customerLogin", false)
+        navigate("/customer-login")
+    }
+
     function handlePay() {
         const cartItem = {
             order: cart,
@@ -84,6 +100,7 @@ function PaymentView() {
             localStorage.setItem("transaction", newTransactionHistory)
         }
         localStorage.setItem("cart", [])
+        
         const user = auth.currentUser; // Get the currently logged-in user
         if (!user) {
             alert("You need to be logged in to complete the payment.");
@@ -150,68 +167,89 @@ function PaymentView() {
                 <title>Pay - UW Bothell Cafe</title>
             </head>
             <body>
-                <h1 id="order-header">Review Order</h1>
-                <div id="order-container">
-                    <div class="content-container" id="order-info">
-                        <div class="time">
-                            <label>Pick-Up Time</label>    
-                            <input type="time" min="08:00" max="18:00"></input>
-                        </div>
-                        <div class="card-details">
-                            <label>Card Details</label>
-                            <input type="text" placeholder="Address Line 1..." required></input>
-                            <input type="text" placeholder="Address Line 2..."></input>
-                            <div class="card-row">
-                                <input type="text" placeholder="City..." required></input>
-                                <input type="text" placeholder="Country..." required></input>
-                            </div>
-                            <div class="card-row">
-                                <input type="text" placeholder="State..." required></input>
-                                <input type="text" placeholder="Zip..." required></input>
-                            </div>
-                            <input type="text" placeholder="Card Number..." required></input>
-                            <div class="card-row">
-                                <input type="text" placeholder="Expiration..." required></input>
-                                <input type="password" placeholder="CVV..." required></input>
-                            </div>
-
-                            <button onClick={handlePay} class="pay-button">
-                                Pay!
-                            </button>
-                        </div>
+                <header>
+                    <div class="logo">
+                        <img src={logo} alt="UW Bothell Cafe Logo" />
                     </div>
-    
-                    <div class="content-container" id="order-recap">
-                        {cart.map((cartItem, index) => (
-                            <div class="cart-item">
-                                <span class="cart-item-title" key={`cart${index}`}>{cartItem.item.itemName}</span>
-                                <div class="cart-item-details">
-                                    <div class="cart-item-info">
-                                        <span class="cart-item-price">{`$${cartItem.item.price} each`}</span>
-                                        <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
+                    <nav>
+                        <ul>
+                            <li><Link to={`/menu`}>Menu</Link></li>
+                            <li hidden><a href="#featured">Featured</a></li>
+                            <li><Link to={`/transaction-history`}>Transaction History</Link></li>
+                            <li hidden><a href="#favorites">Favorites</a></li>
+                            <li class="signout" onClick={signout}>Sign Out</li>
+                        </ul>
+                    </nav>
+                </header>
+                <div id="review-body">
+                    <h1 id="order-header">Review Order</h1>
+                    <div id="order-container">
+                        <div class="content-container" id="order-info">
+                            <div id="order-info-content">
+                                <div class="time">
+                                    <label>Pick-Up Time</label>    
+                                    <input type="time" min="08:00" max="18:00"></input>
+                                </div>
+                                <div class="card-details">
+                                    <label>Card Details</label>
+                                    <input type="text" placeholder="Address Line 1..." required></input>
+                                    <input type="text" placeholder="Address Line 2..."></input>
+                                    <div class="card-row">
+                                        <input type="text" placeholder="City..." required></input>
+                                        <input type="text" placeholder="Country..." required></input>
                                     </div>
-                                    <div class="cart-item-options">
-                                        <div class="spacer"></div>
-                                        <div class="cart-quantity-change">
-                                            <button onClick={() => {
-                                                subtractQuantity(cartItem, index)
-                                                saveCart();
-                                            }}>-</button>
+                                    <div class="card-row">
+                                        <input type="text" placeholder="State..." required></input>
+                                        <input type="text" placeholder="Zip..." required></input>
+                                    </div>
+                                    <input type="text" placeholder="Card Number..." required></input>
+                                    <div class="card-row">
+                                        <input type="text" placeholder="Expiration..." required></input>
+                                        <input type="password" placeholder="CVV..." required></input>
+                                    </div>
 
-                                            <button onClick={() => {
-                                                addQuantity(cartItem)
-                                                saveCart();
-                                            }}>+</button>
+                                    <button onClick={handlePay} class="pay-button">
+                                        Pay!
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+        
+                        <div class="content-container" id="order-recap">
+                            {cart.map((cartItem, index) => (
+                                <div class="cart-item">
+                                    <span class="cart-item-title" key={`cart${index}`}>{cartItem.item.itemName}</span>
+                                    <div class="cart-item-details">
+                                        <div class="cart-item-info">
+                                            <span class="cart-item-price">{`$${cartItem.item.price} each`}</span>
+                                            <span class="cart-item-quantity">{`Quantity: ${cartItem.quantity}`}</span>
+                                        </div>
+                                        <div class="cart-item-options">
+                                            <div class="spacer"></div>
+                                            <div class="cart-quantity-change">
+                                                <button onClick={() => {
+                                                    subtractQuantity(cartItem, index)
+                                                    saveCart();
+                                                }}>-</button>
+
+                                                <button onClick={() => {
+                                                    addQuantity(cartItem)
+                                                    saveCart();
+                                                }}>+</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                            ))}
+                            <div class="cart-item cart-item-title">
+                                {`Total: $${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}
                             </div>
-                        ))}
-                        <div class="cart-item cart-item-title">
-                            {`Total: $${(cartTotal).toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}`}
                         </div>
                     </div>
                 </div>
+                <footer>
+                    <p>&copy; 2024 UW Bothell Cafe. All rights reserved.</p>
+                </footer>
             </body>
         </>
     )

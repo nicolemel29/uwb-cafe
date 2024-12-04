@@ -127,15 +127,23 @@ main {
     font-size: 1.8rem;
 }
 
+
 .cart-bottom {
+    box-sizing: border-box;
+    background-color: white;
+    padding: 16px;
     color: #4b2e83;
     font-weight: bold;
-    position: absolute;
+    border-radius: 16px;
+    position: sticky;
     bottom: .7rem;
     left: 50%;
     text-align: center;
-    transform: translateX(-50%);
+    border: 1px solid black;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
+
+
 
 .menu-button {
     height: 3rem;
@@ -174,16 +182,18 @@ main {
     position: relative;
     margin-bottom: 15px;
     padding: 10px;
+    padding-bottom: 0px;
     border: 1px solid #ccc;
     border-radius: 8px;
     background-color: #f9f9f9;
     cursor: pointer;
-    transition: background-color 0.3s ease, box-shadow 0.3 ease;
+    transition: background-color 0.3s ease, box-shadow 0.3 ease, padding-bottom 0.3 ease;
 }
 
 .menu-item:hover {
     background-color: #eaecee;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding-bottom: 10px;
 }
 
 .item-header {
@@ -222,6 +232,12 @@ main {
 
 .clickable {
     cursor: pointer;
+}
+
+#cart.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 
