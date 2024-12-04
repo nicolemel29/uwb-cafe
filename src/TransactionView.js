@@ -88,7 +88,9 @@ function TransactionView() {
                     renderTransactions()
                 }
                 </div>
-                
+                <footer>
+                    <p>&copy; 2024 UW Bothell Cafe. All rights reserved.</p>
+                </footer>
             </body>
             </>
             
