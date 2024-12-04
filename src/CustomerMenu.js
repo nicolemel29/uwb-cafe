@@ -164,12 +164,12 @@ function CustomerMenu(props) {
     function renderCart() {
         if (cart.length === 0) {
             return (
-                <>
+                <div>
                     <h2 class="menu-heading">Cart</h2>
                     <div id="cart-content">
                         No Items Yet
                     </div>
-                </>
+                </div>
             )
         } else {
             return (<>
