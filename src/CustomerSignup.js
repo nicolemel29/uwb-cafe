@@ -5,10 +5,10 @@ import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'
 import { Link } from 'react-router-dom'
 import stulogo from './cafe-logo.PNG'
-import './CustomerLogin.css'
+import './CustomerSignup.css'
 
 
-function CustomerLogin() {
+function CustomerSignup() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const navigate = useNavigate()
@@ -66,7 +66,7 @@ function CustomerLogin() {
         <div id="student-login-logo">
           <img src={stulogo} alt="Cafe logo student login" />
         </div>
-        <h2 id="student-login-header">Student Login</h2>
+        <h2 id="student-login-header">Student Signup</h2>
         <div className="input-field" id="cust-username">
           <label>Username: </label>
           <input
@@ -84,11 +84,11 @@ function CustomerLogin() {
           />
         </div>
         <button id="cust-login-button" onClick={handleSubmit}>
-          Login
+          Sign Up
         </button>
         </div>
-        <Link id="to-employee-link" to={"/customer-signup"}>
-          New User? Sign Up!
+        <Link id="to-employee-link" to={"/customer-login"}>
+          I already have an account
         </Link>
         <Link id="to-employee-link" to={"/employee-login"}>
           I am an employee
@@ -98,4 +98,4 @@ function CustomerLogin() {
   )
 }
 
-export default CustomerLogin
+export default CustomerSignup
