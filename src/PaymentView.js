@@ -12,6 +12,10 @@ import {Link} from 'react-router-dom'
 function PaymentView() {
     const navigate = useNavigate()
 
+    const goToMenu = () => {
+        navigate('/menu');
+      };
+
     useEffect(() => {
         if (localStorage.getItem("customerLogin") !== "true") {
             localStorage.setItem("customerLogin", false)
@@ -208,9 +212,18 @@ function PaymentView() {
                                         <input class="payment-view" type="password" placeholder="CVV..." required></input>
                                     </div>
 
+                                    <div className="button-container">
+                                    <button onClick={goToMenu} class="cancel-button">
+                                        Cancel
+                                    </button>
+
                                     <button onClick={handlePay} class="pay-button">
                                         Pay!
                                     </button>
+                                    </div>
+
+                                    
+
                                 </div>
                             </div>
                         </div>
