@@ -13,8 +13,8 @@ function CustomerLogin() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    if (localStorage.getItem("customerLogin") === true) {
-      navigate("\menu")
+    if (localStorage.getItem("customerLogin") === "true") {
+      navigate("/menu")
     } else {
       localStorage.setItem("customerLogin", false)
     }

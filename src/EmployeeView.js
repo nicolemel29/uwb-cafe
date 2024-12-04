@@ -17,7 +17,8 @@ function EmployeeView(props) {
     const toggleOpen = props.toggleOpen
 
     useEffect(() => {
-        if (localStorage.getItem("employeeLogin") !== true) {
+        if (localStorage.getItem("employeeLogin") !== "true") {
+            console.log("Here")
             localStorage.setItem("employeeLogin", false)
             navigate("/employee-login")
         }

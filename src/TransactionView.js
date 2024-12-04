@@ -10,7 +10,7 @@ function TransactionView() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (localStorage.getItem("customerLogin") !== true) {
+        if (localStorage.getItem("customerLogin") !== "true") {
             localStorage.setItem("customerLogin", false)
             navigate("/customer-login")
         }
@@ -62,6 +62,7 @@ function TransactionView() {
             </div>
         ))
     }
+
     function signout() {
         localStorage.setItem("customerLogin", false)
         navigate("/customer-login")

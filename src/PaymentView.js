@@ -13,7 +13,7 @@ function PaymentView() {
     const navigate = useNavigate()
 
     useEffect(() => {
-        if (localStorage.getItem("customerLogin") !== true) {
+        if (localStorage.getItem("customerLogin") !== "true") {
             localStorage.setItem("customerLogin", false)
             navigate("/customer-login")
         }

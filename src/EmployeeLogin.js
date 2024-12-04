@@ -12,8 +12,8 @@ function EmployeeLogin() {
     const navigate = useNavigate()
 
     useEffect(() => {
-      if (localStorage.getItem("employeeLogin") === true) {
-        navigate("\employee")
+      if (localStorage.getItem("employeeLogin") === "true") {
+        navigate("/employee")
       } else {
         localStorage.setItem("employeeLogin", false)
       }
