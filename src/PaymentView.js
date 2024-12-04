@@ -143,9 +143,9 @@ function PaymentView() {
             };
     
         //     console.log("Order Data:", orderData);
-    
-        //     // Push the new order to Firebase
-            set(newOrderRef, orderData)
+            if (orderData.cartItems != 0) {
+                // Push the new order to Firebase
+                set(newOrderRef, orderData)
                 .then(() => {
                     alert("Order placed successfully!");
                     localStorage.removeItem("cart"); // Clear local cart
@@ -161,6 +161,11 @@ function PaymentView() {
                     console.error("Error placing order: ", error);
                     alert("Failed to place order. Please try again.");
                 });
+            }
+            else {
+                alert("Cart cannot be empty.")
+                navigate("/menu");
+            }  
         })
         .catch((error) => {
             console.error("Error getting user data: ", error);
@@ -226,9 +231,7 @@ function PaymentView() {
                                         Pay!
                                     </button>
                                     </div>
-
-                                    
-
+                                  
                                 </div>
                             </div>
                         </div>
