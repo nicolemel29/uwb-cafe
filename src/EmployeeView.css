@@ -79,7 +79,7 @@ footer {
     margin-top: auto;
 }
 
-.modify-category-button {
+.modify-category-button, .complete-order-button {
     height: 3rem;
     width: 10rem;
     font-family: Arial, sans-serif;
