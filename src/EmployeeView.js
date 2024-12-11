@@ -478,7 +478,7 @@ function EmployeeView(props) {
                 )}
                 {0 <= selectedCategory &&
                 selectedCategory < categories.length ? (
-                  <input
+                  <input class="modify-input-box"
                     type="text"
                     value={newCategoryName}
                     onChange={(e) => {
@@ -509,7 +509,7 @@ function EmployeeView(props) {
                     ))}
                     <p>Total: {order.totalAmount}</p>
                     <p>For: {order.userName}</p>
-                    <button onClick={() => completeOrder(order.id)}>
+                    <button className="complete-order-button" onClick={() => completeOrder(order.id)}>
                       Complete
                     </button>
                   </div>
