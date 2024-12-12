@@ -22,7 +22,7 @@ function PaymentView() {
   const verifyPayment = {
     cardNumber: /^\d{4}[-]?\d{4}[-]?\d{4}[-]?\d{4}$/,
     cvv: /^\d{3,4}$/,
-    expDate: /^(0[1-9]|1[0-2])\/\d{2}$/,
+    expDate: /^(0[1-9]|1[0-2])\/(2[5-9]|[3-9][0-9])$/, //12/24 cards have expired
   };
 
   function validatePayment(input) {
@@ -34,8 +34,16 @@ function PaymentView() {
       setIsPaymentValid(false);
     } else {
       p.hidden = true;
-      setIsPaymentValid(true);
     }
+    const valid = Array.from(inputs).every((input) => {
+      const pattern = input.getAttribute("name");
+      const regex = verifyPayment[pattern];
+      if (pattern && regex) {
+        return input.value.match(regex);
+      }
+      return true;
+    });
+    setIsPaymentValid(valid);
   }
 
   useEffect(() => {
@@ -339,16 +347,16 @@ function PaymentView() {
                       Cancel
                     </button>
 
-                    <button onClick={() => {
+                    <button
+                      onClick={() => {
                         if (!isPaymentValid) {
-                          alert(
-                            "Please enter valid payment details."
-                          );
+                          alert("Please enter valid payment details.");
                         } else {
                           handlePay();
                         }
                       }}
-                      className="pay-button">
+                      className="pay-button"
+                    >
                       Pay!
                     </button>
                   </div>
