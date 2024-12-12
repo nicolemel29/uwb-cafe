@@ -35,6 +35,7 @@ function PaymentView() {
     } else {
       p.hidden = true;
     }
+    //check if all inputs are valid
     const valid = Array.from(inputs).every((input) => {
       const pattern = input.getAttribute("name");
       const regex = verifyPayment[pattern];
