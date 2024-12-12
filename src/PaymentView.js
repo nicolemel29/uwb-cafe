@@ -92,6 +92,8 @@ function PaymentView() {
     };
     if (cart.length === 0) {
       alert("Cart cannot be empty.");
+      localStorage.removeItem("cart"); // Clear local cart
+      setCart([]); // Clear cart state in the component
       navigate("/menu");
     } else {
       if (localStorage.getItem("transaction")) {
