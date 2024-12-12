@@ -139,6 +139,11 @@ function PaymentView() {
             const quantity = cartItem.quantity; // Access the quantity directly
             return sum + price * quantity; // Multiply price by quantity and add to sum
           }, 0);
+          const checkQuantity = cart.forEach((cartItem) => {
+            if (cartItem.quantity === 0) {
+              removeFromCart(cartItem);
+            }
+          });
           const formattedTotalAmount = totalAmount.toFixed(2);
 
           const orderData = {
