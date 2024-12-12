@@ -26,15 +26,18 @@ function PaymentView() {
   };
 
   function validatePayment(input) {
-    const pattern = input.attributes.name.value;
-    const regex = verifyPayment[pattern];
-    const p = input.nextElementSibling;
-    if (!input.value.match(regex)) {
-      p.hidden = false;
-      setIsPaymentValid(false);
-    } else {
-      p.hidden = true;
+    const pattern = input.getAttribute("name");
+    if (pattern !== null) {
+      const regex = verifyPayment[pattern];
+      const p = input.nextElementSibling;
+      if (!input.value.match(regex)) {
+        p.hidden = false;
+        setIsPaymentValid(false);
+      } else {
+        p.hidden = true;
+      }
     }
+
     //check if all inputs are valid
     const valid = Array.from(inputs).every((input) => {
       const pattern = input.getAttribute("name");
