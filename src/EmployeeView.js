@@ -133,6 +133,7 @@ function EmployeeView(props) {
                 {item.itemName}
               </h3>
             ))}
+            {/* button for Add, Modify, and Delete for possible future manager view implementation*/}
             {/*
             <button class="modify-category-button" onClick={addItem}>Add Item</button>
             {0 <= selectedItem &&
@@ -166,6 +167,7 @@ function EmployeeView(props) {
       );
     }
   }
+// functionality commented for possible manager side implementation
 /*
   function addCategory() {
     const orderRef = ref(db, "categories");
@@ -464,6 +466,8 @@ function EmployeeView(props) {
                     </li>
                   </>
                 ))}
+                
+                {/* button for Add, Modify, and Delete for possible future manager view implementation*/}
                 {/*
                 <button class="modify-category-button" onClick={addCategory}>Add Category</button>
                 {0 <= selectedCategory &&
