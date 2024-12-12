@@ -133,6 +133,7 @@ function EmployeeView(props) {
                 {item.itemName}
               </h3>
             ))}
+            {/*
             <button class="modify-category-button" onClick={addItem}>Add Item</button>
             {0 <= selectedItem &&
             selectedItem < categories[selectedCategory].items.length &&
@@ -159,12 +160,13 @@ function EmployeeView(props) {
             ) : (
               <></>
             )}
+            */}
           </div>
         </>
       );
     }
   }
-
+/*
   function addCategory() {
     const orderRef = ref(db, "categories");
     get(orderRef)
@@ -320,7 +322,7 @@ function EmployeeView(props) {
   }
 
   function reorganizeItem() {}
-
+*/
   function signout() {
     localStorage.setItem("employeeLogin", false);
     navigate("/employee-login");
@@ -462,6 +464,7 @@ function EmployeeView(props) {
                     </li>
                   </>
                 ))}
+                {/*
                 <button class="modify-category-button" onClick={addCategory}>Add Category</button>
                 {0 <= selectedCategory &&
                 selectedCategory < categories.length &&
@@ -488,6 +491,7 @@ function EmployeeView(props) {
                 ) : (
                   <></>
                 )}
+                */}
               </ul>
             </section>
           </section>
