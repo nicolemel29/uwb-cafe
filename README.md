@@ -15,23 +15,23 @@ UWCafe is a Starbucks-inspired pickup website designed to streamline the order a
 - View customer orders currently in progress
 - Mark orders as complete once ready for pickup
 
-# Login Credentials for Testing
+## Login Credentials for Testing
 
-## Student Login
+### Student Login
 
 If you prefer not to create an account, use the following credentials
 - Email: cdampac@uw.edu
 - Password: 123456
 
-## Employee Login
+### Employee Login
 
 Currently, only one set of employee credentials is available:
 - Email: employee@uw.edu
 - Password: 123456
 
-# Setup Instructions
+## Setup Instructions
 
-## Available Scripts
+### Available Scripts
 
 To set up and run the project locally, follow these steps:
 
