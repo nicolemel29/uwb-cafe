@@ -52,6 +52,12 @@ body {
     text-decoration: underline;
 }
 
+.error-message {
+    color: red;
+    font-size: small;
+    margin: auto;
+}
+
 .content-container {
     width: 45%;
 }

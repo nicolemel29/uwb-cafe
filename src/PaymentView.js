@@ -16,6 +16,36 @@ function PaymentView() {
     navigate("/menu");
   };
 
+  const [isPaymentValid, setIsPaymentValid] = useState(false);
+  const inputs = document.querySelectorAll("input");
+
+  const verifyPayment = {
+    cardNumber: /^\d{4}[-]?\d{4}[-]?\d{4}[-]?\d{4}$/,
+    cvv: /^\d{3,4}$/,
+    expDate: /^(0[1-9]|1[0-2])\/\d{2}$/,
+  };
+
+  function validatePayment(input) {
+    const pattern = input.attributes.name.value;
+    const regex = verifyPayment[pattern];
+    const p = input.nextElementSibling;
+    if (!input.value.match(regex)) {
+      p.hidden = false;
+      setIsPaymentValid(false);
+    } else {
+      p.hidden = true;
+      setIsPaymentValid(true);
+    }
+  }
+
+  useEffect(() => {
+    inputs.forEach((input) => {
+      input.addEventListener("input", (e) => {
+        validatePayment(e.target);
+      });
+    });
+  });
+
   useEffect(() => {
     if (localStorage.getItem("customerLogin") !== "true") {
       localStorage.setItem("customerLogin", false);
@@ -274,22 +304,34 @@ function PaymentView() {
                   <input
                     class="payment-view"
                     type="text"
+                    name="cardNumber"
                     placeholder="Card Number..."
                     required
                   ></input>
+                  <p className="error-message" hidden>
+                    Please enter a valid 16 digit card number.
+                  </p>
                   <div class="card-row">
                     <input
                       class="payment-view"
                       type="text"
+                      name="expDate"
                       placeholder="Expiration..."
                       required
                     ></input>
+                    <p className="error-message" hidden>
+                      Please enter a valid expiration date (MM/YY).
+                    </p>
                     <input
                       class="payment-view"
                       type="password"
+                      name="cvv"
                       placeholder="CVV..."
                       required
                     ></input>
+                    <p className="error-message" hidden>
+                      Please enter a valid cvv.
+                    </p>
                   </div>
 
                   <div className="button-container">
@@ -297,7 +339,16 @@ function PaymentView() {
                       Cancel
                     </button>
 
-                    <button onClick={handlePay} class="pay-button">
+                    <button onClick={() => {
+                        if (!isPaymentValid) {
+                          alert(
+                            "Please enter valid payment details."
+                          );
+                        } else {
+                          handlePay();
+                        }
+                      }}
+                      className="pay-button">
                       Pay!
                     </button>
                   </div>
