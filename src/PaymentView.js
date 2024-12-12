@@ -20,7 +20,7 @@ function PaymentView() {
   const inputs = document.querySelectorAll("input");
 
   const verifyPayment = {
-    cardNumber: /^\d{4}[-]?\d{4}[-]?\d{4}[-]?\d{4}$/,
+    cardNumber: /^\d{4}[ -]?\d{4}[ -]?\d{4}[ -]?\d{4}$/,
     cvv: /^\d{3,4}$/,
     expDate: /^(0[1-9]|1[0-2])\/(2[5-9]|[3-9][0-9])$/, //12/24 cards have expired
   };
