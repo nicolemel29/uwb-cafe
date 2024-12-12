@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from 'firebase/auth'
 import { auth, db } from './firebase.js'
 import { ref, set, get } from 'firebase/database'  // Import get method to read data from DB
 import { Link } from 'react-router-dom'
+import clogo from './cafe-logo.PNG'
 import './EmployeeLogin.css'
 
 function EmployeeLogin() {
@@ -57,6 +58,7 @@ function EmployeeLogin() {
       <div id="employee-background">
       <div id="login-container">
         <div id="employee-login-box">
+        <img id="employee-login-logo" src={clogo} alt="Cafe logo student login" />
         <h2 id="employee-login-header">Employee Login</h2>
         <div className="input-field" id="employee-email">
           <label>Email: </label>
